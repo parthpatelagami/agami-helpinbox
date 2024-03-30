@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles'
 import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Menu'
 
 // Component Imports
-import HorizontalNav, { Menu, MenuItem } from '@menu/horizontal-menu'
+import HorizontalNav, { Menu, MenuItem, SubMenu } from '@menu/horizontal-menu'
 import VerticalNavContent from './VerticalNavContent'
 
 // Hook Imports
@@ -85,9 +85,13 @@ const HorizontalMenu = () => {
           menuSectionStyles: verticalMenuSectionStyles(verticalNavOptions, theme)
         }}
       >
-        <MenuItem href='/' icon={<i className='tabler-smart-home' />}>
-          Home
-        </MenuItem>
+        <SubMenu
+          label='Dashboards'
+          icon={<i className='carbon:home' />}
+          //suffix={<CustomChip label='3' size='small' color='error' round='true' />}
+        >
+          <MenuItem href={`/dashboards/crm`}>CRM Dashboard</MenuItem>
+        </SubMenu>
         <MenuItem href='/about' icon={<i className='tabler-info-circle' />}>
           About
         </MenuItem>
