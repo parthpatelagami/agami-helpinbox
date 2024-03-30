@@ -87,14 +87,14 @@ const HorizontalMenu = () => {
       >
         <SubMenu
           label='Dashboards'
-          icon={<i className='carbon:home' />}
+          icon={<i className='tabler-home-bolt' />}
           //suffix={<CustomChip label='3' size='small' color='error' round='true' />}
         >
           <MenuItem href={`/dashboards/crm`}>CRM Dashboard</MenuItem>
         </SubMenu>
         <SubMenu
           label='Tickets'
-          icon={<i className='tabler-info-circle' />}
+          icon={<i className='ttabler-ticket' />}
         >
           <MenuItem href={`/tickets/viewalltickets`}>View All Tickets</MenuItem>
           <MenuItem href={`/tickets/replypage1`}>Reply Page 1</MenuItem>
