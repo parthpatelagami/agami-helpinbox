@@ -81,6 +81,14 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         >
           <MenuItem href={`/dashboards/crm`}>CRM Dashboard</MenuItem>
         </SubMenu>
+        <SubMenu
+          label='Tickets'
+          icon={<i className='tabler-info-circle' />}
+        >
+          <MenuItem href={`/tickets/viewalltickets`}>View All Tickets</MenuItem>
+          <MenuItem href={`/tickets/replypage1`}>Reply Page 1</MenuItem>
+          <MenuItem href={`/tickets/replypage2`}>Reply Page 2</MenuItem>
+        </SubMenu>
         <MenuItem href='/about' icon={<i className='tabler-info-circle' />}>
           About
         </MenuItem>
