@@ -105,6 +105,9 @@ const HorizontalMenu = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof 
         <MenuItem href='/about' icon={<i className='tabler-info-circle' />}>
           About
         </MenuItem>
+        <MenuItem href={`/${locale}/tariffplan`} icon={<i className='tabler-info-circle' />}>
+          Tarrif Plan
+        </MenuItem>
       </Menu>
       {/* <Menu
 rootStyles={menuRootStyles(theme)}

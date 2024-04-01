@@ -29,6 +29,11 @@ const verticalMenuData = (): VerticalMenuDataType[] => [
         href: '/tickets/replypage2'
       }
     ]
+  },
+  {
+    label: 'Tarrif Plan',
+    icon: 'carbon:home',
+    href: '/tarrifplan'
   }
 ]
 
