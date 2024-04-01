@@ -1,189 +1,361 @@
-// ** React Imports
-import { useEffect, useCallback, useState } from 'react'
+'use client'
 
-// ** Next Import
+// React Imports
+import { useState, useMemo, useEffect } from 'react'
+
+// Next Imports
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 
-// ** MUI Imports
-import Box from '@mui/material/Box'
+// MUI Imports
 import Card from '@mui/material/Card'
-import Grid from '@mui/material/Grid'
-import IconButton from '@mui/material/IconButton'
+import CardContent from '@mui/material/CardContent'
+import MenuItem from '@mui/material/MenuItem'
+import Chip from '@mui/material/Chip'
 import Typography from '@mui/material/Typography'
-import { DataGrid, GridColDef } from '@mui/x-data-grid'
-import { SelectChangeEvent } from '@mui/material/Select'
+import Checkbox from '@mui/material/Checkbox'
+import IconButton from '@mui/material/IconButton'
+import TablePagination from '@mui/material/TablePagination'
+import { styled } from '@mui/material/styles'
+import type { TextFieldProps } from '@mui/material/TextField'
 
-// ** Custom Components Imports
-import CustomChip from '@core/components/mui/chip'
-import CustomAvatar from 'src/@core/components/mui/avatar'
+// Third-party Imports
+import classnames from 'classnames'
+import { rankItem } from '@tanstack/match-sorter-utils'
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+  getFilteredRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFacetedMinMaxValues,
+  getPaginationRowModel,
+  getSortedRowModel
+} from '@tanstack/react-table'
+import type { ColumnDef, FilterFn } from '@tanstack/react-table'
+import type { RankingInfo } from '@tanstack/match-sorter-utils'
 
-// ** Utils Import
-import { getInitials } from 'src/@core/utils/get-initials'
+// Type Imports
+import type { ThemeColor } from '@core/types'
+import type { Locale } from '@configs/i18n'
 
-// ** Types Imports
-import { RootState, AppDispatch } from 'src/store'
-import { ThemeColor } from 'src/@core/layouts/types'
+// Component Imports
+import CustomAvatar from '@core/components/mui/Avatar'
+import OptionMenu from '@core/components/option-menu'
+import CustomTextField from '@core/components/mui/TextField'
+import TablePaginationComponent from '@components/TablePaginationComponent'
 
-// ** Custom Components Imports
-import TableHeader from './TariffPlanHeader'
-import axios from 'axios'
+// Util Imports
+import { getInitials } from '@/utils/getInitials'
+import { getLocalizedUrl } from '@/utils/i18n'
 
-interface UserRoleType {
+// Style Imports
+import tableStyles from '@core/styles/table.module.css'
+
+declare module '@tanstack/table-core' {
+  interface FilterFns {
+    fuzzy: FilterFn<unknown>
+  }
+  interface FilterMeta {
+    itemRank: RankingInfo
+  }
+}
+
+type TariffType = {
+  Tarrif_Plan_Name: string
+  Country: string
+  Currency: string
+  Amount: string
+  Duration: string
+}
+
+type UsersTypeWithAction = TariffType & {
+  action?: string
+}
+
+type UserRoleType = {
   [key: string]: { icon: string; color: string }
 }
 
-interface UserStatusType {
+type UserStatusType = {
   [key: string]: ThemeColor
 }
 
-interface CellType {
-  row: any
+// Styled Components
+const Icon = styled('i')({})
+
+const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
+  // Rank the item
+  const itemRank = rankItem(row.getValue(columnId), value)
+
+  // Store the itemRank info
+  addMeta({
+    itemRank
+  })
+
+  // Return if the item should be filtered in/out
+  return itemRank.passed
 }
 
-// ** Vars
-const userRoleObj: UserRoleType = {
-  editor: { icon: 'tabler:edit', color: 'info' },
-  author: { icon: 'tabler:user', color: 'warning' },
-  admin: { icon: 'tabler:device-laptop', color: 'error' },
-  maintainer: { icon: 'tabler:chart-pie-2', color: 'success' },
-  subscriber: { icon: 'tabler:circle-check', color: 'primary' }
-}
-
-const columns: GridColDef[] = [
-  {
-    flex: 0.1,
-    minWidth: 280,
-    field: 'TariffName',
-    headerName: 'TariffName',
-    renderCell: ({ row }: CellType) => {
-      const { TariffName } = row
-
-      return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
-            <Typography
-              noWrap
-              component={Link}
-              href='/apps/user/view/account'
-              sx={{
-                fontWeight: 500,
-                textDecoration: 'none',
-                color: 'text.secondary',
-                '&:hover': { color: 'primary.main' }
-              }}
-            >
-              {TariffName}
-            </Typography>
-          </Box>
-        </Box>
-      )
-    }
-  },
-  {
-    flex: 0.1,
-    field: 'Country',
-    minWidth: 170,
-    headerName: 'Country',
-    renderCell: ({ row }: CellType) => {
-      return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
-            {row.Country}
-          </Typography>
-        </Box>
-      )
-    }
-  },
-  {
-    flex: 0.1,
-    minWidth: 120,
-    headerName: 'Currency',
-    field: 'Currency',
-    renderCell: ({ row }: CellType) => {
-      return (
-        <Typography noWrap sx={{ fontWeight: 500, color: 'text.secondary', textTransform: 'capitalize' }}>
-          {row.Currency}
-        </Typography>
-      )
-    }
-  },
-  {
-    flex: 0.1,
-    minWidth: 190,
-    field: 'Amount',
-    headerName: 'Amount',
-    renderCell: ({ row }: CellType) => {
-      return (
-        <Typography noWrap sx={{ color: 'text.secondary' }}>
-          {row.Amount}
-        </Typography>
-      )
-    }
-  },
-  {
-    flex: 0.1,
-    minWidth: 110,
-    field: 'Duration',
-    headerName: 'Duration',
-    renderCell: ({ row }: CellType) => {
-      return <CustomChip rounded skin='light' size='small' label={row.Duration} sx={{ textTransform: 'capitalize' }} />
-    }
-  }
-]
-const DataForTable = [
-  {
-    id: 1,
-    TariffName: 'Test34',
-    Country: 'India',
-    Currency: 'Ruppe',
-    Amount: '300',
-    Duration: 'Montly'
-  },
-  {
-    id: 2,
-    TariffName: 'Test34',
-    Country: 'India',
-    Currency: 'Dollar',
-    Amount: '400',
-    Duration: 'Yearly'
-  },
-  {
-    id: 3,
-    TariffName: 'Test34',
-    Country: 'India',
-    Currency: 'Dollar',
-    Amount: '500',
-    Duration: 'Monthly'
-  }
-]
-const UserList = () => {
-  const [tariffdata, setTariffData] = useState<any>([])
-  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
+const DebouncedInput = ({
+  value: initialValue,
+  onChange,
+  debounce = 500,
+  ...props
+}: {
+  value: string | number
+  onChange: (value: string | number) => void
+  debounce?: number
+} & Omit<TextFieldProps, 'onChange'>) => {
+  // States
+  const [value, setValue] = useState(initialValue)
 
   useEffect(() => {
-    setTariffData(DataForTable)
-  }, [])
+    setValue(initialValue)
+  }, [initialValue])
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      onChange(value)
+    }, debounce)
+
+    return () => clearTimeout(timeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
+
+  return <CustomTextField {...props} value={value} onChange={e => setValue(e.target.value)} />
+}
+
+// Column Definitions
+const columnHelper = createColumnHelper<UsersTypeWithAction>()
+
+const TariffPlanDataTable = ({ tableData }: { tableData?: TariffType[] }) => {
+  // States
+  const [role, setRole] = useState('')
+  const [rowSelection, setRowSelection] = useState({})
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [data, setData] = useState(...[tableData])
+  const [globalFilter, setGlobalFilter] = useState('')
+
+  // Hooks
+  const { lang: locale } = useParams()
+
+  const columns = useMemo<ColumnDef<UsersTypeWithAction, any>[]>(
+    () => [
+      {
+        id: 'select',
+        header: ({ table }) => (
+          <Checkbox
+            {...{
+              checked: table.getIsAllRowsSelected(),
+              indeterminate: table.getIsSomeRowsSelected(),
+              onChange: table.getToggleAllRowsSelectedHandler()
+            }}
+          />
+        ),
+        cell: ({ row }) => (
+          <Checkbox
+            {...{
+              checked: row.getIsSelected(),
+              disabled: !row.getCanSelect(),
+              indeterminate: row.getIsSomeSelected(),
+              onChange: row.getToggleSelectedHandler()
+            }}
+          />
+        )
+      },
+      columnHelper.accessor('Tarrif_Plan_Name', {
+        header: 'Tarrif Plan Name',
+        cell: ({ row }) => (
+          <div className='flex items-center gap-4'>
+            <div className='flex flex-col'>
+              <Typography className='font-medium' color='text.primary'>
+                {row.original.Tarrif_Plan_Name}
+              </Typography>
+            </div>
+          </div>
+        )
+      }),
+      columnHelper.accessor('Country', {
+        header: 'Country',
+        cell: ({ row }) => (
+          <div className='flex items-center gap-2'>
+            <Typography className='capitalize' color='text.primary'>
+              {row.original.Country}
+            </Typography>
+          </div>
+        )
+      }),
+      columnHelper.accessor('Currency', {
+        header: 'Currency',
+        cell: ({ row }) => (
+          <Typography className='capitalize' color='text.primary'>
+            {row.original.Currency}
+          </Typography>
+        )
+      }),
+      columnHelper.accessor('Amount', {
+        header: 'Amount',
+        cell: ({ row }) => <Typography className='capitalize'>{row.original.Amount}</Typography>
+      }),
+      columnHelper.accessor('Duration', {
+        header: 'Duration',
+        cell: ({ row }) => (
+          <div className='flex items-center gap-3'>
+            <Chip variant='tonal' className='capitalize' label={row.original.Duration} size='small' />
+          </div>
+        )
+      }),
+      columnHelper.accessor('action', {
+        header: 'Actions',
+        cell: () => (
+          <div className='flex items-center'>
+            <IconButton>
+              <i className='tabler-trash text-[22px] text-textSecondary' />
+            </IconButton>
+            <IconButton>
+              <Link href={getLocalizedUrl('apps/user/view', locale as Locale)} className='flex'>
+                <i className='tabler-eye text-[22px] text-textSecondary' />
+              </Link>
+            </IconButton>
+            <OptionMenu
+              iconClassName='text-[22px] text-textSecondary'
+              options={[
+                {
+                  text: 'Download',
+                  icon: 'tabler-download text-[22px]',
+                  menuItemProps: { className: 'flex items-center gap-2 text-textSecondary' }
+                },
+                {
+                  text: 'Edit',
+                  icon: 'tabler-edit text-[22px]',
+                  menuItemProps: { className: 'flex items-center gap-2 text-textSecondary' }
+                }
+              ]}
+            />
+          </div>
+        ),
+        enableSorting: false
+      })
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
+
+  const table = useReactTable({
+    data: data as TariffType[],
+    columns,
+    filterFns: {
+      fuzzy: fuzzyFilter
+    },
+    state: {
+      rowSelection,
+      globalFilter
+    },
+    initialState: {
+      pagination: {
+        pageSize: 10
+      }
+    },
+    enableRowSelection: true, //enable row selection for all rows
+    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    globalFilterFn: fuzzyFilter,
+    onRowSelectionChange: setRowSelection,
+    getCoreRowModel: getCoreRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues()
+  })
 
   return (
-    <Grid container spacing={6}>
-      <Grid item xs={12}>
-        <Card>
-          {/* <TableHeader plan={plan} value={value} handleFilter={handleFilter} handlePlanChange={handlePlanChange} /> */}
-          <DataGrid
-            autoHeight
-            rowHeight={62}
-            rows={tariffdata}
-            columns={columns}
-            checkboxSelection
-            disableRowSelectionOnClick
-            pageSizeOptions={[10, 25, 50]}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-          />
-        </Card>
-      </Grid>
-    </Grid>
+    <Card>
+      <CardContent className='flex justify-between flex-col gap-4 items-start sm:flex-row sm:items-center'>
+        <div className='flex items-center gap-2'>
+          <Typography>Show</Typography>
+          <CustomTextField
+            select
+            value={table.getState().pagination.pageSize}
+            onChange={e => table.setPageSize(Number(e.target.value))}
+            className='is-[70px]'
+          >
+            <MenuItem value='10'>10</MenuItem>
+            <MenuItem value='25'>25</MenuItem>
+            <MenuItem value='50'>50</MenuItem>
+          </CustomTextField>
+        </div>
+      </CardContent>
+      <div className='overflow-x-auto'>
+        <table className={tableStyles.table}>
+          <thead>
+            {table.getHeaderGroups().map(headerGroup => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map(header => (
+                  <th key={header.id}>
+                    {header.isPlaceholder ? null : (
+                      <>
+                        <div
+                          className={classnames({
+                            'flex items-center': header.column.getIsSorted(),
+                            'cursor-pointer select-none': header.column.getCanSort()
+                          })}
+                          onClick={header.column.getToggleSortingHandler()}
+                        >
+                          {flexRender(header.column.columnDef.header, header.getContext())}
+                          {{
+                            asc: <i className='tabler-chevron-up text-xl' />,
+                            desc: <i className='tabler-chevron-down text-xl' />
+                          }[header.column.getIsSorted() as 'asc' | 'desc'] ?? null}
+                        </div>
+                      </>
+                    )}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          {table.getFilteredRowModel().rows.length === 0 ? (
+            <tbody>
+              <tr>
+                <td colSpan={table.getVisibleFlatColumns().length} className='text-center'>
+                  No data available
+                </td>
+              </tr>
+            </tbody>
+          ) : (
+            <tbody>
+              {table
+                .getRowModel()
+                .rows.slice(0, table.getState().pagination.pageSize)
+                .map(row => {
+                  return (
+                    <tr key={row.id} className={classnames({ selected: row.getIsSelected() })}>
+                      {row.getVisibleCells().map(cell => (
+                        <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                      ))}
+                    </tr>
+                  )
+                })}
+            </tbody>
+          )}
+        </table>
+      </div>
+      <TablePagination
+        component={() => <TablePaginationComponent table={table} />}
+        count={table.getFilteredRowModel().rows.length}
+        rowsPerPage={table.getState().pagination.pageSize}
+        page={table.getState().pagination.pageIndex}
+        onPageChange={(_, page) => {
+          table.setPageIndex(page)
+        }}
+      />
+    </Card>
   )
 }
 
-export default UserList
+export default TariffPlanDataTable

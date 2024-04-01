@@ -130,12 +130,12 @@ const TarrifPlanForm = () => {
           <Box>
             <Tooltip placement='top' title='Reset'>
               <IconButton onClick={() => reset()}>
-                <i className='system-uicons:reset' />
+                <i className='tabler-refresh' />
               </IconButton>
             </Tooltip>
             <Tooltip placement='top' title='Close'>
               <IconButton>
-                <i className='clarity:close-line' />
+                <i className='tabler-x' />
               </IconButton>
             </Tooltip>
           </Box>

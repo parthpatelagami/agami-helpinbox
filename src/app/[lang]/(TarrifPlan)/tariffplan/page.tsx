@@ -1,11 +1,11 @@
 import { Grid } from '@mui/material'
 import React from 'react'
-import TarrifPlanForm from '@views/tariff-plan/TariffPlanForm'
+import Roles from '@views/tariff-plan/index'
 
 export default function index() {
   return (
     <Grid item xs={12}>
-      <TarrifPlanForm />
+      <Roles />
     </Grid>
   )
 }
