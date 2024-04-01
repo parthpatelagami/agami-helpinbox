@@ -1,5 +1,8 @@
 'use client'
 
+// Next Imports
+import { useParams } from 'next/navigation'
+
 // MUI Imports
 import { useTheme } from '@mui/material/styles'
 
@@ -8,6 +11,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // Type Imports
 import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Menu'
+import type { getDictionary } from '@/utils/getDictionary'
 
 // Component Imports
 import { Menu, MenuItem, SubMenu } from '@menu/vertical-menu'
@@ -30,6 +34,7 @@ type RenderExpandIconProps = {
 }
 
 type Props = {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>
   scrollMenu: (container: any, isPerfectScrollbar: boolean) => void
 }
 
@@ -39,15 +44,17 @@ const RenderExpandIcon = ({ open, transitionDuration }: RenderExpandIconProps) =
   </StyledVerticalNavExpandIcon>
 )
 
-const VerticalMenu = ({ scrollMenu }: Props) => {
+const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
   // Hooks
   const theme = useTheme()
   const verticalNavOptions = useVerticalNav()
   const { settings } = useSettings()
   const { isBreakpointReached } = useVerticalNav()
+  const params = useParams()
 
   // Vars
   const { transitionDuration } = verticalNavOptions
+  const { lang: locale, id } = params
 
   const ScrollWrapper = isBreakpointReached ? 'div' : PerfectScrollbar
 
@@ -74,34 +81,28 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
         menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
       >
-        <SubMenu
-          label='Dashboards'
-          icon={<i className='tabler-home-bolt' />}
-          //suffix={<CustomChip label='3' size='small' color='error' round='true' />}
-        >
-          <MenuItem href={`/dashboards/crm`}>CRM Dashboard</MenuItem>
+        <SubMenu label={dictionary['navigation'].dashboards} icon={<i className='tabler-smart-home' />}>
+          <MenuItem href={`/${locale}/dashboards/crm`}>{dictionary['navigation'].crm}</MenuItem>
         </SubMenu>
-        <SubMenu
-          label='Tickets'
-          icon={<i className='tabler-ticket' />}
-        >
-          <MenuItem href={`/tickets/viewalltickets`}>View All Tickets</MenuItem>
-          <MenuItem href={`/tickets/replypage1`}>Reply Page 1</MenuItem>
-          <MenuItem href={`/tickets/replypage2`}>Reply Page 2</MenuItem>
+        <SubMenu label='Tickets' icon={<i className='tabler-ticket' />}>
+          <MenuItem href={`/${locale}/tickets/viewalltickets`}>View All Tickets</MenuItem>
+          <MenuItem href={`/${locale}/tickets/replypage1`}>Reply Page 1</MenuItem>
+          <MenuItem href={`/${locale}/tickets/replypage2`}>Reply Page 2</MenuItem>
         </SubMenu>
+
         <MenuItem href='/about' icon={<i className='tabler-info-circle' />}>
           About
         </MenuItem>
       </Menu>
       {/* <Menu
-        popoutMenuOffset={{ mainAxis: 23 }}
-        menuItemStyles={menuItemStyles(verticalNavOptions, theme, settings)}
-        renderExpandIcon={({ open }) => <RenderExpandIcon open={open} transitionDuration={transitionDuration} />}
-        renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
-        menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
-      >
-        <GenerateVerticalMenu menuData={menuData(dictionary, params)} />
-      </Menu> */}
+popoutMenuOffset={{ mainAxis: 23 }}
+menuItemStyles={menuItemStyles(verticalNavOptions, theme, settings)}
+renderExpandIcon={({ open }) => <RenderExpandIcon open={open} transitionDuration={transitionDuration} />}
+renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
+menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
+>
+<GenerateVerticalMenu menuData={menuData(dictionary, params)} />
+</Menu> */}
     </ScrollWrapper>
   )
 }

@@ -1,10 +1,14 @@
 // Do not remove this following 'use client' else SubMenu rendered in vertical menu on smaller screen will not work.
 'use client'
 
+// Next Imports
+import { useParams } from 'next/navigation'
+
 // MUI Imports
 import { useTheme } from '@mui/material/styles'
 
 // Type Imports
+import type { getDictionary } from '@/utils/getDictionary'
 import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Menu'
 
 // Component Imports
@@ -47,15 +51,17 @@ const RenderVerticalExpandIcon = ({ open, transitionDuration }: RenderVerticalEx
   </StyledVerticalNavExpandIcon>
 )
 
-const HorizontalMenu = () => {
+const HorizontalMenu = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof getDictionary>> }) => {
   // Hooks
   const verticalNavOptions = useVerticalNav()
   const theme = useTheme()
   const { settings } = useSettings()
+  const params = useParams()
 
   // Vars
   const { skin } = settings
   const { transitionDuration } = verticalNavOptions
+  const { lang: locale, id } = params
 
   return (
     <HorizontalNav
@@ -85,45 +91,41 @@ const HorizontalMenu = () => {
           menuSectionStyles: verticalMenuSectionStyles(verticalNavOptions, theme)
         }}
       >
-        <SubMenu
-          label='Dashboards'
-          icon={<i className='tabler-home-bolt' />}
-          //suffix={<CustomChip label='3' size='small' color='error' round='true' />}
-        >
-          <MenuItem href={`/dashboards/crm`}>CRM Dashboard</MenuItem>
+        <SubMenu label={dictionary['navigation'].dashboards} icon={<i className='tabler-smart-home' />}>
+          <MenuItem href={`/${locale}/dashboards/crm`} icon={<i className='tabler-chart-pie-2' />}>
+            {dictionary['navigation'].crm}
+          </MenuItem>
         </SubMenu>
-        <SubMenu
-          label='Tickets'
-          icon={<i className='ttabler-ticket' />}
-        >
-          <MenuItem href={`/tickets/viewalltickets`}>View All Tickets</MenuItem>
-          <MenuItem href={`/tickets/replypage1`}>Reply Page 1</MenuItem>
-          <MenuItem href={`/tickets/replypage2`}>Reply Page 2</MenuItem>
+        <SubMenu label='Tickets' icon={<i className='tabler-ticket' />}>
+          <MenuItem href={`/${locale}/tickets/viewalltickets`}>View All Tickets</MenuItem>
+          <MenuItem href={`/${locale}/tickets/replypage1`}>Reply Page 1</MenuItem>
+          <MenuItem href={`/${locale}/tickets/replypage2`}>Reply Page 2</MenuItem>
         </SubMenu>
+
         <MenuItem href='/about' icon={<i className='tabler-info-circle' />}>
           About
         </MenuItem>
       </Menu>
       {/* <Menu
-        rootStyles={menuRootStyles(theme)}
-        renderExpandIcon={({ level }) => <RenderExpandIcon level={level} />}
-        menuItemStyles={menuItemStyles(settings, theme)}
-        renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
-        popoutMenuOffset={{
-          mainAxis: ({ level }) => (level && level > 0 ? 14 : 12),
-          alignmentAxis: 0
-        }}
-        verticalMenuProps={{
-          menuItemStyles: verticalMenuItemStyles(verticalNavOptions, theme, settings),
-          renderExpandIcon: ({ open }) => (
-            <RenderVerticalExpandIcon open={open} transitionDuration={transitionDuration} />
-          ),
-          renderExpandedMenuItemIcon: { icon: <i className='tabler-circle text-xs' /> },
-          menuSectionStyles: verticalMenuSectionStyles(verticalNavOptions, theme)
-        }}
-      >
-        <GenerateHorizontalMenu menuData={menuData(dictionary, params)} />
-      </Menu> */}
+rootStyles={menuRootStyles(theme)}
+renderExpandIcon={({ level }) => <RenderExpandIcon level={level} />}
+menuItemStyles={menuItemStyles(settings, theme)}
+renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
+popoutMenuOffset={{
+mainAxis: ({ level }) => (level && level > 0 ? 14 : 12),
+alignmentAxis: 0
+}}
+verticalMenuProps={{
+menuItemStyles: verticalMenuItemStyles(verticalNavOptions, theme, settings),
+renderExpandIcon: ({ open }) => (
+<RenderVerticalExpandIcon open={open} transitionDuration={transitionDuration} />
+),
+renderExpandedMenuItemIcon: { icon: <i className='tabler-circle text-xs' /> },
+menuSectionStyles: verticalMenuSectionStyles(verticalNavOptions, theme)
+}}
+>
+<GenerateHorizontalMenu menuData={menuData(dictionary, params)} />
+</Menu> */}
     </HorizontalNav>
   )
 }

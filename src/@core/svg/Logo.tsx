@@ -3,32 +3,13 @@ import type { SVGAttributes } from 'react'
 
 const Logo = (props: SVGAttributes<SVGElement>) => {
   return (
-    <svg width='1.4583em' height='1em' viewBox='0 0 35 24' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
+    <svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M15.7393 6.24888L21.2207 9.59165L26.3842 6.49233L15.7393 0.000244141' fill='#1E2C5B' />
+      <path d='M10.543 9.5918V15.9978L21.3763 22.4538L26.3838 19.3471L10.543 9.5918Z' fill='#223F6E' />
+      <path d='M15.7393 25.9874V31.9967L26.3842 25.4997V19.3469L15.7393 25.9874Z' fill='#1E2C5B' />
       <path
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M0.00188479 0V7.47707C0.00188479 7.47707 -0.145285 9.83135 2.161 11.8242L14.9358 23.9961L21.5792 23.9107L20.5136 10.7809L17.9947 7.82497L10.0778 0H0.00188479Z'
-        fill='currentColor'
-      />
-      <path
-        opacity='0.06'
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M8.39807 17.9307L13.6581 3.53127L18.059 7.91564L8.39807 17.9307Z'
-        fill='#161616'
-      />
-      <path
-        opacity='0.06'
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M8.81183 17.3645L15.2093 5.06165L18.0926 7.94695L8.81183 17.3645Z'
-        fill='#161616'
-      />
-      <path
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M8.47955 17.8436L25.8069 0H34.9091V7.50963C34.9091 7.50963 34.7195 10.0128 33.4463 11.3517L21.5808 24H14.9387L8.47955 17.8436Z'
-        fill='currentColor'
+        d='M26.376 13.3167L10.4192 22.704L15.743 25.9894V32.0003L5.09377 25.5V6.61557H5.18839L5 6.50736L15.743 0.00708008V6.25407L10.5505 9.35913V16.0029L26.376 6.49015V13.3167Z'
+        fill='#4CA2DA'
       />
     </svg>
   )
