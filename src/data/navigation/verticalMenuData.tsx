@@ -13,6 +13,7 @@ const verticalMenuData = (): VerticalMenuDataType[] => [
     ]
   },
   {
+<<<<<<< main
     label: 'Tickets',
     icon: 'carbon:home',
     children: [
@@ -34,6 +35,16 @@ const verticalMenuData = (): VerticalMenuDataType[] => [
     label: 'Tarrif Plan',
     icon: 'carbon:home',
     href: '/tarrifplan'
+=======
+    label: 'WorkFlow',
+    icon: 'tabler-grid-dots',
+    children: [
+      {
+        label: 'WorkFlow',
+        href: '/work-flow'
+      }
+    ]
+>>>>>>> bd47ad9 workFlow Dashboard
   }
 ]
 

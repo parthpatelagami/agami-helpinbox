@@ -81,8 +81,18 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
         menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
       >
+<<<<<<< main
         <SubMenu label={dictionary['navigation'].dashboards} icon={<i className='tabler-smart-home' />}>
           <MenuItem href={`/${locale}/dashboards/crm`}>{dictionary['navigation'].crm}</MenuItem>
+=======
+        <SubMenu
+          label='Dashboards'
+          icon={<i className='carbon:home' />}
+
+          //suffix={<CustomChip label='3' size='small' color='error' round='true' />}
+        >
+          <MenuItem href={`/dashboards/crm`}>CRM Dashboard</MenuItem>
+>>>>>>> bd47ad9 workFlow Dashboard
         </SubMenu>
         <SubMenu label='Tickets' icon={<i className='tabler-ticket' />}>
           <MenuItem href={`/${locale}/tickets/viewalltickets`}>View All Tickets</MenuItem>
@@ -93,11 +103,17 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         <MenuItem href='/about' icon={<i className='tabler-info-circle' />}>
           About
         </MenuItem>
+<<<<<<< main
         <MenuItem href={`/${locale}/tariffplan`} icon={<i className='tabler-receipt-2' />}>
           Tarrif Plan
         </MenuItem>
         <MenuItem href={`/${locale}/businesshours`} icon={<i className='tabler-building-factory-2' />}>
           Business Hours
+=======
+
+        <MenuItem href='/work-flow' icon={<i className='tabler-grid-dots' />}>
+          Work-Flow
+>>>>>>> bd47ad9 workFlow Dashboard
         </MenuItem>
       </Menu>
       {/* <Menu
