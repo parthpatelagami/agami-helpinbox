@@ -97,7 +97,7 @@ const Logo = () => {
       ) : (
         <Link href='/'>
           <svg width='184' height='32' viewBox='0 0 184 32' fill='none' xmlns='http://www.w3.org/2000/svg'>
-            <g clip-path='url(#clip0_2582_2767)'>
+            <g clipPath='url(#clip0_2582_2767)'>
               <path
                 d='M1.42773 5.23096H3.21653V15.7933H15.1429V5.23096H16.9317V27.3211H15.1429V17.4833H3.21733V27.3211H1.42773V5.23096Z'
                 fill='#1E2C5B'
