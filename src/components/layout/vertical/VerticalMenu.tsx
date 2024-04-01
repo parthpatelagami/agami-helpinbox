@@ -26,7 +26,6 @@ import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNav
 // Style Imports
 import menuItemStyles from '@core/styles/vertical/menuItemStyles'
 import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
-import CustomChip from '@/@core/components/mui/Chip'
 
 type RenderExpandIconProps = {
   open?: boolean
@@ -54,7 +53,7 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
 
   // Vars
   const { transitionDuration } = verticalNavOptions
-  const { lang: locale, id } = params
+  const { lang: locale } = params
 
   const ScrollWrapper = isBreakpointReached ? 'div' : PerfectScrollbar
 
@@ -81,10 +80,9 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
         menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
       >
-<<<<<<< main
         <SubMenu label={dictionary['navigation'].dashboards} icon={<i className='tabler-smart-home' />}>
           <MenuItem href={`/${locale}/dashboards/crm`}>{dictionary['navigation'].crm}</MenuItem>
-=======
+        </SubMenu>
         <SubMenu
           label='Dashboards'
           icon={<i className='carbon:home' />}
@@ -92,7 +90,6 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
           //suffix={<CustomChip label='3' size='small' color='error' round='true' />}
         >
           <MenuItem href={`/dashboards/crm`}>CRM Dashboard</MenuItem>
->>>>>>> bd47ad9 workFlow Dashboard
         </SubMenu>
         <SubMenu label='Tickets' icon={<i className='tabler-ticket' />}>
           <MenuItem href={`/${locale}/tickets/viewalltickets`}>View All Tickets</MenuItem>
@@ -103,28 +100,17 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         <MenuItem href='/about' icon={<i className='tabler-info-circle' />}>
           About
         </MenuItem>
-<<<<<<< main
+
         <MenuItem href={`/${locale}/tariffplan`} icon={<i className='tabler-receipt-2' />}>
           Tarrif Plan
         </MenuItem>
         <MenuItem href={`/${locale}/businesshours`} icon={<i className='tabler-building-factory-2' />}>
           Business Hours
-=======
-
-        <MenuItem href='/work-flow' icon={<i className='tabler-grid-dots' />}>
+        </MenuItem>
+        <MenuItem href={`/${locale}/work-flow`} icon={<i className='tabler-grid-dots' />}>
           Work-Flow
->>>>>>> bd47ad9 workFlow Dashboard
         </MenuItem>
       </Menu>
-      {/* <Menu
-popoutMenuOffset={{ mainAxis: 23 }}
-menuItemStyles={menuItemStyles(verticalNavOptions, theme, settings)}
-renderExpandIcon={({ open }) => <RenderExpandIcon open={open} transitionDuration={transitionDuration} />}
-renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
-menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
->
-<GenerateVerticalMenu menuData={menuData(dictionary, params)} />
-</Menu> */}
     </ScrollWrapper>
   )
 }
