@@ -19,7 +19,7 @@ const MainPage: React.FC = () => {
     event.preventDefault()
     setIsLoading(true)
 
-    router.push('/business-hours/add-new-business-hours')
+    router.push('/businesshours/add-new-business-hours')
     setIsLoading(false)
   }
 
@@ -52,9 +52,9 @@ const MainPage: React.FC = () => {
             </Typography>
           </Box>
 
-          <Card className='mt-20 mb-10 m-10'>
+          <Box className='mt-20 mb-10 m-2'>
             <BusinessHoursTable />
-          </Card>
+          </Box>
         </Box>
       </Card>
     </>

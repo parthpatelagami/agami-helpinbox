@@ -19,23 +19,23 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const BusinessHoursColumn = [
   {
-    flex: '0 0 200px',
+    flex: 0.015,
     minWidth: 200,
     field: 'id',
     headerName: 'Sr No.',
     renderCell: (params: any) => (
-      <Typography variant='h6' className='text-secondary'>
+      <Typography variant='h6' className='text-secondary mt-2'>
         {params.row.id}
       </Typography>
     )
   },
   {
-    flex: '0 0 800px',
+    flex: 0.1,
     minWidth: 800,
     field: 'title',
     headerName: 'Title',
     renderCell: (params: any) => (
-      <Typography variant='h6' className='text-secondary'>
+      <Typography variant='h6' className='text-secondary mt-2'>
         {params.row.title}
       </Typography>
     )
@@ -43,11 +43,11 @@ const BusinessHoursColumn = [
   {
     field: 'action',
     minWidth: 200,
-    headerName: 'Actions',
+    headerName: 'Action',
     sortable: false,
     renderCell: (params: any) => (
       <div>
-        <Stack display='flex' flexDirection='row'>
+        <Stack display='flex' flexDirection='row' className='mt-1'>
           <Item>
             <IconButton aria-label='check' title='Check'>
               <Check />
