@@ -95,7 +95,7 @@ const CsatChart = (props: propsType) => {
         }
       />
       <CardContent>
-        <AppReactApexCharts type='bar' height={300} options={options} series={[{ data: [90, 75, 50, 30, 10] }]} />
+        <AppReactApexCharts type='bar' height={250} options={options} series={[{ data: [90, 75, 50, 30, 10] }]} />
       </CardContent>
     </Card>
   )

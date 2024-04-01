@@ -14,7 +14,7 @@ import '@assets/iconify-icons/generated-icons.css'
 import { i18n } from '@/configs/i18n'
 
 export const metadata = {
-  title: 'Vuexy - MUI Next.js Admin Dashboard Template',
+  title: 'HelpinBox',
   description:
     'Vuexy - MUI Next.js Admin Dashboard Template - is the most developer friendly & highly customizable Admin Dashboard Template based on MUI v5.'
 }

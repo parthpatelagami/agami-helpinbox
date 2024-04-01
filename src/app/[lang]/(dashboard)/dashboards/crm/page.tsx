@@ -24,6 +24,7 @@ interface LayoutItem {
   y: number
   w: number
   h: number
+  minH?: number
 }
 
 interface LayoutBreakpoints {
@@ -32,11 +33,11 @@ interface LayoutBreakpoints {
 
 const layout: LayoutBreakpoints = {
   lg: [
-    { i: 'stat1', x: 0, y: 0, w: 12, h: 0 },
-    { i: 'stat2', x: 0, y: 0, w: 12, h: 0 },
-    { i: 'stat3', x: 0, y: 0, w: 12, h: 0 },
-    { i: 'chart1', x: 0, y: 0, w: 5, h: 0 },
-    { i: 'chart2', x: 0, y: 0, w: 7, h: 0 }
+    { i: 'stat1', x: 0, y: 0, w: 12, h: 0, minH: 0 },
+    { i: 'stat2', x: 0, y: 0, w: 12, h: 0, minH: 0 },
+    { i: 'stat3', x: 0, y: 0, w: 12, h: 0, minH: 0 },
+    { i: 'chart1', x: 0, y: 0, w: 5, h: 0, minH: 0 },
+    { i: 'chart2', x: 0, y: 0, w: 7, h: 0, minH: 0 }
   ],
   sm: [
     { i: 'stat1', x: 0, y: 0, w: 12, h: 0 },
@@ -109,7 +110,6 @@ const DashboardCRM = () => {
         <Divider />
         <CardContent className='p-0'>
           <ResponsiveGridLayout
-            autoSize={true}
             layouts={layoutState}
             isDraggable={lockLayout ? false : true}
             isResizable={false}
