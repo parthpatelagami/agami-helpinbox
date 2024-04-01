@@ -41,7 +41,7 @@ const TicketByChannelChart = (props: propsType) => {
       formatter: (val: string) => `${parseInt(val, 10)}%`
     },
     legend: {
-      position: 'left',
+      position: 'right',
       markers: { offsetX: -3 },
       labels: { colors: theme.palette.text.secondary },
       itemMargin: {
@@ -115,16 +115,12 @@ const TicketByChannelChart = (props: propsType) => {
   }
 
   return (
-    <Card
-      sx={{ height: '450px', border: '1px solid rgba(47, 43, 61, 0.16)', borderRadius: '0', boxShadow: 'none' }}
-      id={props.id}
-    >
+    <Card sx={{ border: '1px solid rgba(47, 43, 61, 0.16)', borderRadius: '0', boxShadow: 'none' }} id={props.id}>
       <CardHeader
         sx={{ padding: '1rem' }}
         title='Tickets By Channel'
-        subheaderTypographyProps={{ sx: { color: theme => `${theme.palette.text.disabled} !important` } }}
         action={
-          <IconButton size='small'>
+          <IconButton id='handle' size='small'>
             <i className='tabler-arrows-move' />
           </IconButton>
         }

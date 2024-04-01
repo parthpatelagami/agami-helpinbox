@@ -36,20 +36,14 @@ const layout: LayoutBreakpoints = {
     { i: 'stat2', x: 0, y: 0, w: 12, h: 0 },
     { i: 'stat3', x: 0, y: 0, w: 12, h: 0 },
     { i: 'chart1', x: 0, y: 0, w: 5, h: 0 },
-    { i: 'chart2', x: 0, y: 0, w: 7, h: 0 },
-    { i: 'chart3', x: 0, y: 0, w: 4, h: 0 },
-    { i: 'chart4', x: 0, y: 0, w: 4, h: 0 },
-    { i: 'chart5', x: 0, y: 0, w: 4, h: 0 }
+    { i: 'chart2', x: 0, y: 0, w: 7, h: 0 }
   ],
   sm: [
     { i: 'stat1', x: 0, y: 0, w: 12, h: 0 },
     { i: 'stat2', x: 0, y: 0, w: 12, h: 0 },
     { i: 'stat3', x: 0, y: 0, w: 12, h: 0 },
     { i: 'chart1', x: 0, y: 0, w: 12, h: 0 },
-    { i: 'chart2', x: 0, y: 0, w: 12, h: 0 },
-    { i: 'chart3', x: 0, y: 0, w: 4, h: 0 },
-    { i: 'chart4', x: 0, y: 0, w: 4, h: 0 },
-    { i: 'chart5', x: 0, y: 0, w: 4, h: 0 }
+    { i: 'chart2', x: 0, y: 0, w: 12, h: 0 }
   ]
 }
 const DashboardCRM = () => {
@@ -134,10 +128,10 @@ const DashboardCRM = () => {
               <CardStatisticsStatistics3 />
             </Grid>
             <Grid key='chart1' item xs={12} md={5}>
-              <TicketByChannelChart id='chart2' />
+              <TicketByChannelChart id='chart1' />
             </Grid>
             <Grid key='chart2' item xs={12} md={7}>
-              <CsatChart id='chart1' />
+              <CsatChart id='chart2' />
             </Grid>
           </ResponsiveGridLayout>
         </CardContent>

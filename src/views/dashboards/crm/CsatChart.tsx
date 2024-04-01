@@ -70,7 +70,7 @@ const CsatChart = (props: propsType) => {
     },
     yaxis: {
       labels: {
-        style: { fontSize: '13px' }
+        style: { fontSize: '15' }
       }
     },
     xaxis: {
@@ -84,10 +84,7 @@ const CsatChart = (props: propsType) => {
   }
 
   return (
-    <Card
-      sx={{ height: 450, border: '1px solid rgba(47, 43, 61, 0.16)', borderRadius: '0', boxShadow: 'none' }}
-      id={props.id}
-    >
+    <Card sx={{ border: '1px solid rgba(47, 43, 61, 0.16)', borderRadius: '0', boxShadow: 'none' }} id={props.id}>
       <CardHeader
         title='My CSAT'
         sx={{ padding: '1rem' }}
@@ -98,7 +95,7 @@ const CsatChart = (props: propsType) => {
         }
       />
       <CardContent>
-        <AppReactApexCharts type='bar' height={320} options={options} series={[{ data: [90, 75, 50, 30, 10] }]} />
+        <AppReactApexCharts type='bar' height={300} options={options} series={[{ data: [90, 75, 50, 30, 10] }]} />
       </CardContent>
     </Card>
   )
