@@ -93,7 +93,7 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         <MenuItem href='/about' icon={<i className='tabler-info-circle' />}>
           About
         </MenuItem>
-        <MenuItem href={`/${locale}/tariffplan`} icon={<i className='tabler-info-circle' />}>
+        <MenuItem href={`/${locale}/tariffplan`} icon={<i className='tabler-receipt-2' />}>
           Tarrif Plan
         </MenuItem>
       </Menu>
