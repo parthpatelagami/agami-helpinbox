@@ -1,10 +1,11 @@
 // ** React Imports
-import type { ChangeEvent } from 'react'
 import { useEffect, useState } from 'react'
 
 // ** MUI Imports
 import type { GridSortModel } from '@mui/x-data-grid'
 import { DataGrid } from '@mui/x-data-grid'
+
+import { Box, TextField } from '@mui/material'
 
 import columns from './BusinessHoursColumn'
 
@@ -71,30 +72,35 @@ const BusinessHoursTable = () => {
 
   return (
     <>
-      <DataGrid
-        autoHeight
-        pagination
-        rows={rows}
-        rowCount={total}
-        columns={columns}
-        sortingMode='server'
-        paginationMode='server'
-        pageSizeOptions={[5, 10, 25, 50]}
-        paginationModel={paginationModel}
-        onSortModelChange={handleSortModel}
-        onPaginationModelChange={setPaginationModel}
-        slotProps={{
-          baseButton: {
-            size: 'medium',
-            variant: 'tonal'
-          },
-          toolbar: {
-            value: searchValue,
-            clearSearch: () => handleSearch(''),
-            onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value)
-          }
-        }}
-      />
+      <Box className='flex flex-col'>
+        <Box className='flex justify-end pr-4'>
+          <TextField
+            className='mb-2'
+            id='outlined-basic'
+            label='Search...'
+            variant='outlined'
+            value={searchValue}
+            onChange={e => {
+              handleSearch(e.target.value)
+            }}
+          />
+        </Box>
+        <Box className='flex-grow'>
+          <DataGrid
+            autoHeight
+            pagination
+            rows={rows}
+            rowCount={total}
+            columns={columns}
+            sortingMode='server'
+            paginationMode='server'
+            pageSizeOptions={[5, 10, 25, 50]}
+            paginationModel={paginationModel}
+            onSortModelChange={handleSortModel}
+            onPaginationModelChange={setPaginationModel}
+          />
+        </Box>
+      </Box>
     </>
   )
 }

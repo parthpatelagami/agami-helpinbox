@@ -36,9 +36,11 @@ const AddNewBusinessHours: React.FC = () => {
   const [dateValue, setDateValue] = useState<null>(null)
 
   const [selectedContributionBoxes, setSelectedContributionBoxes] = useState<Box[]>([])
-  const [hoveredContributionBox, setHoveredContributionBox] = useState<Box | null>(null)
+
+  // const [hoveredContributionBox, setHoveredContributionBox] = useState<Box | null>(null)
   const [selectedHolidayBoxes, setSelectedHolidayBoxes] = useState<Box[]>([])
-  const [hoveredHolidayBox, setHoveredHolidaynBox] = useState<Box | null>(null)
+
+  // const [hoveredHolidayBox, setHoveredHolidaynBox] = useState<Box | null>(null)
 
   const [businessHours, setBusinessHours] = useState('')
   const [businessHoursError, setBusinessHoursError] = useState(false)
@@ -139,9 +141,18 @@ const AddNewBusinessHours: React.FC = () => {
     setHolidayHoursError(false)
     setDateValue(null)
     setSelectedContributionBoxes([])
-    setHoveredContributionBox(null)
+
+    // setHoveredContributionBox(null)
     setSelectedHolidayBoxes([])
-    setHoveredHolidaynBox(null)
+
+    // setHoveredHolidaynBox(null)
+
+    // Reset the background color of all table cells
+    const cells = document.querySelectorAll('.box')
+
+    cells.forEach(cell => {
+      cell.style.backgroundColor = 'transparent'
+    })
   }
 
   return (
@@ -231,7 +242,7 @@ const AddNewBusinessHours: React.FC = () => {
             </Box>
           </Box>
           <Box className='pb-7 pl-20 ml-5'>
-            <Box className='flex justify-center'>
+            <Box className='flex justify-center' flexDirection='row'>
               {[...Array(24)].map((_, index) => (
                 <Typography
                   key={index}

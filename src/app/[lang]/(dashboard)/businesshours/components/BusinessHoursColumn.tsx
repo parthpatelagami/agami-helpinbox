@@ -1,8 +1,9 @@
 import { Typography, IconButton, Stack, Paper } from '@mui/material'
-import { Check, Delete, Edit } from '@mui/icons-material'
+import { Check, Delete, ModeEdit } from '@mui/icons-material'
 import { styled } from '@mui/material/styles'
 
-const handleEdit = (id: any) => {
+const handleEdit = (id: any, event: React.MouseEvent<HTMLButtonElement>) => {
+  event.preventDefault()
   console.log('EDIT PARAM ::: ', id)
 }
 
@@ -24,7 +25,7 @@ const BusinessHoursColumn = [
     field: 'id',
     headerName: 'Sr No.',
     renderCell: (params: any) => (
-      <Typography variant='h6' className='text-secondary mt-2'>
+      <Typography variant='h6' className='text-secondary mt-2 ml-3'>
         {params.row.id}
       </Typography>
     )
@@ -54,8 +55,8 @@ const BusinessHoursColumn = [
             </IconButton>
           </Item>
           <Item>
-            <IconButton aria-label='edit' title='Edit' onClick={() => handleEdit(params.row.id)}>
-              <Edit />
+            <IconButton aria-label='edit' title='Edit' onClick={e => handleEdit(params.row.id, e)}>
+              <ModeEdit />
             </IconButton>
           </Item>
           <Item>
