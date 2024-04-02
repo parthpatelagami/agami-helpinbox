@@ -26,7 +26,7 @@ const donutColors = {
 }
 
 interface propsType {
-  id: string
+  id?: string
 }
 
 const TicketByChannelChart = (props: propsType) => {
@@ -132,7 +132,7 @@ const TicketByChannelChart = (props: propsType) => {
         }
       />
       <CardContent>
-        <AppReactApexCharts type='donut' height={300} options={options} series={[85, 16, 50, 50]} />
+        <AppReactApexCharts type='donut' height={350} options={options} series={[85, 16, 50, 50]} />
       </CardContent>
     </Card>
   )

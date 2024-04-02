@@ -18,7 +18,7 @@ import { rgbaToHex } from '@/utils/rgbaToHex'
 import { IconButton } from '@mui/material'
 
 interface propsType {
-  id: string
+  id?: string
 }
 // Styled Component Imports
 const AppReactApexCharts = dynamic(() => import('@/libs/styles/AppReactApexCharts'))

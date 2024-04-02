@@ -12,10 +12,12 @@ import { useEffect, useState } from 'react'
 import CardStatisticsStatistics1 from '@/views/dashboards/crm/CardStatisticsStatistics1'
 import CardStatisticsStatistics2 from '@/views/dashboards/crm/CardStatisticsStatistics2'
 import CardStatisticsStatistics3 from '@/views/dashboards/crm/CardStatisticsStatistics3'
-import CsatChart from '@/views/dashboards/crm/CsatChart'
-import TicketByChannelChart from '@/views/dashboards/crm/TicketsByChannelChart'
+import CsatChart from '@/views/dashboards/crm/ApexCsatChart'
+import TicketByChannelChart from '@/views/dashboards/crm/ApexTicketsByChannelChart'
 import DashboardFilter from '@/views/dashboards/crm/DashboardFilter'
 import { StyledGrid } from './styles'
+import RechartsCsatChart from '@/views/dashboards/crm/RechartsCsatChart'
+import RechartsTicketsByChannel from '@/views/dashboards/crm/RechartsTicketsByChannel'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 interface LayoutItem {
@@ -115,17 +117,17 @@ const DashboardCRM = () => {
             isResizable={false}
             onBreakpointChange={updateHeights}
             draggableHandle='#handle'
-            margin={[20, 20]}
+            margin={[15, 20]}
             cols={{ xxs: 12, xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
           >
             <Grid key='stat3' item xs={12}>
               <CardStatisticsStatistics3 />
             </Grid>
             <Grid key='chart1' item xs={12} md={5}>
-              <TicketByChannelChart id='chart1' />
+              <RechartsTicketsByChannel id='chart1' />
             </Grid>
             <Grid key='chart2' item xs={12} md={7}>
-              <CsatChart id='chart2' />
+              <RechartsCsatChart id='chart2' />
             </Grid>
           </ResponsiveGridLayout>
         </CardContent>
