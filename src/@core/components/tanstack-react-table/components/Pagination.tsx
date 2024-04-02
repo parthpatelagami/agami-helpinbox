@@ -3,28 +3,31 @@ import React, { useMemo } from 'react'
 import Select from 'react-select'
 import { Box, Pagination } from '@mui/material'
 
-const Footer = ({ table }) => {
+const Paginate = ({ table }) => {
   const pageSize = table.getState().pagination.pageSize
 
   const options = useMemo(() => {
-    return [5, 10, 20, 30].map(pageSize => ({ value: pageSize, label: pageSize }))
+    return [5, 10, 20].map(pageSize => ({ value: pageSize, label: pageSize }))
   }, [])
 
-  const handlePageSizeChange = (event: any) => {
-    table.setPageSize(Number(event.target.value))
-  }
-
   const handlePageChange = (event, page) => {
-    table.setPageIndex(page - 1)
+    // Calculate the new page index
+    const newPageIndex = page - 1
+
+    // Update the page index in the table state
+    table.setPagination({
+      ...table.getState().pagination,
+      pageIndex: newPageIndex
+    })
   }
 
   return (
-    <Box className='justify-end p-3' display='flex' flexDirection='row'>
+    <Box className=' p-3' display='flex' flexDirection='row' justifyContent='flex-end'>
       <Box className='flex items-center justify-between mx-5'>
         <span className='mr-2'>Show</span>
         <Select
           value={{ value: pageSize, label: pageSize }}
-          onChange={event => handlePageSizeChange(event)}
+          onChange={event => table.setPageSize(Number(event.value))}
           className='w-15'
           classNamePrefix='select'
           options={options}
@@ -35,7 +38,7 @@ const Footer = ({ table }) => {
           variant='outlined'
           count={table.getPageCount()}
           page={table.getState().pagination.pageIndex + 1}
-          onChange={handlePageChange}
+          onChange={(event, page) => handlePageChange(event, page)}
           color='primary'
           shape='rounded'
           size='small'
@@ -45,4 +48,4 @@ const Footer = ({ table }) => {
   )
 }
 
-export default Footer
+export default Paginate

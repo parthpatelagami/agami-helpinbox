@@ -1,20 +1,10 @@
 import React, { useMemo, Fragment } from 'react'
 
 import PropTypes from 'prop-types'
-import {
-  Card,
-  Table,
-  CardHeader,
-  CircularProgress as Spinner,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell
-} from '@mui/material'
+import { Box, Table, CircularProgress as Spinner, TableBody, TableHead, TableRow, TableCell } from '@mui/material'
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 
 import Pagination from './components/Pagination'
-import HideShowColumns from './components/HideShowColumns'
 
 interface ColumnDefinition {
   header: string | (() => React.ReactNode)
@@ -50,7 +40,6 @@ const TanstackReactTable: React.FC<TanstackReactTableProps> = ({
   data,
   loading,
   dataCount,
-  headerComponent,
   enablePagination,
   manualPagination,
   pagination: { pageIndex, pageSize },
@@ -97,55 +86,47 @@ const TanstackReactTable: React.FC<TanstackReactTableProps> = ({
   const tableRowCount = table.getRowModel().rows.length
 
   return (
-    <Card>
-      <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-        <div className='d-flex mt-md-0 mt-1'>
-          {headerComponent && headerComponent()}
-          {enableColumnsVisiblity && <HideShowColumns table={table} />}
-        </div>
-      </CardHeader>
-      <>
-        <Table>
-          <TableHead>
-            {table.getHeaderGroups().map((headerGroup: any) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header: any) => (
-                  <TableCell key={header.id}>
-                    <span style={{ display: 'block', width: header.column.getSize(), textTransform: 'capitalize' }}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </span>
-                  </TableCell>
+    <Box>
+      <Table>
+        <TableHead sx={{ backgroundColor: '#dedede' }}>
+          {table.getHeaderGroups().map((headerGroup: any) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header: any) => (
+                <TableCell key={header.id}>
+                  <span style={{ display: 'block', width: header.column.getSize(), textTransform: 'capitalize' }}>
+                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                  </span>
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableHead>
+        <TableBody>
+          {loading && (
+            <TableRow>
+              <TableCell className='p-0'>
+                <Spinner />
+              </TableCell>
+            </TableRow>
+          )}
+          {!loading && tableRowCount === 0 && (
+            <TableRow>
+              <TableCell className='fallback-spinner data-loader'>No Data Available</TableCell>
+            </TableRow>
+          )}
+          {table.getRowModel().rows.map(row => (
+            <Fragment key={row.id}>
+              <TableRow>
+                {row.getVisibleCells().map(cell => (
+                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                 ))}
               </TableRow>
-            ))}
-          </TableHead>
-          <TableBody>
-            {loading && (
-              <TableRow>
-                <TableCell className='p-0'>
-                  <Spinner />
-                </TableCell>
-              </TableRow>
-            )}
-            {!loading && tableRowCount === 0 && (
-              <TableRow>
-                <TableCell className='fallback-spinner data-loader'>No Data Available</TableCell>
-              </TableRow>
-            )}
-            {table.getRowModel().rows.map(row => (
-              <Fragment key={row.id}>
-                <TableRow sx={loading ? { backgroundColor: '#dedede' } : {}}>
-                  {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                  ))}
-                </TableRow>
-              </Fragment>
-            ))}
-          </TableBody>
-        </Table>
-        {enablePagination && <Pagination table={table} />}
-      </>
-    </Card>
+            </Fragment>
+          ))}
+        </TableBody>
+      </Table>
+      {enablePagination && <Pagination table={table} />}
+    </Box>
   )
 }
 

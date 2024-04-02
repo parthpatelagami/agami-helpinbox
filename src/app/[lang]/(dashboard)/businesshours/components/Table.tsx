@@ -1,4 +1,6 @@
-import { Box } from '@mui/material'
+import { useEffect, useState } from 'react'
+
+import { Box, TextField } from '@mui/material'
 
 import TanstackReactTable from '@/@core/components/tanstack-react-table'
 import { columns } from './Column'
@@ -20,18 +22,49 @@ const dummyData: DataGridRowType[] = [
 
 const Table = () => {
   const isFormsLoading: boolean = false
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 5 })
+  const [total, setTotal] = useState<number>(0)
+  const [rows, setRows] = useState<DataGridRowType[]>([])
+  const [searchValue, setSearchValue] = useState<string>('')
+
+  useEffect(() => {
+    const filteredData = dummyData.filter(row => row.title.toLowerCase().includes(searchValue.toLowerCase()))
+    const startIndex = pagination.pageIndex * pagination.pageSize
+    const slicedData = filteredData.slice(startIndex, startIndex + pagination.pageSize)
+
+    setRows(slicedData)
+    setTotal(filteredData.length)
+  }, [searchValue, pagination])
+
+  const handleSearch = (value: string) => {
+    setSearchValue(value)
+  }
 
   return (
     <>
+      <Box className='flex justify-end pr-4'>
+        <TextField
+          className='mb-2'
+          id='outlined-basic'
+          label='Search...'
+          variant='outlined'
+          value={searchValue}
+          onChange={e => {
+            handleSearch(e.target.value)
+          }}
+        />
+      </Box>
       <Box className='flex-grow'>
         <TanstackReactTable
           loading={isFormsLoading}
           columns={columns}
-          data={dummyData}
-          dataCount={dummyData.length}
+          data={rows}
+          dataCount={total}
           responsiveTable={true}
           enablePagination={true}
           manualPagination={true}
+          pagination={pagination}
+          setPagination={setPagination}
           enableColumnsVisiblity={true}
         />
       </Box>
