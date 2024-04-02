@@ -83,14 +83,6 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         <SubMenu label={dictionary['navigation'].dashboards} icon={<i className='tabler-smart-home' />}>
           <MenuItem href={`/${locale}/dashboards/crm`}>{dictionary['navigation'].crm}</MenuItem>
         </SubMenu>
-        <SubMenu
-          label='Dashboards'
-          icon={<i className='carbon:home' />}
-
-          //suffix={<CustomChip label='3' size='small' color='error' round='true' />}
-        >
-          <MenuItem href={`/dashboards/crm`}>CRM Dashboard</MenuItem>
-        </SubMenu>
         <SubMenu label='Tickets' icon={<i className='tabler-ticket' />}>
           <MenuItem href={`/${locale}/tickets/viewalltickets`}>View All Tickets</MenuItem>
           <MenuItem href={`/${locale}/tickets/replypage1`}>Reply Page 1</MenuItem>

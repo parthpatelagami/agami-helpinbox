@@ -33,15 +33,15 @@ interface LayoutBreakpoints {
 
 const layout: LayoutBreakpoints = {
   lg: [
-    { i: 'stat1', x: 0, y: 0, w: 12, h: 0, minH: 0 },
-    { i: 'stat2', x: 0, y: 0, w: 12, h: 0, minH: 0 },
+    /*  { i: 'stat1', x: 0, y: 0, w: 12, h: 0, minH: 0 },
+    { i: 'stat2', x: 0, y: 0, w: 12, h: 0, minH: 0 }, */
     { i: 'stat3', x: 0, y: 0, w: 12, h: 0, minH: 0 },
     { i: 'chart1', x: 0, y: 0, w: 5, h: 0, minH: 0 },
     { i: 'chart2', x: 0, y: 0, w: 7, h: 0, minH: 0 }
   ],
   sm: [
-    { i: 'stat1', x: 0, y: 0, w: 12, h: 0 },
-    { i: 'stat2', x: 0, y: 0, w: 12, h: 0 },
+    /*     { i: 'stat1', x: 0, y: 0, w: 12, h: 0 },
+    { i: 'stat2', x: 0, y: 0, w: 12, h: 0 }, */
     { i: 'stat3', x: 0, y: 0, w: 12, h: 0 },
     { i: 'chart1', x: 0, y: 0, w: 12, h: 0 },
     { i: 'chart2', x: 0, y: 0, w: 12, h: 0 }
@@ -118,12 +118,6 @@ const DashboardCRM = () => {
             margin={[20, 20]}
             cols={{ xxs: 12, xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
           >
-            <Grid key='stat1' item xs={12}>
-              <CardStatisticsStatistics1 />
-            </Grid>
-            <Grid key='stat2' item xs={12}>
-              <CardStatisticsStatistics2 />
-            </Grid>
             <Grid key='stat3' item xs={12}>
               <CardStatisticsStatistics3 />
             </Grid>

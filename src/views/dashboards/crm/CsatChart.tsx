@@ -15,9 +15,6 @@ import { ApexOptions } from 'apexcharts'
 // Util Imports
 import { rgbaToHex } from '@/utils/rgbaToHex'
 
-// Server Action Imports
-import { getServerMode } from '@core/utils/serverHelpers'
-
 import { IconButton } from '@mui/material'
 
 interface propsType {
@@ -30,6 +27,11 @@ const CsatChart = (props: propsType) => {
   // Hooks
   const theme = useTheme()
   const { mode } = useColorScheme()
+  // Vars
+  const _mode = (mode === 'system' ? 'light' : mode) || 'light'
+  const textSecondary = rgbaToHex(`rgb(${theme.mainColorChannels[_mode]} / 0.7)`)
+  const divider = rgbaToHex(`rgb(${theme.mainColorChannels[_mode]} / 0.12)`)
+  const disabledText = rgbaToHex(`rgb(${theme.mainColorChannels[_mode]} / 0.4)`)
 
   const options: ApexOptions = {
     chart: {
@@ -39,7 +41,7 @@ const CsatChart = (props: propsType) => {
     legend: {
       position: 'right',
       markers: { offsetX: -3, radius: 10 },
-      labels: { colors: theme.palette.text.secondary },
+      labels: { colors: textSecondary },
       itemMargin: {
         vertical: 10,
         horizontal: 10
@@ -75,10 +77,10 @@ const CsatChart = (props: propsType) => {
     },
     xaxis: {
       axisBorder: { show: false },
-      axisTicks: { color: theme.palette.divider },
+      axisTicks: { color: divider },
       categories: ['Great', 'Good', 'Average', 'Poor', 'Bad'],
       labels: {
-        style: { colors: theme.palette.text.disabled }
+        style: { colors: disabledText, fontSize: '13px' }
       }
     }
   }
@@ -95,7 +97,7 @@ const CsatChart = (props: propsType) => {
         }
       />
       <CardContent>
-        <AppReactApexCharts type='bar' height={250} options={options} series={[{ data: [90, 75, 50, 30, 10] }]} />
+        <AppReactApexCharts type='bar' height={300} options={options} series={[{ data: [90, 75, 50, 30, 10] }]} />
       </CardContent>
     </Card>
   )
