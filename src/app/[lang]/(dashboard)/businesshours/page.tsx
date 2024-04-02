@@ -9,6 +9,7 @@ import InfoIcon from '@mui/icons-material/Info'
 import AddIcon from '@mui/icons-material/Add'
 
 import BusinessHoursTable from './components/BusinessHoursTable'
+import Table from './components/Table'
 
 const MainPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -53,7 +54,8 @@ const MainPage: React.FC = () => {
           </Box>
 
           <Box className='mt-20 mb-10 m-2'>
-            <BusinessHoursTable />
+            {/* <BusinessHoursTable /> */}
+            <Table />
           </Box>
         </Box>
       </Card>
