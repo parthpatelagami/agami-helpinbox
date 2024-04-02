@@ -16,7 +16,6 @@ import Typography from '@mui/material/Typography'
 import Checkbox from '@mui/material/Checkbox'
 import IconButton from '@mui/material/IconButton'
 import TablePagination from '@mui/material/TablePagination'
-import { styled } from '@mui/material/styles'
 import type { TextFieldProps } from '@mui/material/TextField'
 
 // Third-party Imports
@@ -38,17 +37,14 @@ import type { ColumnDef, FilterFn } from '@tanstack/react-table'
 import type { RankingInfo } from '@tanstack/match-sorter-utils'
 
 // Type Imports
-import type { ThemeColor } from '@core/types'
 import type { Locale } from '@configs/i18n'
 
 // Component Imports
-import CustomAvatar from '@core/components/mui/Avatar'
 import OptionMenu from '@core/components/option-menu'
 import CustomTextField from '@core/components/mui/TextField'
 import TablePaginationComponent from '@components/TablePaginationComponent'
 
 // Util Imports
-import { getInitials } from '@/utils/getInitials'
 import { getLocalizedUrl } from '@/utils/i18n'
 
 // Style Imports
@@ -64,6 +60,7 @@ declare module '@tanstack/table-core' {
 }
 
 type TariffType = {
+  id: Number
   Tarrif_Plan_Name: string
   Country: string
   Currency: string
@@ -71,24 +68,14 @@ type TariffType = {
   Duration: string
 }
 
-type UsersTypeWithAction = TariffType & {
+type TariffTypeWithAction = TariffType & {
   action?: string
 }
-
-type UserRoleType = {
-  [key: string]: { icon: string; color: string }
-}
-
-type UserStatusType = {
-  [key: string]: ThemeColor
-}
-
-// Styled Components
-const Icon = styled('i')({})
 
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item
   const itemRank = rankItem(row.getValue(columnId), value)
+  console.log('Fuzzy Filter is called and rank item is', itemRank)
 
   // Store the itemRank info
   addMeta({
@@ -99,37 +86,8 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   return itemRank.passed
 }
 
-const DebouncedInput = ({
-  value: initialValue,
-  onChange,
-  debounce = 500,
-  ...props
-}: {
-  value: string | number
-  onChange: (value: string | number) => void
-  debounce?: number
-} & Omit<TextFieldProps, 'onChange'>) => {
-  // States
-  const [value, setValue] = useState(initialValue)
-
-  useEffect(() => {
-    setValue(initialValue)
-  }, [initialValue])
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      onChange(value)
-    }, debounce)
-
-    return () => clearTimeout(timeout)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value])
-
-  return <CustomTextField {...props} value={value} onChange={e => setValue(e.target.value)} />
-}
-
 // Column Definitions
-const columnHelper = createColumnHelper<UsersTypeWithAction>()
+const columnHelper = createColumnHelper<TariffTypeWithAction>()
 
 const TariffPlanDataTable = ({ tableData }: { tableData?: TariffType[] }) => {
   // States
@@ -142,7 +100,7 @@ const TariffPlanDataTable = ({ tableData }: { tableData?: TariffType[] }) => {
   // Hooks
   const { lang: locale } = useParams()
 
-  const columns = useMemo<ColumnDef<UsersTypeWithAction, any>[]>(
+  const columns = useMemo<ColumnDef<TariffTypeWithAction, any>[]>(
     () => [
       {
         id: 'select',
@@ -210,13 +168,13 @@ const TariffPlanDataTable = ({ tableData }: { tableData?: TariffType[] }) => {
       }),
       columnHelper.accessor('action', {
         header: 'Actions',
-        cell: () => (
+        cell: ({ row }) => (
           <div className='flex items-center'>
             <IconButton>
               <i className='tabler-trash text-[22px] text-textSecondary' />
             </IconButton>
             <IconButton>
-              <Link href={getLocalizedUrl('apps/user/view', locale as Locale)} className='flex'>
+              <Link href={getLocalizedUrl(`tariffplan/form/${row.original.id}`, locale as Locale)} className='flex'>
                 <i className='tabler-eye text-[22px] text-textSecondary' />
               </Link>
             </IconButton>
@@ -275,7 +233,7 @@ const TariffPlanDataTable = ({ tableData }: { tableData?: TariffType[] }) => {
 
   return (
     <Card>
-      <CardContent className='flex justify-between flex-col gap-4 items-start sm:flex-row sm:items-center'>
+      <CardContent className='flex justify-between flex-col gap-4 items-start sm:flex-row sm:items-center ml-3 mr-3'>
         <div className='flex items-center gap-2'>
           <Typography>Show</Typography>
           <CustomTextField
@@ -288,6 +246,16 @@ const TariffPlanDataTable = ({ tableData }: { tableData?: TariffType[] }) => {
             <MenuItem value='25'>25</MenuItem>
             <MenuItem value='50'>50</MenuItem>
           </CustomTextField>
+        </div>
+        <div className='flex gap-4 flex-col !items-start is-full sm:flex-row sm:is-auto sm:items-center'>
+          <Link href={getLocalizedUrl(`tariffplan/form`, locale as Locale)}>
+            <IconButton className='hover:border-2 hover:border-inherit hover:border-solid'>
+              <i className='tabler-plus border-solid text-[20px] text-textSecondary' />
+            </IconButton>
+          </Link>
+          <IconButton className='hover:border-2 hover:border-inherit hover:border-solid'>
+            <i className='tabler-trash text-[20px] text-textSecondary' />
+          </IconButton>
         </div>
       </CardContent>
       <div className='overflow-x-auto'>

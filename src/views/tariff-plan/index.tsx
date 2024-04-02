@@ -5,6 +5,7 @@ import TarrifPlanTable from './TariffPlanDataTable'
 
 const TariffData = [
   {
+    id: 1,
     Tarrif_Plan_Name: 'Basic Plan',
     Country: 'India',
     Currency: 'Rupee',
@@ -12,6 +13,7 @@ const TariffData = [
     Duration: 'Montly'
   },
   {
+    id: 2,
     Tarrif_Plan_Name: 'Pro Plan',
     Country: 'India',
     Currency: 'Rupee',
@@ -19,6 +21,7 @@ const TariffData = [
     Duration: 'Montly'
   },
   {
+    id: 3,
     Tarrif_Plan_Name: 'Essential Plan',
     Country: 'India',
     Currency: 'Rupee',

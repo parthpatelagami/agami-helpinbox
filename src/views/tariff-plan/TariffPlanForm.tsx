@@ -5,19 +5,12 @@ import { forwardRef, useState } from 'react'
 // ** MUI Imports
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
-import Radio from '@mui/material/Radio'
 import Button from '@mui/material/Button'
-import Checkbox from '@mui/material/Checkbox'
 import MenuItem from '@mui/material/MenuItem'
-import FormLabel from '@mui/material/FormLabel'
 import CardHeader from '@mui/material/CardHeader'
 import IconButton from '@mui/material/IconButton'
-import RadioGroup from '@mui/material/RadioGroup'
-import FormControl from '@mui/material/FormControl'
 import CardContent from '@mui/material/CardContent'
-import FormHelperText from '@mui/material/FormHelperText'
 import InputAdornment from '@mui/material/InputAdornment'
-import FormControlLabel from '@mui/material/FormControlLabel'
 
 // ** Custom Component Import
 import CustomTextField from '@core/components/mui/TextField'
@@ -26,26 +19,15 @@ import CustomTextField from '@core/components/mui/TextField'
 import { useForm, Controller } from 'react-hook-form'
 
 // Table
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
 import { Box, Divider, TextField, styled } from '@mui/material'
 import TarrifModule from './TarrifModule'
 import Tooltip from '@mui/material/Tooltip'
 import { useTheme } from '@mui/material/styles'
-
-const defaultValues = {
-  tarrif_plan_name: '',
-  currency_id: '1',
-  country_id: '',
-  total_amount: '',
-  duration: '',
-  CopyFrom: ''
-}
+import { data } from './ModuleFeatureData'
+import Link from 'next/link'
+import { getLocalizedUrl } from '@/utils/i18n'
+import { useParams } from 'next/navigation'
+import { Locale } from '@/configs/i18n'
 
 type moduleData = {
   module_id: string
@@ -61,8 +43,11 @@ type submitData = {
   duration: string
   module_feature_right_data: moduleData[]
 }
-
-const TarrifPlanForm = () => {
+type propsType = {
+  defaultValues: any
+}
+const TarrifPlanForm = (props: propsType) => {
+  const defaultValues = props.defaultValues
   // ** Hooks
   const {
     control,
@@ -108,20 +93,10 @@ const TarrifPlanForm = () => {
     4: '128'
   }
 
-  function createData(name: string, calories: number, fat: number) {
-    return { name, features: ['Bulk Import', 'Bulk Select', 'Add', 'Edit', 'Delete', 'can'] }
-  }
-
-  const rows = [
-    createData('Agent', 159, 6.0),
-    createData('Customer', 237, 9.0),
-    createData('Ticket Management', 262, 16.0),
-    createData('SLA', 305, 3.7),
-    createData('Escaltion', 356, 16.0),
-    { name: 'test', features: [] }
-  ]
+  const rows = data
   const [Currency, setCurrency] = useState('8377')
   const theme = useTheme()
+  const { lang: locale } = useParams()
   return (
     <Card>
       <CardHeader
@@ -130,13 +105,15 @@ const TarrifPlanForm = () => {
           <Box>
             <Tooltip placement='top' title='Reset'>
               <IconButton onClick={() => reset()}>
-                <i className='tabler-refresh' />
+                <i className='tabler-refresh border-solid text-[20px] text-textSecondary' />
               </IconButton>
             </Tooltip>
             <Tooltip placement='top' title='Close'>
-              <IconButton>
-                <i className='tabler-x' />
-              </IconButton>
+              <Link href={getLocalizedUrl(`tariffplan`, locale as Locale)}>
+                <IconButton>
+                  <i className='tabler-x border-solid text-[20px] text-textSecondary' />
+                </IconButton>
+              </Link>
             </Tooltip>
           </Box>
         }
