@@ -38,12 +38,7 @@ const verticalMenuData = (): VerticalMenuDataType[] => [
   {
     label: 'WorkFlow',
     icon: 'tabler-grid-dots',
-    href: '/work-flow',
-    children: [
-      {
-        label: 'WorkFlow'
-      }
-    ]
+    href: '/work-flow'
   }
 ]
 
