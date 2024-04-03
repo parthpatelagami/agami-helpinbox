@@ -120,6 +120,9 @@ const HorizontalMenu = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof 
         <MenuItem href={`/${locale}/form-view`} icon={<i className='tabler-layout-2' />}>
           Form View
         </MenuItem>
+        <MenuItem href={`/${locale}/sla`} icon={<i className='tabler-list-tree' />}>
+          SLA
+        </MenuItem>
       </Menu>
       {/* <Menu
 rootStyles={menuRootStyles(theme)}
