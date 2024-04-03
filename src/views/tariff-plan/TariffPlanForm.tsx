@@ -1,8 +1,13 @@
 'use client'
+
 // ** React Imports
 import { forwardRef, useState } from 'react'
 
 // ** MUI Imports
+import Link from 'next/link'
+
+import { useParams } from 'next/navigation'
+
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -13,21 +18,22 @@ import CardContent from '@mui/material/CardContent'
 import InputAdornment from '@mui/material/InputAdornment'
 
 // ** Custom Component Import
-import CustomTextField from '@core/components/mui/TextField'
 
 // ** Third Party Imports
 import { useForm, Controller } from 'react-hook-form'
 
 // Table
 import { Box, Divider, TextField, styled } from '@mui/material'
-import TarrifModule from './TarrifModule'
+
 import Tooltip from '@mui/material/Tooltip'
 import { useTheme } from '@mui/material/styles'
+
+import TarrifModule from './TarrifModule'
+import CustomTextField from '@core/components/mui/TextField'
 import { data } from './ModuleFeatureData'
-import Link from 'next/link'
 import { getLocalizedUrl } from '@/utils/i18n'
-import { useParams } from 'next/navigation'
-import { Locale } from '@/configs/i18n'
+
+import type { Locale } from '@/configs/i18n'
 
 type moduleData = {
   module_id: string
@@ -46,8 +52,10 @@ type submitData = {
 type propsType = {
   defaultValues: any
 }
+
 const TarrifPlanForm = (props: propsType) => {
   const defaultValues = props.defaultValues
+
   // ** Hooks
   const {
     control,
@@ -58,7 +66,8 @@ const TarrifPlanForm = (props: propsType) => {
 
   const onSubmit: any = (data: submitData) => {
     console.log(data)
-    let serverData = {
+
+    const serverData = {
       country_id: 0,
       currency_id: 0,
       duration: 0,
@@ -66,6 +75,7 @@ const TarrifPlanForm = (props: propsType) => {
       total_amount: 0,
       module_feature_right_data: data.module_feature_right_data
     }
+
     serverData.country_id = Number(data.country_id)
     serverData.currency_id = Number(data.currency_id)
     serverData.duration = Number(data.duration)
@@ -73,19 +83,23 @@ const TarrifPlanForm = (props: propsType) => {
     serverData.total_amount = Number(data.total_amount)
 
     const moduleArray = serverData.module_feature_right_data
+
     moduleArray.map((mod, index) => {
       mod.limit = mod.limit != null && mod.limit != undefined ? Number(mod.limit) : Number(0)
-      let moduleFeature = mod.features
+      const moduleFeature = mod.features
+
       if (moduleFeature != null && moduleFeature != undefined) {
         const moduleFeatureIds = Object.entries(moduleFeature)
           .filter(([key, value]) => value === true)
           .map(([key]) => key)
+
         mod.features = moduleFeatureIds
       }
     })
 
     console.log(serverData)
   }
+
   const currenyIdSymbolData = {
     1: '8377',
     2: '36',
@@ -97,6 +111,7 @@ const TarrifPlanForm = (props: propsType) => {
   const [Currency, setCurrency] = useState('8377')
   const theme = useTheme()
   const { lang: locale } = useParams()
+
   return (
     <Card>
       <CardHeader
@@ -218,6 +233,7 @@ const TarrifPlanForm = (props: propsType) => {
                       value: value,
                       onChange: e => {
                         console.log('Currect change', e)
+
                         //@ts-ignore
                         setCurrency(currenyIdSymbolData[e.target.value])
                         onChange(e)

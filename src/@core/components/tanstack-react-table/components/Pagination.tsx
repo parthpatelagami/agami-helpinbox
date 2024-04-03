@@ -11,10 +11,9 @@ const Paginate = ({ table }) => {
   }, [])
 
   const handlePageChange = (event, page) => {
-    // Calculate the new page index
+    event.preventDefault()
     const newPageIndex = page - 1
 
-    // Update the page index in the table state
     table.setPagination({
       ...table.getState().pagination,
       pageIndex: newPageIndex
@@ -35,7 +34,6 @@ const Paginate = ({ table }) => {
       </Box>
       <Box className='mt-1'>
         <Pagination
-          variant='outlined'
           count={table.getPageCount()}
           page={table.getState().pagination.pageIndex + 1}
           onChange={(event, page) => handlePageChange(event, page)}
