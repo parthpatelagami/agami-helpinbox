@@ -1,49 +1,52 @@
 'use client'
 
-import React, { useState } from 'react'
+// React Import
+import React, { Fragment } from 'react'
 
-import { useRouter } from 'next/navigation'
+// Next Impot
+import { useParams } from 'next/navigation'
+import Link from 'next/link'
 
-import { Box, Typography, Divider, Card, IconButton } from '@mui/material'
-import InfoIcon from '@mui/icons-material/Info'
-import AddIcon from '@mui/icons-material/Add'
+// Mui Import
+import { Box, Typography, Divider, Card, IconButton, Tooltip } from '@mui/material'
 
-import BusinessHoursTable from './components/BusinessHoursTable'
+// Util Imports
+import { getLocalizedUrl } from '@/utils/i18n'
+
+// Type Imports
+import type { Locale } from '@configs/i18n'
+
+// Custom Import
 import Table from './components/Table'
 
+// import BusinessHoursTable from './components/BusinessHoursTable'
+
 const MainPage: React.FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-
-  const router = useRouter()
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    setIsLoading(true)
-
-    router.push('/businesshours/add-new-business-hours')
-    setIsLoading(false)
-  }
+  const { lang: locale } = useParams()
 
   return (
-    <>
+    <Fragment>
       <Card>
-        <Box className='p-5'>
-          <div className='flex justify-between items-center mb-5'>
+        <Box className='p-3'>
+          <Box className='flex justify-between items-center mb-5'>
             <Typography variant='caption' className='font-bold text-lg capitalize'>
               Business Hours
             </Typography>
-
-            {isLoading && (
-              <div>
-                <IconButton title='Info'>
-                  <InfoIcon />
+            <Box>
+              <Tooltip placement='top' title='Info'>
+                <IconButton className='hover:border-2 hover:border-inherit hover:border-solid'>
+                  <i className='tabler-info-circle border-solid text-[20px] text-textSecondary' />
                 </IconButton>
-                <IconButton title='Add' onClick={handleClick}>
-                  <AddIcon />
-                </IconButton>
-              </div>
-            )}
-          </div>
+              </Tooltip>
+              <Link href={getLocalizedUrl(`businesshours/add-new-business-hours`, locale as Locale)}>
+                <Tooltip placement='top' title='Add'>
+                  <IconButton className='hover:border-2 hover:border-inherit hover:border-solid'>
+                    <i className='tabler-plus border-solid text-[20px] text-textSecondary' />
+                  </IconButton>
+                </Tooltip>
+              </Link>
+            </Box>
+          </Box>
 
           <Divider />
 
@@ -59,7 +62,7 @@ const MainPage: React.FC = () => {
           </Box>
         </Box>
       </Card>
-    </>
+    </Fragment>
   )
 }
 

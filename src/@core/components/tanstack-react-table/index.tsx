@@ -1,9 +1,15 @@
-import React, { useMemo, Fragment } from 'react'
+// React Import
+import React, { useMemo } from 'react'
 
+// MUI Imports
+import { Table, CircularProgress as Spinner, TableBody, TableHead, TableRow, TableCell, Box } from '@mui/material'
+
+// Third party Components
 import PropTypes from 'prop-types'
-import { Box, Table, CircularProgress as Spinner, TableBody, TableHead, TableRow, TableCell } from '@mui/material'
+import classnames from 'classnames'
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 
+// Custom Components
 import Pagination from './components/Pagination'
 
 interface ColumnDefinition {
@@ -88,12 +94,20 @@ const TanstackReactTable: React.FC<TanstackReactTableProps> = ({
   return (
     <Box>
       <Table>
-        <TableHead sx={{ backgroundColor: '#dedede' }}>
+        <TableHead>
           {table.getHeaderGroups().map((headerGroup: any) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header: any) => (
                 <TableCell key={header.id}>
-                  <span style={{ display: 'block', width: header.column.getSize(), textTransform: 'capitalize' }}>
+                  <span
+                    style={{
+                      fontWeight: '600',
+                      fontSize: '1rem',
+                      display: 'block',
+                      width: header.column.getSize(),
+                      textTransform: 'capitalize'
+                    }}
+                  >
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </span>
                 </TableCell>
@@ -111,18 +125,24 @@ const TanstackReactTable: React.FC<TanstackReactTableProps> = ({
           )}
           {!loading && tableRowCount === 0 && (
             <TableRow>
-              <TableCell className='fallback-spinner data-loader'>No Data Available</TableCell>
+              <TableCell colSpan={table.getVisibleFlatColumns().length} className='text-center'>
+                No data available
+              </TableCell>
             </TableRow>
           )}
-          {table.getRowModel().rows.map(row => (
-            <Fragment key={row.id}>
-              <TableRow>
-                {row.getVisibleCells().map(cell => (
-                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                ))}
-              </TableRow>
-            </Fragment>
-          ))}
+
+          {table
+            .getRowModel()
+            .rows.slice(0, table.getState().pagination.pageSize)
+            .map(row => {
+              return (
+                <TableRow key={row.id} className={classnames({ selected: row.getIsSelected() })}>
+                  {row.getVisibleCells().map(cell => (
+                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                  ))}
+                </TableRow>
+              )
+            })}
         </TableBody>
       </Table>
       {enablePagination && <Pagination table={table} />}

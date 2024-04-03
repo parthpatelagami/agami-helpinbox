@@ -1,7 +1,8 @@
+// React Impports
 import React from 'react'
 
-import { IconButton, Stack } from '@mui/material'
-import { Check, Edit, Trash } from 'react-feather'
+// MUI Imports
+import { IconButton, Stack, Tooltip } from '@mui/material'
 
 interface Column {
   accessorKey: string
@@ -40,17 +41,29 @@ export const columns: Column[] = [
     cell: info => (
       <div>
         <Stack display='flex' flexDirection='row' className='mt-1'>
-          <IconButton aria-label='check' title='Check'>
-            <Check size={17} />
-          </IconButton>
+          <Tooltip placement='top' title='Check'>
+            <IconButton className='hover:border-2 hover:border-inherit hover:border-solid'>
+              <i className='tabler-circle-check text-[22px] text-textSecondary' />
+            </IconButton>
+          </Tooltip>
 
-          <IconButton aria-label='edit' title='Edit' onClick={e => handleEdit(info.getValue(), e)}>
-            <Edit size={17} />
-          </IconButton>
+          <Tooltip placement='top' title='Edit'>
+            <IconButton
+              className='hover:border-2 hover:border-inherit hover:border-solid'
+              onClick={e => handleEdit(info.getValue(), e)}
+            >
+              <i className='tabler-edit text-[22px] text-textSecondary' />
+            </IconButton>
+          </Tooltip>
 
-          <IconButton aria-label='delete' title='Delete' onClick={() => handleDelete(info.getValue())}>
-            <Trash size={17} />
-          </IconButton>
+          <Tooltip placement='top' title='Delete'>
+            <IconButton
+              className='hover:border-2 hover:border-inherit hover:border-solid'
+              onClick={() => handleDelete(info.getValue())}
+            >
+              <i className='tabler-trash text-[22px] text-textDanger' />
+            </IconButton>
+          </Tooltip>
         </Stack>
       </div>
     ),
