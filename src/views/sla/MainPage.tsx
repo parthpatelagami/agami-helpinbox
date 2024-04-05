@@ -27,7 +27,7 @@ const MainPage: React.FC = () => {
         <CardContent>
           <Box className='flex justify-between items-center mb-5'>
             <Typography variant='caption' className='font-bold text-lg capitalize'>
-              Business Hours
+              SLA
             </Typography>
             <Box>
               <Link href={getLocalizedUrl(`sla/add-new-sla`, locale as Locale)}>
