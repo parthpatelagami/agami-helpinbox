@@ -1,4 +1,8 @@
+import ReplyPage from "@views/tickets/reply/replypage1/ReplyPage";
+
 export default function Page() {
-    return <h1>Reply page 1!</h1>
+    return (
+        <ReplyPage/>
+    )
   }
   
