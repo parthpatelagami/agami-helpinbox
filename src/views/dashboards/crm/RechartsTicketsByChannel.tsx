@@ -54,7 +54,7 @@ const renderCustomizedLabel = (props: LabelProp) => {
 interface propsType {
   id?: string
 }
-const RechartsPieChart = (props: propsType) => {
+const RechartsTicketsByChannel = (props: propsType) => {
   return (
     <Card sx={{ border: '1px solid rgba(47, 43, 61, 0.16)', borderRadius: '0', boxShadow: 'none' }} id={props.id}>
       <CardHeader
@@ -66,14 +66,22 @@ const RechartsPieChart = (props: propsType) => {
           </IconButton>
         }
       />
-      <CardContent>
-        <AppRecharts>
+      <CardContent className='grid grid-cols-7 pr-0'>
+        <div className='col-span-2 content-center'>
+          {data.map(item => (
+            <Box className='flex items-center gap-1.5 pb-1' sx={{ '& i': { color: item.color } }}>
+              <i className='tabler-circle-filled text-md' />
+              <Typography variant='body1'>{item.name}</Typography>
+            </Box>
+          ))}
+        </div>
+        <AppRecharts className='col-span-5'>
           <div className='bs-[300px]'>
             <ResponsiveContainer>
               <PieChart height={300} style={{ direction: 'ltr' }}>
                 <Pie
                   data={data}
-                  innerRadius={75}
+                  innerRadius={65}
                   dataKey='value'
                   label={renderCustomizedLabel}
                   labelLine={false}
@@ -84,27 +92,8 @@ const RechartsPieChart = (props: propsType) => {
                   ))}
                 </Pie>
                 <Tooltip />
-                <Legend layout='vertical' align='left' verticalAlign='middle' iconType='circle' />
               </PieChart>
             </ResponsiveContainer>
-            {/*  <div className='flex justify-center flex-wrap gap-6'>
-              <Box className='flex items-center gap-1.5' sx={{ '& i': { color: '#00d4bd' } }}>
-                <i className='tabler-circle-filled text-xs' />
-                <Typography variant='body2'>R&D</Typography>
-              </Box>
-              <Box className='flex items-center gap-1.5' sx={{ '& i': { color: '#ffe700' } }}>
-                <i className='tabler-circle-filled text-xs' />
-                <Typography variant='body2'>Operational</Typography>
-              </Box>
-              <Box className='flex items-center gap-1.5' sx={{ '& i': { color: '#FFA1A1' } }}>
-                <i className='tabler-circle-filled text-xs' />
-                <Typography variant='body2'>Networking</Typography>
-              </Box>
-              <Box className='flex items-center gap-1.5' sx={{ '& i': { color: '#826bf8' } }}>
-                <i className='tabler-circle-filled text-xs' />
-                <Typography variant='body2'>Hiring</Typography>
-              </Box>
-            </div> */}
           </div>
         </AppRecharts>
       </CardContent>
@@ -112,4 +101,4 @@ const RechartsPieChart = (props: propsType) => {
   )
 }
 
-export default RechartsPieChart
+export default RechartsTicketsByChannel

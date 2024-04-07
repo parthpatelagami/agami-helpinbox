@@ -7,6 +7,10 @@ module.exports = {
   important: '#__next',
   plugins: [require('tailwindcss-logical'), require('./src/@core/tailwind/plugin')],
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        default: '#F3F2F5'
+      }
+    }
   }
 }

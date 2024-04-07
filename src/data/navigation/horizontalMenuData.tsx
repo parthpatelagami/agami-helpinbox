@@ -38,6 +38,16 @@ const horizontalMenuData = (): HorizontalMenuDataType[] => [
     label: 'Tarrif Plan',
     icon: 'carbon:home',
     href: '/tarrifplan'
+  },
+  {
+    label: 'WorkFlow',
+    icon: 'tabler-grid-dots',
+    href: '/work-flow'
+  },
+  {
+    label: 'Form View',
+    icon: 'tabler-layout-2',
+    href: '/form-view'
   }
 ]
 
