@@ -78,7 +78,7 @@ const CustomTooltip = (props: TooltipProps<any, any>) => {
 interface propsType {
   id?: string
 }
-const RechartsBarChart = (props: propsType) => {
+const RechartsCsatChart = (props: propsType) => {
   // Hooks
   const theme = useTheme()
 
@@ -110,7 +110,7 @@ const RechartsBarChart = (props: propsType) => {
             </ResponsiveContainer>
           </div>
         </AppRecharts>
-        <div className=''>
+        <div className='col-span-1 content-center'>
           <Box className='flex items-center gap-1.5 pb-1' sx={{ '& i': { color: '#33b2df' } }}>
             <i className='tabler-circle-filled text-md' />
             <Typography variant='body1'>Great</Typography>
@@ -137,4 +137,4 @@ const RechartsBarChart = (props: propsType) => {
   )
 }
 
-export default RechartsBarChart
+export default RechartsCsatChart

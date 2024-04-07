@@ -44,6 +44,11 @@ const verticalMenuData = (): VerticalMenuDataType[] => [
     label: 'SLA',
     icon: 'tabler-list-tree',
     href: '/sla'
+  },
+  {
+    label: 'Form View',
+    icon: 'tabler-layout-2',
+    href: '/form-view'
   }
 ]
 

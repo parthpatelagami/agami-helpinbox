@@ -40,9 +40,19 @@ const horizontalMenuData = (): HorizontalMenuDataType[] => [
     href: '/tarrifplan'
   },
   {
+    label: 'WorkFlow',
+    icon: 'tabler-grid-dots',
+    href: '/work-flow'
+  },
+  {
     label: 'SLA',
     icon: 'tabler-list-tree',
     href: '/sla'
+  },
+  {
+    label: 'Form View',
+    icon: 'tabler-layout-2',
+    href: '/form-view'
   }
 ]
 

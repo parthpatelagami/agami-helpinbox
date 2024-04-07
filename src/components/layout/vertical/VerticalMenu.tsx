@@ -105,6 +105,9 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         <MenuItem href={`/${locale}/sla`} icon={<i className='tabler-list-tree' />}>
           SLA
         </MenuItem>
+        <MenuItem href={`/${locale}/form-view`} icon={<i className='tabler-layout-2' />}>
+          Form View
+        </MenuItem>
       </Menu>
     </ScrollWrapper>
   )
