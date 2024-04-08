@@ -21,45 +21,41 @@ const ChildTicketView = ()=>{
     return (
         <Card sx={{mt:7 , height:'600px'}}>
             <ScrollWrapper>
-                <Grid container>          
+                <div className="grid grid-rows-1 gap-2">          
                 {relatedTicketData.map((ticketData:any, index:number) =>
                     <Box key={index}>       
                         <CardContent>
-                            <Grid item md={12} xs={12} sm={12} sx={{ display: 'flex', alignItems: 'flex-start', justifyContent:'space-around'}}>
-                                <Grid item md={1} xs={12} sm={12} sx={{textAlign:'center' }}>                        
-                                    <CustomAvatar skin='light' sx={{ width: 50, height: 50, mb: 2.25 }}>
+                        <div className="grid grid-cols-12">
+                            <div className="col-span-1">                        
+                                <CustomAvatar skin='light' sx={{ width: 50, height: 50, mb: 2.25 }}>
                                         {/* <Icon icon='streamline:ticket-1-solid' color={`${theme.palette.primary.main}`} fontSize={30} />    */}
-                                    </CustomAvatar>                   
-                                </Grid>
+                                </CustomAvatar> 
+                            </div>
+                            <div className="col-span-5 border-r border-gray-300 mx-2">
+                                <Typography sx={{ mr: 2, color: 'text.secondary', fontWeight: 800 }}>#{ticketData.id}</Typography>
+                                <Typography >{ticketData.ticketSubject}</Typography>
+                            </div>
                             
-                                <Grid item md={5} xs={12} sm={12} sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
-                                    <Typography sx={{ mr: 2, color: 'text.secondary', fontWeight: 800 }}>#{ticketData.id}</Typography>
-                                    <Typography >{ticketData.ticketSubject}</Typography>
-                                </Grid>
-
-                                <Divider orientation="vertical" flexItem />
-                                <Grid item md={2} xs={12} sm={12} sx={{ display: 'flex', mb: 4, flexDirection:'column',  textAlign:'center' }}>
-                                    <Typography sx={{ mr: 2, color: 'text.secondary', fontWeight: 800 }}>Ticket Status</Typography>
-                                    <Typography >{ticketData.replyStatus}</Typography>
-                                </Grid>
-
-                                <Divider orientation="vertical" flexItem />
-                                <Grid item md={2} xs={12} sm={12} sx={{ display: 'flex', mb: 4, flexDirection:'column', textAlign:'center' }}>
-                                    <Typography sx={{ mr: 2, color: 'text.secondary', fontWeight: 800 }}>Ticket Chanel</Typography>
-                                    <Typography >{ticketData.ticketChanel}</Typography>
-                                </Grid>
-
-                                <Divider orientation="vertical" flexItem sx={{mr:2, ml:2}} />
-                                <Grid item md={2} xs={12} sm={12} sx={{ display: 'flex', mb: 4, textAlign:'center', flexDirection:'column' }}>
-                                    <Typography sx={{ mr: 2, color: 'text.secondary', fontWeight: 800 }}>Reply Status</Typography>
-                                    <Typography >{ticketData.replyStatus}</Typography>
-                                </Grid>
-                            </Grid>
+                            <div className="col-span-2 text-center border-r border-gray-300">
+                                <Typography sx={{ mr: 2, color: 'text.secondary', fontWeight: 800 }}>Ticket Status</Typography>
+                                <Typography >{ticketData.replyStatus}</Typography>
+                            </div>
+                            
+                            <div className="col-span-2 text-center border-r border-gray-300">
+                                <Typography sx={{ mr: 2, color: 'text.secondary', fontWeight: 800 }}>Reply Status</Typography>
+                                <Typography >{ticketData.replyStatus}</Typography>
+                            </div>
+                            
+                            <div className="col-span-2 text-center">
+                                <Typography sx={{ mr: 2, color: 'text.secondary', fontWeight: 800 }}>Ticket Chanel</Typography>
+                                <Typography >{ticketData.ticketChanel}</Typography>
+                            </div>
+                        </div>
                         </CardContent>
                         <Divider />
                     </Box>   
                 )}                                       
-                </Grid>
+                </div>
             </ScrollWrapper>
         </Card>
     )

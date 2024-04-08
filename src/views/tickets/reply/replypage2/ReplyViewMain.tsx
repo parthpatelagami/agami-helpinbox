@@ -9,12 +9,14 @@ import IconButton from '@mui/material/IconButton'
 // import Icon from 'src/@core/components/icon'
 import Tooltip from '@mui/material/Tooltip'
 import ReplyViewRight from './ReplyViewRight'
+import { Icon } from '@iconify/react'
 
 import Grid, { GridProps } from '@mui/material/Grid'
 import { styled, useTheme } from '@mui/material/styles'
 import { Divider } from '@mui/material'
 import ReplyLeftView from './ReplyLeftView'
-// import ForwardTicket from './ForwardTicket/ForwardTicket'
+import ForwardTicket from './ForwardTicket/ForwardTicket'
+
 const StyledGrid = styled(Grid)<GridProps>(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     borderBottom: `1px solid ${theme.palette.divider}`
@@ -27,10 +29,9 @@ const StyledGrid = styled(Grid)<GridProps>(({ theme }) => ({
 
 const ReplyViewMain = () => {
   const theme = useTheme()
-
+  // const [addUserOpen, setAddUserOpen] = useState(false)
   const [openForwardTicket, setOpenForwardTicket] = useState<boolean>(false)
-  const toggleForwardTicketDrawer = () => setOpenForwardTicket(!openForwardTicket)
-
+ 
     return (     
           <Card >
             <Grid container item sm={12} md={12} xs={12}>              
@@ -39,7 +40,7 @@ const ReplyViewMain = () => {
                   <Grid item md={12} sm={12} xs={12}  sx={{ py: 3.75,  display: 'flex', justifyContent: {md:'space-between',sm: 'unset', xs:'unset'}, flexDirection: {md:'row', sm:'column', xs:'column'} }}>
                     <Grid item md={7} sm={12} xs={12} sx={{  width: 'auto', display: 'flex', alignItems: 'center' }}>                      
                       <Box  sx={{ mr: 3, ml:-2}}>
-                        {/* <Icon icon='fontisto:ticket' color={`${theme.palette.primary.main}`} fontSize={25} /> */}
+                        <Icon icon='fontisto:ticket' color={`${theme.palette.primary.main}`} fontSize={25} />
                       </Box>       
                       <Link
                           component="button"
@@ -50,7 +51,7 @@ const ReplyViewMain = () => {
                       </Link>               
                       
                     </Grid>
-                    {/* <Grid item md={5} sm={12} xs={12} sx={{ width: 'auto', display: 'flex', alignItems: 'center',justifyContent:['end'] }}>
+                    <Grid item md={5} sm={12} xs={12} sx={{ width: 'auto', display: 'flex', alignItems: 'center',justifyContent:['end'] }}>
                       <Tooltip placement='top' title='Create Jira Ticket'>                      
                         <IconButton  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
                           <Icon icon='simple-icons:jirasoftware' color={`${theme.palette.primary.main}`} fontSize={20} />
@@ -67,7 +68,7 @@ const ReplyViewMain = () => {
                         </IconButton>  
                       </Tooltip>
                       <Tooltip placement='top' title='Forward Ticket'>
-                        <IconButton onClick={toggleForwardTicketDrawer}  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
+                        <IconButton onClick={()=>setOpenForwardTicket(!openForwardTicket)}  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
                           <Icon icon='solar:square-forward-bold'color={`${theme.palette.primary.main}`} fontSize={20} />
                         </IconButton>  
                       </Tooltip>
@@ -91,7 +92,7 @@ const ReplyViewMain = () => {
                           <Icon icon='ic:round-arrow-forward-ios' color={`${theme.palette.primary.main}`} fontSize={20} />
                         </IconButton>  
                       </Tooltip>
-                    </Grid> */}
+                    </Grid>
                   </Grid>                  
                 </CardContent>                 
                 <Divider/>
@@ -112,7 +113,7 @@ const ReplyViewMain = () => {
                 <ReplyLeftView/>
               </Grid>
           </Grid>
-          {/* <ForwardTicket open={openForwardTicket} toggle={toggleForwardTicketDrawer} /> */}
+          <ForwardTicket open={openForwardTicket} handleClose={() => setOpenForwardTicket(!openForwardTicket)} />
         </Card>
     )
 }

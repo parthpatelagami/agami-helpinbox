@@ -84,7 +84,7 @@ const JiraRightPanelView = ()=>{
     return(
       <Grid item sm={12} xs={12} md={12}>
         <CardContent> 
-          <Grid item md={12} sm={12} xs={12} sx={{display:'flex', alignItems:'center', mb:5}} className='demo-space-x ' >
+          <Grid item md={12} sm={12} xs={12} className='gap-2 flex items-center mb-5' >
             <Typography variant='subtitle1'>Status:- </Typography>           
             <CustomChip label="To Do" color="primary"/>
           </Grid>            

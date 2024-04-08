@@ -60,6 +60,7 @@ const ConversationView = ()=>{
             <Grid container item xs={12} sm={12} md={12}
                 sx={{                
                   mb: 10,
+                  mt:5,
                   width: '100%',
                   display: 'flex',
                   alignItems: 'center',
