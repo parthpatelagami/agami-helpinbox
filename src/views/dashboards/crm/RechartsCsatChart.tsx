@@ -80,7 +80,6 @@ interface propsType {
 }
 const RechartsCsatChart = (props: propsType) => {
   // Hooks
-  const theme = useTheme()
 
   return (
     <Card sx={{ border: '1px solid rgba(47, 43, 61, 0.16)', borderRadius: '0', boxShadow: 'none' }} id={props.id}>
@@ -97,12 +96,12 @@ const RechartsCsatChart = (props: propsType) => {
         <AppRecharts className='col-span-4'>
           <div className='bs-[300px]'>
             <ResponsiveContainer>
-              <BarChart layout='vertical' barGap={10} height={350} data={data} barSize={25}>
-                <XAxis type='number' orientation='bottom' />
+              <BarChart layout='vertical' barGap={10} height={350} data={data} barSize={30}>
+                <XAxis type='number' />
                 <YAxis type='category' dataKey='name' />
                 <Bar dataKey='CSAT' fill='#8884d8'>
                   {data.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={colors[index]} />
+                    <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Bar>
                 <Tooltip content={CustomTooltip} />
@@ -111,26 +110,12 @@ const RechartsCsatChart = (props: propsType) => {
           </div>
         </AppRecharts>
         <div className='col-span-1 content-center'>
-          <Box className='flex items-center gap-1.5 pb-1' sx={{ '& i': { color: '#33b2df' } }}>
-            <i className='tabler-circle-filled text-md' />
-            <Typography variant='body1'>Great</Typography>
-          </Box>
-          <Box className='flex items-center gap-1.5 pb-1' sx={{ '& i': { color: '#546E7A' } }}>
-            <i className='tabler-circle-filled text-md' />
-            <Typography variant='body2'>Good</Typography>
-          </Box>
-          <Box className='flex items-center gap-1.5 pb-1' sx={{ '& i': { color: '#d4526e' } }}>
-            <i className='tabler-circle-filled text-md' />
-            <Typography variant='body2'>Average</Typography>
-          </Box>
-          <Box className='flex items-center gap-1.5 pb-1' sx={{ '& i': { color: '#13d8aa' } }}>
-            <i className='tabler-circle-filled text-md' />
-            <Typography variant='body2'>Poor</Typography>
-          </Box>
-          <Box className='flex items-center gap-1.5 pb-1' sx={{ '& i': { color: '#2b908f' } }}>
-            <i className='tabler-circle-filled text-md' />
-            <Typography variant='body2'>Bad</Typography>
-          </Box>
+          {data.map((item, index) => (
+            <Box key={index} className='flex items-center gap-1.5 pb-1' sx={{ '& i': { color: item.color } }}>
+              <i className='tabler-circle-filled text-md' />
+              <Typography variant='body1'>{item.name}</Typography>
+            </Box>
+          ))}
         </div>
       </CardContent>
     </Card>
