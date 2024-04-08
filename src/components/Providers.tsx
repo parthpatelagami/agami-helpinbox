@@ -5,6 +5,7 @@ import type { ChildrenType, Direction } from '@core/types'
 import { VerticalNavProvider } from '@menu/contexts/verticalNavContext'
 import { SettingsProvider } from '@core/contexts/settingsContext'
 import ThemeProvider from '@components/theme'
+import LoaderProvider from './LoaderProvider'
 
 // Util Imports
 import { getDemoName, getMode, getSettingsFromCookie, getSystemMode } from '@core/utils/serverHelpers'
@@ -27,7 +28,7 @@ const Providers = (props: Props) => {
     <VerticalNavProvider>
       <SettingsProvider settingsCookie={settingsCookie} mode={mode} demoName={demoName}>
         <ThemeProvider direction={direction} systemMode={systemMode}>
-          {children}
+          <LoaderProvider>{children}</LoaderProvider>
         </ThemeProvider>
       </SettingsProvider>
     </VerticalNavProvider>
