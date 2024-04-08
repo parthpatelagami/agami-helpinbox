@@ -69,16 +69,14 @@ const TransferTabView = () => {
                 </Grid> 
               </Grid>             
               {/* <EditorControlled/> */}
-              <Grid item xs={12} mt={2} sx={{display:'flex', justifyContent:'flex-end'}}>
-                <div className='demo-space-x' >
-                  <Button variant='contained' sx={{color:'black', backgroundColor:'white'}}>
-                    Clear
-                  </Button>
-                  <Button variant='contained'>
-                    Transfer
-                  </Button>
-                </div>
-              </Grid>
+              <div className='flex items-center justify-end gap-4'>
+                <Button variant='contained' type='submit'>
+                  Save
+                </Button>
+                <Button variant='tonal' color='error' type='reset' onClick={(e) => e.preventDefault()}>
+                  Cancel
+                </Button>
+              </div>
             </CardContent>
           </Card>        
         </Grid>

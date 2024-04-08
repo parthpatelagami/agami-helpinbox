@@ -1,171 +1,69 @@
-'use client'
-// ** React Imports
-import { useState, ChangeEvent } from 'react'
 
-// ** MUI Imports
-import Drawer from '@mui/material/Drawer'
+// React Imports
+import { useState } from 'react'
+
+// MUI Imports
 import Button from '@mui/material/Button'
-import MenuItem from '@mui/material/MenuItem'
-import { styled } from '@mui/material/styles'
+import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
+import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
-import Box, { BoxProps } from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
+
+// Component Imports
 import CustomTextField from '@core/components/mui/TextField'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm, Controller } from 'react-hook-form'
-import { SelectChangeEvent } from '@mui/material/Select'
-import Grid from '@mui/material/Grid'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
 
-import EditorControlled from '../../editor/EditControlled'
-import { EditorWrapper } from 'src/@core/styles/libs/react-draft-wysiwyg'
-
-// ** Store Imports
-import CustomChip from 'src/@core/components/mui/chip'
-
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
-
-// ** Types Imports
-import { Divider } from '@mui/material'
-
-interface ForwardTicketType {
+type Props = {
   open: boolean
-  toggle: () => void
+  handleClose: () => void
 }
 
-const showErrors = (field: string, valueLen: number, min: number) => {
-  if (valueLen === 0) {
-    return `${field} field is required`
-  } else if (valueLen > 0 && valueLen < min) {
-    return `${field} must be at least ${min} characters`
-  } else {
-    return ''
-  }
+type FormDataType = {
+  bcc: string
+  cc: string
+  subject: string
+  emailto: string
 }
 
-const Header = styled(Box)<BoxProps>(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(6),
-  justifyContent: 'space-between'
-}))
-
-const schema = yup.object().shape({
-  subject: yup.string().required(),
-  bcc: yup.string().email().required(),
-  emailto: yup.string().email().required(),
-//   cc: yup.string().email().required(),
-  contact: yup
-    .number()
-    .typeError('Contact Number field is required')
-    .min(10, obj => showErrors('Contact Number', obj.value.length, obj.min))
-    .required(),
-  cc: yup
-    .string()
-    .min(3, obj => showErrors('CC', obj.value.length, obj.min))
-    .required()
-})
-
-const defaultValues = {
+// Vars
+const initialData = {
   bcc: '',
+  cc: '',
   subject: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi maxime voluptatibus odit sint, animi quos minus possimus tempora esse, atque accusantium. Consequuntur expedita et porro beatae amet commodi quo? Harum?',
-  emailto: '',
-  cc: ''
+  emailto: ''
 }
 
 const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder'
+    'Oliver Hansen',
+    'Van Henry',
+    'April Tucker',
+    'Ralph Hubbard',
+    'Omar Alexander',
+    'Carlos Abbott',
+    'Miriam Wagner',
+    'Bradley Wilkerson',
+    'Virginia Andrews',
+    'Kelly Snyder'
 ]
-const ForwardTicket = (props: ForwardTicketType) => {
-  // ** Props
-  const { open, toggle } = props
 
-  const [personName, setPersonName] = useState<string[]>([])
-  const [personNameNative, setPersonNameNative] = useState<string[]>([])
+const ForwardTicket = ({ open, handleClose }: Props) => {
+  // States
+  const [formData, setFormData] = useState<FormDataType>(initialData)
 
-  const handleChange = (event: SelectChangeEvent<unknown>) => {
-    setPersonName(event.target.value as string[])
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    handleClose()
+    setFormData(initialData)
   }
 
-  const handleChangeMultipleNative = (event: ChangeEvent<HTMLSelectElement>) => {
-    const { options } = event.target
-    const value: string[] = []
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        value.push(options[i].value)
-      }
-    }
-    setPersonNameNative(value)
-  }
-
-  // ** State
-  const [plan, setPlan] = useState<string>('basic')
-  const [role, setRole] = useState<string>('subscriber')
-
-  const {
-    reset,
-    control,
-    // setValue,
-    // setError,
-    handleSubmit,
-    formState: { errors }
-  } = useForm({
-    defaultValues,
-    mode: 'onChange',
-    resolver: yupResolver(schema)
-  })
-  const onSubmit = ()=>{
-
-  }
-//   const onSubmit = (data: UserData) => {
-//     if (store.allData.some((u: UsersType) => u.email === data.email || u.cc === data.cc)) {
-//       store.allData.forEach((u: UsersType) => {
-//         if (u.email === data.email) {
-//           setError('email', {
-//             message: 'Email already exists!'
-//           })
-//         }
-//         if (u.cc === data.cc) {
-//           setError('cc', {
-//             message: 'cc already exists!'
-//           })
-//         }
-//       })
-//     } 
-//     else {
-//       dispatch(addUser({ ...data, role, currentPlan: plan }))
-//       toggle()
-//       reset()
-//     }
-//   }
-
-  const handleClose = () => {
-    // setPlan('basic')
-    // setRole('subscriber')
-    // setValue('contact', Number(''))
-    toggle()
-    reset()
+  const handleReset = () => {
+    handleClose()
+    setFormData({
+      bcc: '',
+      cc: '',   
+      subject: '',
+      emailto: ''
+    })
   }
 
   return (
@@ -173,172 +71,95 @@ const ForwardTicket = (props: ForwardTicketType) => {
       open={open}
       anchor='right'
       variant='temporary'
-      onClose={handleClose}
+      onClose={handleReset}
       ModalProps={{ keepMounted: true }}
-      sx={{ '& .MuiDrawer-paper': { width: { xs: 300, sm: 400 , md:800} } }}
+      sx={{ '& .MuiDrawer-paper': { width: { xs: 300, sm: 400 } } }}
     >
-        <Header>
-            <Typography variant='h5'>Forward Ticket</Typography>
-            <IconButton
-                size='small'
-                onClick={handleClose}
-                sx={{
-                    p: '0.438rem',
-                    borderRadius: 1,
-                    color: 'text.primary',
-                    backgroundColor: 'action.selected',
-                    '&:hover': {
-                    backgroundColor: theme => `rgba(${theme.palette.customColors.main}, 0.16)`
-                    }
-                }}
+      <div className='flex items-center justify-between plb-5 pli-6'>
+        <Typography variant='h5'>Forward Ticket</Typography>
+        <IconButton onClick={handleReset}>
+          <i className='tabler-x text-textPrimary' />
+        </IconButton>
+      </div>
+      <Divider />
+      <div>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-6 p-6'>
+            <CustomTextField
+                select
+                fullWidth
+                id='emailto'
+                value={formData.emailto}
+                onChange={e => setFormData({ ...formData, emailto: e.target.value })}
+                label='Select Email'
+                inputProps={{ placeholder: 'Email' }}
             >
-                <Icon icon='tabler:x' fontSize='1.125rem' />
-            </IconButton>    
-        </Header>   
-        <Divider/>
-        <Box sx={{ p: theme => theme.spacing(0, 6, 6) , mt:5}}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Controller
-                    name='emailto'
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { value, onChange } }) => (
-                        <CustomTextField
-                            select
-                            fullWidth
-                            sx={{ mb: 4 }}
-                            label='Email To :-'
-                            id='select-multiple-chip'
-                            SelectProps={{
-                            multiple: true,
-                            value: personName,
-                            onChange: e => handleChange(e),
-                            renderValue: selected => (
-                                <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                                {(selected as unknown as string[]).map(value => (
-                                    <CustomChip key={value} label={value} sx={{ m: 0.75 }} skin='light' color='primary' />
-                                ))}
-                                </Box>
-                            )
-                            }}
-                            >
-                            {names.map(name => (
-                            <MenuItem key={name} value={name}>
-                                {name}
-                            </MenuItem>
-                            ))}
-                        </CustomTextField>
-                    )}
-                />
-                <Controller
-                    name='cc'
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { value, onChange } }) => (
-                        <CustomTextField
-                            select
-                            fullWidth
-                            sx={{ mb: 4 }}
-                            label='CC :-'
-                            id='select-multiple-chip'
-                            SelectProps={{
-                            multiple: true,
-                            value: personName,
-                            onChange: e => handleChange(e),
-                            renderValue: selected => (
-                                <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                                {(selected as unknown as string[]).map(value => (
-                                    <CustomChip key={value} label={value} sx={{ m: 0.75 }} skin='light' color='primary' />
-                                ))}
-                                </Box>
-                            )
-                            }}
-                            >
-                            {names.map(name => (
-                            <MenuItem key={name} value={name}>
-                                {name}
-                            </MenuItem>
-                            ))}
-                        </CustomTextField>
-                    )}
-                />
-                <Controller
-                    name='bcc'
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { value, onChange } }) => (
-                        <CustomTextField
-                            select
-                            fullWidth
-                            sx={{ mb: 4 }}
-                            label='BCC :-'
-                            id='select-multiple-chip'
-                            SelectProps={{
-                            multiple: true,
-                            value: personName,
-                            onChange: e => handleChange(e),
-                            renderValue: selected => (
-                                <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                                {(selected as unknown as string[]).map(value => (
-                                    <CustomChip key={value} label={value} sx={{ m: 0.75 }} skin='light' color='primary' />
-                                ))}
-                                </Box>
-                            )
-                            }}
-                        >
-                        {names.map(name => (
-                        <MenuItem key={name} value={name}>
-                            {name}
-                        </MenuItem>
-                        ))}
-                        </CustomTextField>
-                    )}
-                />
-                <Controller
-                    name='subject'
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { value, onChange } }) => (
-                    <CustomTextField
-                        fullWidth
-                        value={value}
-                        label='Subject :-'
-                        onChange={onChange}
-                        placeholder='Test Ticket'
-                        error={Boolean(errors.subject)}
-                        {...(errors.subject && { helperText: errors.subject.message })}
-                    />
-                    )}
-                />
-                <EditorWrapper sx={{py:5}}>   
-                    <Grid>
-                        <Typography variant='inherit'>Comment :-</Typography>
-                        <EditorControlled/>      
-                    </Grid>                              
-                </EditorWrapper>   
-                <Button
-                    sx={{my:5}}
-                    component="label"
-                    role={undefined}
-                    variant="contained"
-                    tabIndex={-1}
-                    startIcon={<Icon icon='simple-line-icons:cloud-upload' fontSize={25}/>}
-                    >
-                    Upload file
-                    <VisuallyHiddenInput type="file" />
-                </Button> 
-                <Box sx={{ display: 'flex', justifyContent:{md:'flex-end'} }}>
-                    <Button type='submit' variant='contained' sx={{ mr: 3 }}>
-                    Submit
-                    </Button>
-                    <Button variant='tonal' color='secondary' onClick={handleClose}>
-                    Cancel
-                    </Button>
-                </Box>
+                {names.map(name => (
+                <MenuItem key={name} value={name}>
+                    {name}
+                </MenuItem>
+                ))}
+            </CustomTextField>
+            <CustomTextField
+                select
+                fullWidth
+                id='cc'
+                value={formData.cc}
+                onChange={e => setFormData({ ...formData, cc: e.target.value })}
+                label='Select CC'
+                inputProps={{ placeholder: 'CC' }}
+            >
+                {names.map(name => (
+                <MenuItem key={name} value={name}>
+                    {name}
+                </MenuItem>
+                ))}
+            </CustomTextField>
+            <CustomTextField
+                select
+                fullWidth
+                id='bcc'
+                value={formData.cc}
+                onChange={e => setFormData({ ...formData, bcc: e.target.value })}
+                label='Select BCC'
+                inputProps={{ placeholder: 'BCC' }}
+            >
+               {names.map(name => (
+                <MenuItem key={name} value={name}>
+                    {name}
+                </MenuItem>
+                ))}
+            </CustomTextField>
+            <CustomTextField
+                label='Subject'
+                fullWidth
+                placeholder='Ticket Subject'
+                value={formData.subject}
+                onChange={e => setFormData({ ...formData, subject: e.target.value })}
+            />
+            <form className="flex items-center space-x-6">
+                <label className="block">
+                    <span className="sr-only">Choose profile photo</span>
+                    <input type="file" className="block w-full text-sm text-slate-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-violet-50 file:text-violet-700
+                    hover:file:bg-violet-100
+                    "/>
+                </label>
             </form>
-        </Box>
+            <div className='flex items-center gap-4'>
+              <Button variant='contained' type='submit'>
+                Forward
+              </Button>
+              <Button variant='tonal' color='error' type='reset' onClick={() => handleReset()}>
+                Clear
+              </Button>
+          </div>
+        </form>
+      </div>
     </Drawer>
   )
 }
 
-export default ForwardTicket;
+export default ForwardTicket

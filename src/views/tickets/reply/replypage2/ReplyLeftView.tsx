@@ -22,6 +22,7 @@ import Chip from '@mui/material/Chip'
 // import Icon from 'src/@core/components/icon'
 import MuiListItem, { ListItemProps } from '@mui/material/ListItem'
 import { styled, useTheme } from '@mui/material/styles'
+import MuiTextField, { TextFieldProps } from '@mui/material/TextField'
 
 // ** MUI Imports
 import Accordion from '@mui/material/Accordion'
@@ -63,16 +64,13 @@ const data = {
     avatar: '/images/avatars/14.png'
   }
 
-  // import { makeStyles } from '@material-ui/core';
-  // const useStyles = makeStyles({
-  //   customTextField: {
-  //     '& .MuiInputBase-input:not(textarea).MuiInputBase-inputSizeSmall': {
-  //       fontWeight: 'bolder',
-  //       color: 'aliceblue',
-  //       fontSize: '15px',
-  //     },
-  //   },
-  // });
+  const CustomTextField1 = styled(MuiTextField)<TextFieldProps>(({ theme }) => ({
+    '& .MuiInputBase-input:not(textarea).MuiInputBase-inputSizeSmall': {
+      fontWeight: 'bolder',
+      color: 'aliceblue',
+      fontSize: '15px',
+    },
+  }))
 
 const ReplyLeftView = ()=>{
     const [openEdit, setOpenEdit] = useState<boolean>(false)
@@ -105,7 +103,7 @@ const ReplyLeftView = ()=>{
     return(
       <Grid item sm={12} xs={12} md={12}>
         <CardContent  sx={{ pb: 4 }}> 
-          <Grid item md={12} sm={12} xs={12} sx={{display:'flex', alignItems:'center', mb:5}} className='demo-space-x' >
+          <Grid item md={12} sm={12} xs={12} className='gap-2 flex items-center mb-5' >
             <Typography variant='subtitle1'>Status:- </Typography>           
             <CustomTextField select fullWidth label='' sx={{backgroundColor:`${theme.palette.primary.main}`, borderRadius:'5px'}} defaultValue='0'>
               <MenuItem value='0'>Open</MenuItem>

@@ -11,7 +11,7 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import React, { useState, ReactNode } from 'react'
 // ** Icon Imports
-// import Icon from 'src/@core/components/icon'
+import {Icon} from '@iconify/react'
 import IconButton from '@mui/material/IconButton'
 
 // ** Types
@@ -90,8 +90,8 @@ const ReplyTabView = () => {
                         <MenuItem value='4'>Mangera Aadil</MenuItem>
                       </CustomTextField>
                       <Tooltip placement='top' title='Add New User'>
-                        <IconButton  sx={{  p:'3px'}}>
-                          {/* <Icon icon='ei:plus' color={`${theme.palette.primary.main}`} fontSize={35} /> */}
+                        <IconButton>
+                          <Icon icon='ei:plus' color={`${theme.palette.primary.main}`} fontSize={35} />
                         </IconButton>
                       </Tooltip>  
                     </Grid>
@@ -106,14 +106,14 @@ const ReplyTabView = () => {
                     </CustomTextField>
                   </Grid>
                 </Grid>
-                <Grid item sm={12} md={12} xs={12} sx={{display:'flex', justifyContent:'end'}} className='demo-space-x' >
-                  <Button variant='contained' sx={{color:'black', backgroundColor:'white'}}>
-                    Clear
-                  </Button>
-                  <Button variant='contained'>
+                <div className='flex items-center justify-end gap-4 py-8'>
+                  <Button variant='contained' type='submit' >
                     Reply
                   </Button>
-                </Grid>
+                  <Button variant='tonal' color='error' type='reset' >
+                    Cancel
+                  </Button>
+                </div>
               </Grid>
             </CardContent>
           </Card>        
