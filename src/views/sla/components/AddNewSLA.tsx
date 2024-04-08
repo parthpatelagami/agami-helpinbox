@@ -240,8 +240,7 @@ const AddNewSLA = () => {
   //   // setSubCount(prevCount => prevCount + 1)
   // }
 
-  const deleteForm = (index: number) => {
-    console.log('INDEX VALUE ', index)
+  const deleteForm = () => {
     setCount(prevCount => prevCount - 1)
   }
 
@@ -417,7 +416,7 @@ const AddNewSLA = () => {
                           {i !== 0 && (
                             <Box className='absolute top-0 right-0'>
                               <InvoiceAction>
-                                <IconButton size='small' onClick={deleteForm(i)}>
+                                <IconButton size='small' onClick={deleteForm}>
                                   <i className='tabler-x border-solid text-[20px] text-textSecondary' />
                                 </IconButton>
                               </InvoiceAction>
