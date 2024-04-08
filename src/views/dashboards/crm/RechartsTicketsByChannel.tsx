@@ -68,8 +68,8 @@ const RechartsTicketsByChannel = (props: propsType) => {
       />
       <CardContent className='grid grid-cols-7 pr-0'>
         <div className='col-span-2 content-center'>
-          {data.map(item => (
-            <Box className='flex items-center gap-1.5 pb-1' sx={{ '& i': { color: item.color } }}>
+          {data.map((item, index) => (
+            <Box key={index} className='flex items-center gap-1.5 pb-1' sx={{ '& i': { color: item.color } }}>
               <i className='tabler-circle-filled text-md' />
               <Typography variant='body1'>{item.name}</Typography>
             </Box>
@@ -81,7 +81,7 @@ const RechartsTicketsByChannel = (props: propsType) => {
               <PieChart height={300} style={{ direction: 'ltr' }}>
                 <Pie
                   data={data}
-                  innerRadius={65}
+                  innerRadius={70}
                   dataKey='value'
                   label={renderCustomizedLabel}
                   labelLine={false}
