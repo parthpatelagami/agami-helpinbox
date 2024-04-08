@@ -466,7 +466,7 @@ export const historydata = [
 export const relatedTicketData = [
   {
     id:12305,
-    ticketSubject:"Lorem Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+    ticketSubject:"Lorem Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
     ticketStatus:"Open",
     ticketChanel:"Email",
     replyStatus:"Not Replied Yet"
