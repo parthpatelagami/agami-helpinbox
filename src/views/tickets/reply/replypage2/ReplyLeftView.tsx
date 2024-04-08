@@ -104,8 +104,8 @@ const ReplyLeftView = ()=>{
       <Grid item sm={12} xs={12} md={12}>
         <CardContent  sx={{ pb: 4 }}> 
           <Grid item md={12} sm={12} xs={12} className='gap-2 flex items-center mb-5' >
-            <Typography variant='subtitle1'>Status:- </Typography>           
-            <CustomTextField select fullWidth label='' sx={{backgroundColor:`${theme.palette.primary.main}`, borderRadius:'5px'}} defaultValue='0'>
+            <p className='text-gray-700'>Status:- </p>           
+            <CustomTextField select fullWidth label='' className='rounded' sx={{backgroundColor:`${theme.palette.primary.main}`, '& .MuiInputBase-input:not(textarea).MuiInputBase-inputSizeSmall': { color: 'white', fontWeight: 'bold' } }} defaultValue='0'>
               <MenuItem value='0'>Open</MenuItem>
               <MenuItem value='pending'>Pending</MenuItem>
               <MenuItem value='active'>Resolved</MenuItem>
@@ -159,7 +159,7 @@ const ReplyLeftView = ()=>{
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
-              <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
+              <Box sx={{ display: 'flex', mb: 4, mt:2, flexDirection:'column' }}>
                 <Typography sx={{ mr: 2, color: 'text.secondary' }}>Assigneed To:</Typography>
                 <CustomTextField select defaultValue='10' label='' sx={{border:'none', alignItems:'normal'}} id='custom-select'>
                     <MenuItem value=''>
@@ -197,7 +197,7 @@ const ReplyLeftView = ()=>{
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
-              <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
+              <Box sx={{ display: 'flex', mb: 4, mt:2, flexDirection:'column' }}>
                 <Typography sx={{ mr: 2,  color: 'text.secondary' }}>Channel:</Typography>
                 <Typography sx={{ color: 'text.secondary', fontWeight: 800 }}>Manual</Typography>
               </Box>
@@ -268,7 +268,7 @@ const ReplyLeftView = ()=>{
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
-              <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
+              <Box sx={{ display: 'flex', mb: 4, mt:2, flexDirection:'column' }}>
                 <Typography sx={{ mr: 2, color: 'text.secondary' }}>CC:</Typography>
                 <Grid mt={2} container spacing={2}>
                   {collaboratorsdata.map((item, index) => <Chip key={index} label={item.email} sx={{mb:2}} size='small' />)}

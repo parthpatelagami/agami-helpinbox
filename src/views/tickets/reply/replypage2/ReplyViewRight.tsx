@@ -92,7 +92,7 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
 
   return (
     <Grid>
-      <Typography variant='subtitle1'>Description </Typography> 
+      <Typography className="text-gray-950">Description </Typography> 
       <Box
         sx={{
           p: 5,
@@ -103,7 +103,7 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
           mb: 5
         }}
       >
-        <Typography sx={{ mb: 2 }} variant='h6'>
+        <Typography className="text-gray-950 font-bold">
           Buying gift for a loved one?
         </Typography>
         <Typography sx={{ mb: 2, color: 'text.secondary' }}>
