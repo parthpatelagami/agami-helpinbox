@@ -82,16 +82,11 @@ const sources: BundleScriptConfig = {
   ], */
 
   svg: [
-    /* {
-      dir: 'src/assets/iconify-icons/svg',
+    {
+      dir: 'src/assets/control-icons/svg',
       monotone: false,
       prefix: 'custom'
-    } */
-    /* {
-      dir: 'src/assets/iconify-icons/emojis',
-      monotone: false,
-      prefix: 'emoji'
-    } */
+    }
   ]
 }
 
