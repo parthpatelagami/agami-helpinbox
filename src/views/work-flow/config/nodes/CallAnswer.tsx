@@ -17,7 +17,7 @@ const CallAnswerControl: React.FC<PhoneControls> = ({ data, isConnectable }) => 
       <div>
         <i className='custom-call-answer text-4xl' />
       </div>
-      <Handle type='target' position={Position.Bottom} />
+      <Handle type='source' position={Position.Bottom} />
     </>
   )
 }

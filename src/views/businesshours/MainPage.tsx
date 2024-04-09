@@ -32,13 +32,13 @@ const MainPage: React.FC = () => {
             </Typography>
             <Box>
               <Tooltip placement='top' title='Info'>
-                <IconButton className='hover:border-2 hover:border-inherit hover:border-solid'>
+                <IconButton className='hover:border-1 hover:border-inherit hover:border-solid'>
                   <i className='tabler-info-circle border-solid text-[20px] text-textSecondary' />
                 </IconButton>
               </Tooltip>
               <Link href={getLocalizedUrl(`businesshours/add-new-business-hours`, locale as Locale)}>
                 <Tooltip placement='top' title='Add'>
-                  <IconButton className='hover:border-2 hover:border-inherit hover:border-solid'>
+                  <IconButton className='hover:border-1 hover:border-inherit hover:border-solid'>
                     <i className='tabler-plus border-solid text-[20px] text-textSecondary' />
                   </IconButton>
                 </Tooltip>
@@ -54,10 +54,9 @@ const MainPage: React.FC = () => {
             </Typography>
           </Box>
 
-          <Box className='mt-20 mb-10 m-2'>
-            {/* <BusinessHoursTable /> */}
+          <div className='mt-10 mb-10 m-2'>
             <Table />
-          </Box>
+          </div>
         </Box>
       </Card>
     </Fragment>

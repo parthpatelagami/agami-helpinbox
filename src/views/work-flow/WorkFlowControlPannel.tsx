@@ -30,7 +30,7 @@ const WorkFlowControlPanel = () => {
   const onDragStart = (event: React.DragEvent<HTMLDivElement>, nodeType: string) => {
     event.dataTransfer.setData('application/reactflow', nodeType)
 
-    console.log(`DragSta`)
+    console.log(`DragStart`)
     console.log(`Node type data`, nodeType)
   }
 
@@ -78,7 +78,7 @@ const WorkFlowControlPanel = () => {
                   scrollbarWidth: 'none',
                   display: 'flex',
                   flexDirection: 'column',
-                  flexGrow: '1',
+                  flexGrow: '1  ',
                   position: 'relative'
                 }}
               >
@@ -99,10 +99,54 @@ const WorkFlowControlPanel = () => {
                       <Typography>Phone Controls</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Stack direction='row' spacing={3}>
+                      <Stack display='flex' flexDirection='row' spacing={0}>
                         <Item elevation={0}>
                           <i
                             className='custom-call-answer cursor-move text-3xl'
+                            onDragStart={event => onDragStart(event, 'output')}
+                            draggable
+                          />
+                        </Item>
+                        <Item elevation={0}>
+                          <i
+                            className='custom-case-when cursor-move text-3xl'
+                            onDragStart={event => onDragStart(event, 'output')}
+                            draggable
+                          />
+                        </Item>
+                        <Item elevation={0}>
+                          <i
+                            className='custom-get-output cursor-move text-3xl'
+                            onDragStart={event => onDragStart(event, 'output')}
+                            draggable
+                          />
+                        </Item>
+                        <Item elevation={0}>
+                          <i
+                            className='custom-ivr-list cursor-move text-3xl'
+                            onDragStart={event => onDragStart(event, 'output')}
+                            draggable
+                          />
+                        </Item>
+                        <Item elevation={0}>
+                          <i
+                            className='custom-language-menu cursor-move text-3xl'
+                            onDragStart={event => onDragStart(event, 'output')}
+                            draggable
+                          />
+                        </Item>
+                      </Stack>
+                      <Stack display='flex' flexDirection='row' spacing={0}>
+                        <Item elevation={0}>
+                          <i
+                            className='custom-play-audio cursor-move text-3xl'
+                            onDragStart={event => onDragStart(event, 'output')}
+                            draggable
+                          />
+                        </Item>
+                        <Item elevation={0}>
+                          <i
+                            className='custom-tts cursor-move text-3xl'
                             onDragStart={event => onDragStart(event, 'output')}
                             draggable
                           />
