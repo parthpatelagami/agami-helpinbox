@@ -8,6 +8,7 @@ import { StyledGrid } from './styles'
 import { useState } from 'react'
 import { FieldType } from '@/types/formViewTypes'
 import OptionMenu from '@/@core/components/option-menu'
+import classNames from 'classnames'
 interface PropsType {
   fields: FieldType[]
 }
@@ -24,11 +25,11 @@ const FormView = (props: PropsType) => {
   const [fields, setFields] = useState(props.fields)
 
   return (
-    <StyledGrid className='h-full'>
-      <div className={`h-full flex-col bg-white p-6 border ${skin == 'default' && 'shadow'} rounded`}>
+    <StyledGrid className='h-full flex flex-col'>
+      <div className={`bg-white p-0 pt-3 border ${skin == 'default' && 'shadow'} rounded flex flex-col flex-grow`}>
         <CardHeader
           title='Form View'
-          className='p-0'
+          className='p-0 pl-3'
           action={
             <>
               <Tooltip placement='top' title='Layout'>
@@ -62,7 +63,8 @@ const FormView = (props: PropsType) => {
             </>
           }
         />
-        <div className='grid grid-cols-9 gap-2 h-full py-6'>
+        <Divider className='pt-2' />
+        <div className='flex-grow flex'>
           <SidebarLeft fields={fields} setFields={setFields} />
           <FormArea fields={fields} setFields={setFields} />
         </div>

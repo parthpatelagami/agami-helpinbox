@@ -37,7 +37,7 @@ const FormArea = (props: PropsType) => {
         x: (layoutState[breakpoint].length * 4) % 12,
         y: Infinity,
         w: 4,
-        h: 1,
+        h: e.dataTransfer?.getData('type') == 'area' ? 2 : 1,
         type: e.dataTransfer?.getData('type') || ''
       })
     })
@@ -50,22 +50,21 @@ const FormArea = (props: PropsType) => {
   }
 
   return (
-    <div className={`col-span-7 bg-default border-solid border`}>
+    <div className={`w-full border-solid h-full border-r border-b`}>
       <ResponsiveGridLayout
         layouts={layoutState}
         isDraggable
-        margin={[20, 20]}
         cols={{ xxs: 12, xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
         isDroppable
         onDrop={onDrop}
         isResizable={false}
+        style={{ minHeight: '100%' }}
       >
         {layoutState[breakpoint]?.map(component => (
           <Grid key={component.i} item xs={12}>
             {component.type?.includes('input') ? (
               <CustomTextField
-                className='p-0'
-                disabled
+                className='p-0 pointer-events-none'
                 id={component.i}
                 autoFocus
                 fullWidth
@@ -76,7 +75,6 @@ const FormArea = (props: PropsType) => {
               <CustomTextField
                 variant='standard'
                 className='p-0'
-                disabled
                 select
                 fullWidth
                 defaultValue='Select'
@@ -90,9 +88,8 @@ const FormArea = (props: PropsType) => {
             ) : (
               <CustomTextField
                 multiline
-                rows={4}
+                rows={5}
                 className='p-0'
-                disabled
                 id={component.i}
                 autoFocus
                 fullWidth

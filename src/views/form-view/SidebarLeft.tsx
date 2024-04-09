@@ -37,7 +37,7 @@ const SidebarLeft = (props: PropsType) => {
 
   const borderColor = theme.palette.mode === 'light' ? '#e5e5e5' : '#5d5d5d'
   return (
-    <div className={`col-span-2 border-solid border h-full`}>
+    <div className={`border-solid border h-full border-t-0 flex flex-col`}>
       <Stack spacing={2}>
         <Box
           sx={{
@@ -63,7 +63,7 @@ const SidebarLeft = (props: PropsType) => {
           />
         </Box>
       </Stack>
-      <div className='overflow-y-auto max-h-96'>
+      <div className='overflow-y-auto' style={{ maxHeight: 'calc(100vh - 218px)', scrollbarWidth: 'none' }}>
         <Accordion defaultExpanded className='border-none shadow-none overflow-auto'>
           <AccordionSummary className='p-2' id='panel-header-1' aria-controls='panel-content-1'>
             <Typography>Static Fields</Typography>
