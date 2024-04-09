@@ -19,7 +19,7 @@ const ChildTicketView = ()=>{
     }
 
     return (
-        <Card sx={{mt:7 , height:'600px'}}>
+        <Card className="h-[600px] mt-7">
             <ScrollWrapper>
                 <div className="grid grid-rows-1 gap-2">          
                 {relatedTicketData.map((ticketData:any, index:number) =>

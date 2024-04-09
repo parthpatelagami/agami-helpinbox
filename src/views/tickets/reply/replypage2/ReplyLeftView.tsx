@@ -112,7 +112,7 @@ const ReplyLeftView = ()=>{
               <MenuItem value='inactive'>Close</MenuItem>
             </CustomTextField>
           </Grid>
-          <Accordion expanded={expanded === true} sx={{mb:5}} onChange={handleChange('panel1')}>
+          <Accordion expanded={expanded === true} className='mb-5' onChange={handleChange('panel1')}>
             <AccordionSummary
               id='controlled-panel-header-1'
               aria-controls='controlled-panel-content-1'
@@ -122,10 +122,10 @@ const ReplyLeftView = ()=>{
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
-              <Box sx={{ pt: 1 }}>
-                  <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
-                      <Box sx={{ display: 'flex', justifyContent:'space-between' }}>
-                          <Typography sx={{ mr: 2, color: 'text.secondary' }}>Customer Name:</Typography>
+              <div className='pt-2'>
+                  <div className='flex mb-4 flex-col'>
+                      <div className='flex justify-between'>
+                          <p className='me-2 text-gray-500'>Customer Name:</p>
                           <Tooltip placement='top' title='Update Customer Details'>
                           <Link
                               component="button"
@@ -135,33 +135,33 @@ const ReplyLeftView = ()=>{
                               Edit
                           </Link>
                           </Tooltip>
-                      </Box>
-                      <Typography sx={{ color: 'text.secondary', fontWeight: 800 }}>{data.fullName}</Typography>                    
-                  </Box>
-                  <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
-                      <Typography sx={{ mr: 2, color: 'text.secondary' }}>Customer Email:</Typography>
-                      <Typography sx={{ color: 'text.secondary', fontWeight: 800 }}>{data.email}</Typography>
-                  </Box>
-                  <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
-                      <Typography sx={{ mr: 2, color: 'text.secondary' }}>Customer Number:</Typography>
-                      <Typography sx={{ color: 'text.secondary', fontWeight: 800 }}>{data.contact}</Typography>
-                  </Box>                  
-              </Box>
+                      </div>
+                      <p className='text-gray-800 font-[500] '>{data.fullName}</p>                    
+                  </div>
+                  <div className='flex mb-4 flex-col'>
+                      <p className='me-2 text-gray-500'>Customer Email:</p>
+                      <p className='text-gray-800 font-[500] '>{data.email}</p>
+                  </div>
+                  <div className='flex mb-4 flex-col'>
+                      <p className='me-2 text-gray-500'>Customer Number:</p>
+                      <p className='text-gray-800 font-[500] '>{data.contact}</p>
+                  </div>                  
+              </div>
             </AccordionDetails>
           </Accordion> 
-          <Accordion expanded={expanded1 === true} sx={{mb:5}} onChange={handleChange('panel2')}>
+          <Accordion expanded={expanded1 === true} className='mb-5' onChange={handleChange('panel2')}>
             <AccordionSummary
               id='controlled-panel-header-1'
               aria-controls='controlled-panel-content-1'
               // expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
             >
-              <Typography>Agent Details</Typography>
+              <p>Agent Details</p>
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
-              <Box sx={{ display: 'flex', mb: 4, mt:2, flexDirection:'column' }}>
-                <Typography sx={{ mr: 2, color: 'text.secondary' }}>Assigneed To:</Typography>
-                <CustomTextField select defaultValue='10' label='' sx={{border:'none', alignItems:'normal'}} id='custom-select'>
+              <div className='flex mb-4 flex-col mt-2'>
+                <p className='me-2 text-gray-500'>Assigneed To:</p>
+                <CustomTextField select defaultValue='10' label='' className='' id='custom-select'>
                     <MenuItem value=''>
                     <em>None</em>
                     </MenuItem>
@@ -169,14 +169,14 @@ const ReplyLeftView = ()=>{
                     <MenuItem value={20}>Parth Patel</MenuItem>
                     <MenuItem value={30}>Vinod Suvare</MenuItem>
                 </CustomTextField>
-              </Box>
-              <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
-                  <Typography sx={{ mr: 2, color: 'text.secondary' }}>Due date:</Typography>
-                  <Typography sx={{ color: 'text.secondary', fontWeight: 800, textTransform: 'capitalize' }}>2024-03-13 12:11:09 PM</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
-                <Typography sx={{ mr: 2, color: 'text.secondary' }}>Priority:</Typography>
-                <CustomTextField select defaultValue='10' label='' sx={{border:'none', alignItems:'normal'}} id='custom-select'>
+              </div>
+              <div className='flex mb-4 flex-col'>
+                  <p className='me-2 text-gray-500'>Due date:</p>
+                  <p className='text-gray-800 font-[500]'>2024-03-13 12:11:09 PM</p>
+              </div>
+              <div className='flex mb-4 flex-col'>
+                <p className='me-2 text-gray-500'>Priority:</p>
+                <CustomTextField select defaultValue='10' label='' id='custom-select'>
                     <MenuItem value=''>
                     <em>None</em>
                     </MenuItem>
@@ -184,26 +184,26 @@ const ReplyLeftView = ()=>{
                     <MenuItem value={20}>High</MenuItem>
                     <MenuItem value={30}>Medium</MenuItem>
                 </CustomTextField>
-              </Box>
+              </div>
             </AccordionDetails>
           </Accordion>  
-          <Accordion expanded={expanded2 === true} sx={{mb:5}} onChange={handleChange('panel3')}>
+          <Accordion expanded={expanded2 === true} className='mb-5' onChange={handleChange('panel3')}>
             <AccordionSummary
               id='controlled-panel-header-1'
               aria-controls='controlled-panel-content-1'
               // expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
             >
-              <Typography>Other Details</Typography>
+              <p>Other Details</p>
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
-              <Box sx={{ display: 'flex', mb: 4, mt:2, flexDirection:'column' }}>
-                <Typography sx={{ mr: 2,  color: 'text.secondary' }}>Channel:</Typography>
-                <Typography sx={{ color: 'text.secondary', fontWeight: 800 }}>Manual</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', mb:4, flexDirection:'column' }}>
-                  <Typography sx={{ mr: 2, color: 'text.secondary' }}>Request Type:</Typography>
-                  <CustomTextField select defaultValue='10' label='' sx={{border:'none', alignItems:'normal'}} id='custom-select'>
+              <div className='flex mb-4 flex-col mt-2'>
+                <p className='me-2 text-gray-500'>Channel:</p>
+                <p className='text-gray-800 font-[500]'>Manual</p>
+              </div>
+              <div className='flex mb-4 flex-col'>
+                  <p className='me-2 text-gray-500'>Request Type:</p>
+                  <CustomTextField select defaultValue='10' label='' id='custom-select'>
                       <MenuItem value=''>
                       <em>None</em>
                       </MenuItem>
@@ -211,10 +211,10 @@ const ReplyLeftView = ()=>{
                       <MenuItem value={20}>HD</MenuItem>
                       <MenuItem value={30}>Task</MenuItem>
                   </CustomTextField>
-              </Box>
-              <Box sx={{ display: 'flex', mb:4, flexDirection:'column' }}>
-                  <Typography sx={{ mr: 2, color: 'text.secondary' }}>Ticket Type:</Typography>
-                  <CustomTextField select defaultValue='10' label='' sx={{border:'none', alignItems:'normal'}} id='custom-select'>
+              </div>
+              <div className='flex mb-4 flex-col'>
+                  <p className='me-2 text-gray-500'>Ticket Type:</p>
+                  <CustomTextField select defaultValue='10' label='' id='custom-select'>
                       <MenuItem value=''>
                       <em>None</em>
                       </MenuItem>
@@ -222,10 +222,10 @@ const ReplyLeftView = ()=>{
                       <MenuItem value={20}>Issue</MenuItem>
                       <MenuItem value={30}>Somthing</MenuItem>
                   </CustomTextField>
-              </Box>
-              <Box sx={{ display: 'flex', mb:4, flexDirection:'column' }}>
-                  <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Department Name:</Typography>
-                  <CustomTextField select defaultValue='10' label='' sx={{border:'none', alignItems:'normal'}} id='custom-select'>
+              </div>
+              <div className='flex mb-4 flex-col'>
+                  <p className='me-2 text-gray-500'>Department Name:</p>
+                  <CustomTextField select defaultValue='10' label='' id='custom-select'>
                       <MenuItem value=''>
                       <em>None</em>
                       </MenuItem>
@@ -233,10 +233,10 @@ const ReplyLeftView = ()=>{
                       <MenuItem value={20}>QA</MenuItem>
                       <MenuItem value={30}>Tester</MenuItem>
                   </CustomTextField>
-              </Box>
-              <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
-                  <Typography sx={{ mr: 2, color: 'text.secondary' }}>Category:</Typography>
-                  <CustomTextField select defaultValue='10' label='' sx={{border:'none', alignItems:'normal'}} id='custom-select'>
+              </div>
+              <div className='flex mb-4 flex-col'>
+                  <p className='me-2 text-gray-500'>Category:</p>
+                  <CustomTextField select defaultValue='10' label='' id='custom-select'>
                       <MenuItem value=''>
                       <em>None</em>
                       </MenuItem>
@@ -244,10 +244,10 @@ const ReplyLeftView = ()=>{
                       <MenuItem value={20}>Service Affecting</MenuItem>
                       <MenuItem value={30}>Non-Service Affecting</MenuItem>
                   </CustomTextField>
-              </Box>
-              <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
-                  <Typography sx={{ mr: 2, color: 'text.secondary' }}>Sub-Category:</Typography>
-                  <CustomTextField select defaultValue='10' label='' sx={{border:'none', alignItems:'normal'}} id='custom-select'>
+              </div>
+              <div className='flex mb-4 flex-col'>
+                  <p className='me-2 text-gray-500'>Sub-Category:</p>
+                  <CustomTextField select defaultValue='10' label='' id='custom-select'>
                       <MenuItem value=''>
                       <em>None</em>
                       </MenuItem>
@@ -255,34 +255,34 @@ const ReplyLeftView = ()=>{
                       <MenuItem value={20}>Service Affecting</MenuItem>
                       <MenuItem value={30}>Non-Service Affecting</MenuItem>
                   </CustomTextField>
-              </Box>
+              </div>
             </AccordionDetails>
           </Accordion>    
-          <Accordion expanded={expanded3 === true} sx={{mb:5}} onChange={handleChange('panel4')}>
+          <Accordion expanded={expanded3 === true} className='mb-5' onChange={handleChange('panel4')}>
             <AccordionSummary
               id='controlled-panel-header-1'
               aria-controls='controlled-panel-content-1'
               // expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
             >
-              <Typography>Email Details</Typography>
+              <p>Email Details</p>
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
-              <Box sx={{ display: 'flex', mb: 4, mt:2, flexDirection:'column' }}>
-                <Typography sx={{ mr: 2, color: 'text.secondary' }}>CC:</Typography>
-                <Grid mt={2} container spacing={2}>
-                  {collaboratorsdata.map((item, index) => <Chip key={index} label={item.email} sx={{mb:2}} size='small' />)}
-                </Grid>
-            </Box>
-            <Box sx={{ display: 'flex', mb: 4, flexDirection:'column' }}>
-                <Typography sx={{ mr: 2, color: 'text.secondary' }}>TO:</Typography>
-                <Grid mt={2} container spacing={2}>
-                  {collaboratorsdata.map((item, index) => <Chip key={index} label={item.email} sx={{mb:2}} size='small' />)}
-                </Grid>
-            </Box>
+              <div className='flex mb-4 flex-col mt-2'>
+                <p className='me-2 text-gray-500'>CC:</p>
+                <div className='mt-2'>
+                  {collaboratorsdata.map((item, index) => <Chip key={index} label={item.email} className='mb-2' size='small' />)}
+                </div>
+            </div>
+            <div className='flex mb-4 flex-col'>
+                <p className='me-2 text-gray-500'>TO:</p>
+                <div className='mt-2'>
+                  {collaboratorsdata.map((item, index) => <Chip key={index} label={item.email} className='mb-2' size='small' />)}
+                </div>
+            </div>
             </AccordionDetails>
           </Accordion>    
-          <Box sx={{ display: 'flex', mb:4, flexDirection:'column' }}>
+          <div className='flex mb-4 flex-col'>
               <Link
               component="button"
               variant="body1"
@@ -290,20 +290,19 @@ const ReplyLeftView = ()=>{
               >
               Show More +
               </Link>
-          </Box>            
+          </div>            
         </CardContent>
         <Dialog
             open={openEdit}
             onClose={handleEditClose}
             aria-labelledby='user-view-edit'
             aria-describedby='user-view-edit-description'
-            sx={{ '& .MuiPaper-root': { width: '100%', maxWidth: 650 } }}
+            className="w-full md:max-w-650"
           >
             <DialogTitle
               id='user-view-edit'
-              sx={{
-                textAlign: 'center',
-                fontSize: '1.5rem !important',
+              className='text-center text-2xl'
+              sx={{                
                 px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
                 pt: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
               }}
@@ -316,7 +315,7 @@ const ReplyLeftView = ()=>{
                 px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`]
               }}
             >
-              <DialogContentText variant='body2' id='user-view-edit-description' sx={{ textAlign: 'center', mb: 7 }}>
+              <DialogContentText variant='body2' id='user-view-edit-description' className='text-center mb-7'>
                 Updating user details will receive a privacy audit.
               </DialogContentText>
               <form>
