@@ -1,10 +1,13 @@
 import React, { useMemo } from 'react'
 
 import Select from 'react-select'
-import { Box, Pagination } from '@mui/material'
+import { Box, Pagination, Typography } from '@mui/material'
 
-const Paginate = ({ table }) => {
+const Paginate = ({ table, dataCount }) => {
+  const pageIndex = table.getState().pagination.pageIndex
   const pageSize = table.getState().pagination.pageSize
+  const startRow = pageIndex * pageSize + 1
+  const endRow = Math.min(startRow + pageSize - 1, dataCount)
 
   const options = useMemo(() => {
     return [5, 10, 20].map(pageSize => ({ value: pageSize, label: pageSize }))
@@ -21,8 +24,13 @@ const Paginate = ({ table }) => {
   }
 
   return (
-    <Box className=' p-3' display='flex' flexDirection='row' justifyContent='flex-end'>
-      <Box className='flex items-center justify-between mx-5'>
+    <Box className='p-3' display='flex' flexDirection='row' justifyContent='space-between'>
+      <div className='mt-2'>
+        <Typography>
+          Showing {startRow} - {endRow} of {dataCount} entries
+        </Typography>
+      </div>
+      <div className='flex items-center'>
         <span className='mr-2'>Show</span>
         <Select
           value={{ value: pageSize, label: pageSize }}
@@ -31,17 +39,19 @@ const Paginate = ({ table }) => {
           classNamePrefix='select'
           options={options}
         />
-      </Box>
-      <Box className='mt-1'>
+      </div>
+      <div>
         <Pagination
           count={table.getPageCount()}
-          page={table.getState().pagination.pageIndex + 1}
+          page={pageIndex + 1}
           onChange={(event, page) => handlePageChange(event, page)}
-          color='primary'
           shape='rounded'
-          size='small'
+          color='primary'
+          variant='tonal'
+          showFirstButton
+          showLastButton
         />
-      </Box>
+      </div>
     </Box>
   )
 }

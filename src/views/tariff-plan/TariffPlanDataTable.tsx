@@ -75,6 +75,7 @@ type TariffTypeWithAction = TariffType & {
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item
   const itemRank = rankItem(row.getValue(columnId), value)
+
   console.log('Fuzzy Filter is called and rank item is', itemRank)
 
   // Store the itemRank info
@@ -274,10 +275,19 @@ const TariffPlanDataTable = ({ tableData }: { tableData?: TariffType[] }) => {
                           onClick={header.column.getToggleSortingHandler()}
                         >
                           {flexRender(header.column.columnDef.header, header.getContext())}
-                          {{
-                            asc: <i className='tabler-chevron-up text-xl' />,
-                            desc: <i className='tabler-chevron-down text-xl' />
-                          }[header.column.getIsSorted() as 'asc' | 'desc'] ?? null}
+                          {header.column.canSort && (
+                            <>
+                              {header.column.isSorted ? (
+                                header.column.isSortedDesc ? (
+                                  <i className='tabler-chevron-down text-xl' />
+                                ) : (
+                                  <i className='tabler-chevron-up text-xl' />
+                                )
+                              ) : (
+                                <i className='tabler-chevron-up text-xl opacity-0' />
+                              )}
+                            </>
+                          )}
                         </div>
                       </>
                     )}
