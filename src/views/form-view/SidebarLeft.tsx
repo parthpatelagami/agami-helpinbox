@@ -39,29 +39,20 @@ const SidebarLeft = (props: PropsType) => {
   return (
     <div className={`border-solid border h-full border-t-0 flex flex-col`}>
       <Stack spacing={2}>
-        <Box
-          sx={{
-            borderBottom: `1px solid ${borderColor}`,
-            maring: '5px',
-            py: 3,
-            px: 5,
-            display: 'flex',
-            alignItems: 'center'
-          }}
-        >
+        <div className={`border-b border-solid border-[${borderColor}] py-3 px-5 flex items-center`}>
           <CustomTextField
             fullWidth
             placeholder='Search'
             sx={{ '& .MuiInputBase-root': { borderRadius: '30px !important' } }}
             InputProps={{
               startAdornment: (
-                <InputAdornment position='start' sx={{ color: 'text.secondary' }}>
+                <InputAdornment position='start' className='text-secondary'>
                   <i className='tabler:search' />
                 </InputAdornment>
               )
             }}
           />
-        </Box>
+        </div>
       </Stack>
       <div className='overflow-y-auto' style={{ maxHeight: 'calc(100vh - 218px)', scrollbarWidth: 'none' }}>
         <Accordion defaultExpanded className='border-none shadow-none overflow-auto'>

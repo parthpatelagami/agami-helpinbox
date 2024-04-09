@@ -29,7 +29,7 @@ const FormView = (props: PropsType) => {
       <div className={`bg-white p-0 pt-3 border ${skin == 'default' && 'shadow'} rounded flex flex-col flex-grow`}>
         <CardHeader
           title='Form View'
-          className='p-0 pl-3'
+          className='p-0 px-3'
           action={
             <>
               <Tooltip placement='top' title='Layout'>
