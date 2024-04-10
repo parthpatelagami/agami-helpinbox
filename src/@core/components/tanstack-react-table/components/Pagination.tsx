@@ -30,12 +30,11 @@ const Paginate = ({ table, dataCount }) => {
           Showing {startRow} - {endRow} of {dataCount} entries
         </Typography>
       </div>
-      <div className='flex items-center'>
-        <span className='mr-2'>Show</span>
+      <div className='items-center'>
         <Select
           value={{ value: pageSize, label: pageSize }}
           onChange={event => table.setPageSize(Number(event.value))}
-          className='w-15'
+          className='w-17 absolute'
           classNamePrefix='select'
           options={options}
         />

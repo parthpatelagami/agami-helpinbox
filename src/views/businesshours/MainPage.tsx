@@ -26,7 +26,7 @@ const MainPage: React.FC = () => {
     <Fragment>
       <Card>
         <Box className='p-3'>
-          <Box className='flex justify-between items-center mb-5'>
+          <Box className='flex justify-between items-center mb-3'>
             <Typography variant='h5' className='font-bold-500 text-lg capitalize'>
               Business Hours
             </Typography>
@@ -49,12 +49,12 @@ const MainPage: React.FC = () => {
           <Divider />
 
           <Box>
-            <Typography variant='h1' component='p' className='font-medium text-base mt-5'>
+            <Typography variant='h1' component='p' className='font-medium text-base mt-2'>
               Business hours tell what days and hours of the week your team is working.
             </Typography>
           </Box>
 
-          <div className='mt-5 mb-32 m-2'>
+          <div className='m-2'>
             <Table />
           </div>
         </Box>
