@@ -17,6 +17,7 @@ import { getLocalizedUrl } from '@/utils/i18n'
 import type { Locale } from '@configs/i18n'
 
 // Custom Import
+import Table from './components/Table'
 
 const MainPage: React.FC = () => {
   const { lang: locale } = useParams()
@@ -26,13 +27,13 @@ const MainPage: React.FC = () => {
       <Card>
         <CardContent>
           <Box className='flex justify-between items-center mb-5'>
-            <Typography variant='caption' className='font-bold text-lg capitalize'>
+            <Typography variant='h5' className='font-bold-500 text-lg capitalize'>
               SLA
             </Typography>
             <Box>
               <Link href={getLocalizedUrl(`sla/add-new-sla`, locale as Locale)}>
                 <Tooltip placement='top' title='Add'>
-                  <IconButton className='hover:border-2 hover:border-inherit hover:border-solid'>
+                  <IconButton className='hover:border-1 hover:border-inherit hover:border-solid'>
                     <i className='tabler-plus border-solid text-[20px] text-textSecondary' />
                   </IconButton>
                 </Tooltip>
@@ -42,10 +43,13 @@ const MainPage: React.FC = () => {
         </CardContent>
         <Divider></Divider>
         <Box className='p-5'>
-          <Typography variant='h1' component='p' className='font-medium text-base mt-5'>
+          <Typography variant='h1' component='p' className='font-medium text-base mt-1'>
             Enable
           </Typography>
         </Box>
+        <div className='mb-32 m-1'>
+          <Table />
+        </div>
       </Card>
     </Fragment>
   )

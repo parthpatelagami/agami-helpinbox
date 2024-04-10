@@ -54,7 +54,7 @@ const MainPage: React.FC = () => {
             </Typography>
           </Box>
 
-          <div className='mt-5 mb-10 m-2'>
+          <div className='mt-5 mb-32 m-2'>
             <Table />
           </div>
         </Box>
