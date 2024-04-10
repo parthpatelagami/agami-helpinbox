@@ -137,13 +137,8 @@ const TanstackReactTable: React.FC<TanstackReactTableProps> = ({
   const table = useReactTable(tableConfig)
   const tableRowCount = table.getRowModel().rows.length
 
-  console.log('THEME ::: ', theme)
-
-  const primaryBg = theme.palette.primary
-
-  console.log('primaryBg ::: ', primaryBg)
-
-  const headerBgColor = theme.palette.mode === 'light' ? '#e0f1ff' : '#25293c'
+  const primaryBg = theme.palette.primary.lightOpacity
+  const headerBgColor = theme.palette.mode === 'light' ? primaryBg : primaryBg
 
   return (
     <Card>
