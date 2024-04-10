@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 
 // Mui Import
-import { Box, Typography, Divider, Card, IconButton, Tooltip, CardContent } from '@mui/material'
+import { Box, Typography, Divider, Card, IconButton, Tooltip } from '@mui/material'
 
 // Util Imports
 import { getLocalizedUrl } from '@/utils/i18n'
@@ -25,8 +25,8 @@ const MainPage: React.FC = () => {
   return (
     <Fragment>
       <Card>
-        <CardContent>
-          <Box className='flex justify-between items-center mb-5'>
+        <Box className='p-3'>
+          <Box className='flex justify-between items-center mb-3'>
             <Typography variant='h5' className='font-bold-500 text-lg capitalize'>
               SLA
             </Typography>
@@ -40,16 +40,18 @@ const MainPage: React.FC = () => {
               </Link>
             </Box>
           </Box>
-        </CardContent>
-        <Divider></Divider>
-        <Box className='p-5'>
-          <Typography variant='h1' component='p' className='font-medium text-base mt-1'>
-            Enable
-          </Typography>
+
+          <Divider></Divider>
+
+          {/* <Box className='p-2'>
+            <Typography variant='h1' component='p' className='font-medium text-base mt-1'>
+              Enable
+            </Typography>
+          </Box> */}
+          <div className='m-2'>
+            <Table />
+          </div>
         </Box>
-        <div className='mb-32 m-1'>
-          <Table />
-        </div>
       </Card>
     </Fragment>
   )
