@@ -1,49 +1,73 @@
 import { useEffect, useState } from 'react'
 
-import { TextField } from '@mui/material'
-
 import TanstackReactTable from '@/@core/components/tanstack-react-table'
 import { columns } from './Column'
 
 export type DataGridRowType = {
   id: string
   title: string
+  description: string
 }
 
 const dummyData: DataGridRowType[] = [
   {
     id: '1',
-    title:
+    title: 'Default SLA',
+    description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book'
   },
   {
     id: '2',
-    title:
+    title: 'Business SLA',
+    description:
       'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
   },
   {
     id: '3',
-    title:
+    title: 'Offcie SLA',
+    description:
       'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'
   },
   {
     id: '4',
-    title:
+    title: 'Testing 001 SLA',
+    description:
       'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
   },
   {
     id: '5',
-    title:
+    title: 'Private SLA',
+    description:
       'The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using'
   },
   {
     id: '6',
-    title:
+    title: 'Public SLA',
+    description:
       'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable.'
   },
   {
     id: '7',
-    title:
+    title: 'Secured SLA',
+    description:
+      'If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidden in the middle of text. '
+  },
+  {
+    id: '8',
+    title: 'Disbaled SLA',
+    description:
+      'If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidden in the middle of text. '
+  },
+  {
+    id: '9',
+    title: 'Enabled SLA',
+    description:
+      'If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidden in the middle of text. '
+  },
+  {
+    id: '10',
+    title: 'Set SLA',
+    description:
       'If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidden in the middle of text. '
   }
 ]
@@ -53,35 +77,18 @@ const Table = () => {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 5 })
   const [total, setTotal] = useState<number>(0)
   const [rows, setRows] = useState<DataGridRowType[]>([])
-  const [searchValue, setSearchValue] = useState<string>('')
 
   useEffect(() => {
-    const filteredData = dummyData.filter(row => row.title.toLowerCase().includes(searchValue.toLowerCase()))
+    const filteredData = dummyData.filter(row => row.title.toLowerCase())
     const startIndex = pagination.pageIndex * pagination.pageSize
     const slicedData = filteredData.slice(startIndex, startIndex + pagination.pageSize)
 
     setRows(slicedData)
     setTotal(filteredData.length)
-  }, [searchValue, pagination])
-
-  const handleSearch = (value: string) => {
-    setSearchValue(value)
-  }
+  }, [pagination])
 
   return (
     <>
-      <div className='flex justify-end pr-4'>
-        <TextField
-          className='mb-2'
-          id='outlined-basic'
-          label='Search...'
-          variant='outlined'
-          value={searchValue}
-          onChange={e => {
-            handleSearch(e.target.value)
-          }}
-        />
-      </div>
       <TanstackReactTable
         loading={isFormsLoading}
         columns={columns}

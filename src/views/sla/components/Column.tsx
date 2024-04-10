@@ -26,11 +26,18 @@ export const columns: Column[] = [
     accessorKey: 'id',
     header: () => 'Sr.No',
     cell: info => <Typography className='text-center text-[14px]'>{info.getValue()}</Typography>,
-    size: 50
+    size: 70
   },
   {
     accessorKey: 'title',
     header: () => 'Title',
+    cell: info => <Typography className='text-[14px]'>{info.getValue()}</Typography>,
+    filterType: 'text',
+    size: 180
+  },
+  {
+    accessorKey: 'description',
+    header: () => 'Description',
     cell: info => <Typography className='text-[14px]'>{info.getValue()}</Typography>,
     filterType: 'text',
     size: 500
@@ -41,18 +48,18 @@ export const columns: Column[] = [
     cell: info => (
       <div>
         <Stack display='flex' flexDirection='row' justifyContent='center'>
-          <Tooltip placement='top' title='Check'>
-            <IconButton className='hover:border-1 hover:border-inherit hover:border-solid'>
-              <i className='tabler-circle-check text-[20px] text-textSecondary' />
-            </IconButton>
-          </Tooltip>
-
           <Tooltip placement='top' title='Edit'>
             <IconButton
               className='hover:border-1 hover:border-inherit hover:border-solid'
               onClick={e => handleEdit(info.getValue(), e)}
             >
               <i className='tabler-edit text-[20px] text-textSecondary' />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip placement='top' title='Disabled SLAs'>
+            <IconButton className='hover:border-1 hover:border-inherit hover:border-solid'>
+              <i className='tabler-circle-off text-[20px] text-textSecondary' />
             </IconButton>
           </Tooltip>
 

@@ -27,7 +27,7 @@ const MainPage: React.FC = () => {
       <Card>
         <Box className='p-3'>
           <Box className='flex justify-between items-center mb-5'>
-            <Typography variant='caption' className='font-bold text-lg capitalize'>
+            <Typography variant='h5' className='font-bold-500 text-lg capitalize'>
               Business Hours
             </Typography>
             <Box>
@@ -54,7 +54,7 @@ const MainPage: React.FC = () => {
             </Typography>
           </Box>
 
-          <div className='mt-10 mb-10 m-2'>
+          <div className='mt-5 mb-32 m-2'>
             <Table />
           </div>
         </Box>
