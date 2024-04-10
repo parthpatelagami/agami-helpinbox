@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react'
 
 import { TextField } from '@mui/material'
 
-import { Card } from 'reactstrap'
-
 import TanstackReactTable from '@/@core/components/tanstack-react-table'
 import { columns } from './Column'
 
@@ -84,21 +82,19 @@ const Table = () => {
           }}
         />
       </div>
-      <Card>
-        <TanstackReactTable
-          loading={isFormsLoading}
-          columns={columns}
-          data={rows}
-          dataCount={total}
-          responsiveTable={true}
-          enablePagination={true}
-          manualPagination={true}
-          pagination={pagination}
-          setPagination={setPagination}
-          enableColumnFilters={false}
-          enableColumnsVisiblity={true}
-        />
-      </Card>
+      <TanstackReactTable
+        loading={isFormsLoading}
+        columns={columns}
+        data={rows}
+        dataCount={total}
+        responsiveTable={true}
+        enablePagination={true}
+        manualPagination={true}
+        pagination={pagination}
+        setPagination={setPagination}
+        enableColumnFilters={false}
+        enableColumnsVisiblity={true}
+      />
     </>
   )
 }
