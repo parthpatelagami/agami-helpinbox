@@ -1,5 +1,8 @@
-import TabsLayout from '@/views/tickets/viewalltickets/TabsLayout'
+'use client'
+
 import { Grid } from '@mui/material'
+
+import TabsLayout from '@/views/tickets/viewalltickets/TabsLayout'
 
 export default function Page() {
   return (

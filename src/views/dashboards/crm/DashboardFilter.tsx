@@ -1,3 +1,5 @@
+'use cient'
+
 // React Imports
 import { forwardRef, useState } from 'react'
 
@@ -10,9 +12,10 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 
 // Component Imports
+import { FormControl, FormControlLabel, Switch } from '@mui/material'
+
 import CustomTextField from '@core/components/mui/TextField'
 import AppReactDatepicker from '@/libs/styles/AppReactDatepicker'
-import { FormControl, FormControlLabel, Switch } from '@mui/material'
 
 type Props = {
   open: boolean

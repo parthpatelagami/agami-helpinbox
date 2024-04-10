@@ -1,3 +1,5 @@
+'use client'
+
 import AddNewBusinessHours from '@/views/businesshours/components/AddNewBusinessHours'
 
 const AddNewBusinessHoursComponents = () => {
