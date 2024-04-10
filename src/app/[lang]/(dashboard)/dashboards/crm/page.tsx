@@ -1,3 +1,5 @@
+'use client'
+
 import DashboardCRM from '@/views/dashboards/crm'
 
 const DashboardCRMPage = () => {

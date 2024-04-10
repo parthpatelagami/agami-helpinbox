@@ -25,8 +25,8 @@ const Paginate = ({ table, dataCount }) => {
 
   return (
     <Box className='p-3' display='flex' flexDirection='row' justifyContent='space-between'>
-      <div className='mt-2'>
-        <Typography>
+      <div className='mt-2 text-xs'>
+        <Typography className='text-xs'>
           Showing {startRow} - {endRow} of {dataCount} entries
         </Typography>
       </div>
@@ -34,7 +34,7 @@ const Paginate = ({ table, dataCount }) => {
         <Select
           value={{ value: pageSize, label: pageSize }}
           onChange={event => table.setPageSize(Number(event.value))}
-          className='w-17 absolute'
+          className='w-17 absolute text-xs'
           classNamePrefix='select'
           options={options}
         />

@@ -1,8 +1,7 @@
-import ReplyPage from "@views/tickets/reply/replypage1/ReplyPage";
+'use client'
+
+import ReplyPage from '@views/tickets/reply/replypage1/ReplyPage'
 
 export default function Page() {
-    return (
-        <ReplyPage/>
-    )
-  }
-  
+  return <ReplyPage />
+}
