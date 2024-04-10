@@ -49,14 +49,12 @@ const MainPage: React.FC = () => {
           <Divider />
 
           <Box>
-            <Typography variant='h1' component='p' className='text-sm font-normal mt-2'>
+            <Typography variant='h1' component='p' className='text-xs font-normal mt-2'>
               Business hours tell what days and hours of the week your team is working.
             </Typography>
           </Box>
 
-          <div className='m-2'>
-            <Table />
-          </div>
+          <Table />
         </Box>
       </Card>
     </Fragment>

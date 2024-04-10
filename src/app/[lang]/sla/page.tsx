@@ -1,3 +1,4 @@
+'use client'
 import MainPage from '@/views/sla/MainPage'
 
 const SLAComponents = () => {

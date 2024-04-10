@@ -1,4 +1,6 @@
 // REACT IMPORTS
+'use client'
+
 import React from 'react'
 
 // MUI IMPORTS

@@ -163,7 +163,7 @@ const TanstackReactTable: React.FC<TanstackReactTableProps> = ({
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header: any) => (
                   <th key={header.id} className='p-2'>
-                    <span style={{ display: 'block', width: header.column.getSize() }}>
+                    <span style={{ display: '', width: header.column.getSize() }} className='text-xs'>
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                       {showFilters ? <ColumnFilter column={header.column} table={table} /> : null}
                     </span>
@@ -175,14 +175,14 @@ const TanstackReactTable: React.FC<TanstackReactTableProps> = ({
           <TableBody>
             {loading && (
               <TableRow>
-                <TableCell colSpan={table.getVisibleFlatColumns().length} className='text-center mt-10'>
+                <TableCell colSpan={table.getVisibleFlatColumns().length} className='text-center text-xs mt-10'>
                   <Spinner />
                 </TableCell>
               </TableRow>
             )}
             {!loading && tableRowCount === 0 && (
               <TableRow>
-                <TableCell colSpan={table.getVisibleFlatColumns().length} className='text-center'>
+                <TableCell colSpan={table.getVisibleFlatColumns().length} className='text-center text-xs'>
                   No data available
                 </TableCell>
               </TableRow>
