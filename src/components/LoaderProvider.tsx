@@ -1,11 +1,16 @@
 'use client'
 
-import { ChildrenType } from '@/@core/types'
-import { AppProgressBar as ProgressBar } from 'next-nprogress-bar'
-import themeConfig from '@/configs/themeConfig'
 import { useTheme } from '@mui/material'
+
+import { AppProgressBar as ProgressBar } from 'next-nprogress-bar'
+
+import type { ChildrenType } from '@/@core/types'
+
+import themeConfig from '@/configs/themeConfig'
+
 const LoaderProvider = ({ children }: ChildrenType) => {
   const theme = useTheme()
+
   const customStyles = `
     #nprogress {
       pointer-events: none;
@@ -20,6 +25,7 @@ const LoaderProvider = ({ children }: ChildrenType) => {
       background-color: ${theme.palette.primary.main};
     }
   `
+
   return (
     <>
       {children}
@@ -27,6 +33,7 @@ const LoaderProvider = ({ children }: ChildrenType) => {
     </>
   )
 }
+
 //backgroundColor: theme.palette.primary.main
 
 export default LoaderProvider
