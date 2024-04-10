@@ -5,13 +5,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "fast": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "build:icons": "tsx src/assets/iconify-icons/bundle-icons-css.ts",
-    "postinstall": "npm run build:icons"
+    "postinstall": "npm run build:icons,prisma generate"
   },
   "dependencies": {
     "@emotion/cache": "11.11.0",
