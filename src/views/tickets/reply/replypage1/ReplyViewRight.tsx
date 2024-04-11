@@ -40,8 +40,8 @@ const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
   }
 }))
 
+
 const TabList = styled(MuiTabList)<TabListProps>(({ theme }) => ({
-  borderBottom: '0 !important',
   '&, & .MuiTabs-scroller': {
     boxSizing: 'content-box',
     padding: theme.spacing(1.25, 1.25, 2),
@@ -51,15 +51,23 @@ const TabList = styled(MuiTabList)<TabListProps>(({ theme }) => ({
     display: 'none'
   },
   '& .Mui-selected': {
-    boxShadow: theme.shadows[2],
-    backgroundColor: theme.palette.primary.main,
-    color: `${theme.palette.common.white} !important`
+    // boxShadow: theme.shadows[0],
+    backgroundColor: `${theme.palette.common.white} !important`,
+    color: `${theme.palette.primary.main} !important`,
+    borderTop: '3px solid !important',
+    borderLeft: '1px solid !important',
+    borderRight: '1px solid !important',
   },
   '& .MuiTab-root': {
     lineHeight: 0,
-    borderRadius: theme.shape.borderRadius,
+    // borderRadius: theme.shape.borderRadius,
+    borderTopLeftRadius: '5px',
+    borderTopRightRadius: '5px',
+    backgroundColor: theme.palette.primary.main,
+    color: `${theme.palette.common.white}`,
     '&:hover': {
-      color: theme.palette.primary.main
+      color: `${theme.palette.primary.main}`,
+      backgroundColor: theme.palette.common.white,
     }
   }
 }))
@@ -97,55 +105,56 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
         scrollButtons='auto'
         onChange={handleChange}
         aria-label='forced scroll tabs example'
-        sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
+        // sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
+        className='border-none'
       >
-        <Tab value='reply' label='Reply' />
-        <Tab value='transfer' label='Transfer'/>
-        <Tab value='related-ticket' label='Related Tickets'/>
-        <Tab value='ticket-field' label='Ticket Field'  />
-        <Tab value='child-ticket' label='Child Tickets' />
-        <Tab value='history' label='History' />
-        <Tab value='jira' label='Jira' />        
+        <Tab className='me-2' value='reply' label='Reply' />
+        <Tab className='me-2' value='transfer' label='Transfer'/>
+        <Tab className='me-2' value='related-ticket' label='Related Tickets'/>
+        <Tab className='me-2' value='ticket-field' label='Ticket Field'  />
+        <Tab className='me-2' value='child-ticket' label='Child Tickets' />
+        <Tab className='me-2' value='history' label='History' />
+        <Tab className='me-2' value='jira' label='Jira' />        
       </TabList>
-      <Box sx={{ mt: 2 }}>
+      <div className=''>
         {isLoading ? (
-          <Box sx={{ mt: 6, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-            <CircularProgress sx={{ mb: 4 }} />
+          <div className='mt-6 flex items-center flex-col'>
+            <CircularProgress className='mb-4'/>
             <Typography>Loading...</Typography>
-          </Box>
+          </div>
         ) : (
           <>
-            <TabPanel sx={{ p: 0 }} value='reply'>
+            <TabPanel value='reply'>
               <ReplyTabView />
               <ConversationView/>
             </TabPanel>
-            <TabPanel sx={{ p: 0 }} value='transfer'>
+            <TabPanel value='transfer'>
               <TransferTabView />
               <ConversationView/>
             </TabPanel>
-            <TabPanel sx={{ p: 0 }} value='related-ticket'>
+            <TabPanel value='related-ticket'>
               <RelatedTicketView />
               <ConversationView/>
             </TabPanel>
-            <TabPanel sx={{ p: 0 }} value='ticket-field'>
+            <TabPanel value='ticket-field'>
               <TextFieldView />
               <ConversationView/>
             </TabPanel>
-            <TabPanel sx={{ p: 0 }} value='child-ticket'>
+            <TabPanel value='child-ticket'>
               <ChildTicketView />
               <ConversationView/>
             </TabPanel>
-            <TabPanel sx={{ p: 0 }} value='history'>
+            <TabPanel value='history'>
               <HistoryTabView/>
               <ConversationView/>
             </TabPanel>
-            <TabPanel sx={{ p: 0 }} value='jira'>
+            <TabPanel value='jira'>
               <JiraMainTabView />
               <ConversationView/>
             </TabPanel>
           </>
         )}
-      </Box>
+      </div>
     </TabContext>
   )
 }

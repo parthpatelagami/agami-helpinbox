@@ -54,57 +54,49 @@ const HistoryTabView = () => {
         }
     }
   return (
-    <Card sx={{mt:5, height:'500px'}}>
+    <Card className='mt-7 h-[500px]'>
       <CardHeader
-        sx={{p:5}}
+          className='p-5'
           title={
-            <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 3 } }}>
-              {/* <Icon fontSize='1.25rem' icon='tabler:list-details' /> */}
-              <Typography>Ticket History</Typography>
-            </Box>
+            <div className='flex items-center'>
+              <i className='tabler:list-details' />
+              <p>Ticket History</p>
+            </div>
           }
           action={
             <OptionsMenu
               options={['Share timeline', 'Suggest edits', 'Report bug']}
-              iconButtonProps={{ size: 'small', sx: { color: 'text.disabled' } }}
+              iconButtonProps={{ size: 'small', className:'' }}
             />
           }
         />
       <Divider/>
       <ScrollWrapper>
         <CardContent>     
-          <Timeline sx={{mb:20}}>
+          <Timeline className='mb-20'>
           {historydata.map((item:any, index:number)=>
             <TimelineItem key={index}>
               <TimelineSeparator>
-                <TimelineDot color='warning' sx={{ mt: 1.5 }} />
+                <TimelineDot color='primary'  className='' />
                 <TimelineConnector />
               </TimelineSeparator>
-              <TimelineContent sx={{ mt: 0, mb: theme => `${theme.spacing(2)} !important` }}>
-                <Box
-                  sx={{
-                    mb: 4,
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
-                  }}
-                >
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <Avatar src='/images/avatars/1.png' sx={{ mr: 3, width: 38, height: 38 }} />
-                      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <TimelineContent className='mt-0 mb-2'>
+                <div className='mb-4 flex items-center justify-between flex-wrap'>
+                  <div className='flex items-center'>
+                      <Avatar src='/images/avatars/1.png' className='mr-3 w-10 h-10'/>
+                      <div className='flex flex-col items-start'>
                           <Typography variant='h6' sx={{ mr: 2 }}>
                             {item.name}
                           </Typography>
                       <Typography variant='caption'>{item.time}</Typography>
-                      </Box>
-                  </Box>
+                      </div>
+                  </div>
                   
-                </Box>
+                </div>
                 
-                <Box sx={{ rowGap: 1, columnGap: 3, display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <Typography variant='h6' sx={{mr:2}}>{item.statustitle}</Typography>
-                </Box>
+                <div className='gap-x-3 gap-y-1 flex flex-wrap items-center'>
+                  <Typography variant='h6' className='mr-2'>{item.statustitle}</Typography>
+                </div>
               </TimelineContent>
             </TimelineItem>
             )}

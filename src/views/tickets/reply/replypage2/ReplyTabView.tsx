@@ -69,8 +69,8 @@ const ReplyTabView = () => {
     // <EditorWrapper>
       <Grid container spacing={2} className='match-height'>       
         <Grid item xs={12} md={12} sm={12}>
-          <Grid item xs={12} sm={12} md={12} mb={5} sx={{display:'flex', justifyContent:{md:'space-between', sm:null, xs:null}, flexDirection:{md:'unset', xs:'column', sm:'column'}}}>
-            <Grid item md={4} sm={12} xs={12} sx={{mt:5}}>
+          <Grid item xs={12} sm={12} md={12} mb={5} className='flex flex-col justify-normal md:justify-between lg:justify-between sm:justify-normal md:flex-row sm:flex-col'>
+            <Grid item md={4} sm={12} xs={12} className='mt-5'>
               <CustomTextField select fullWidth label='' defaultValue='0'>
                 <MenuItem value='0'>Select Canned Response</MenuItem>
                 <MenuItem value='pending'>Shubham</MenuItem>
@@ -78,7 +78,7 @@ const ReplyTabView = () => {
                 <MenuItem value='inactive'>Vinod</MenuItem>
               </CustomTextField> 
             </Grid>
-            <Grid item md={4} sm={12} xs={12} sx={{mt:5}}>                
+            {/* <Grid item md={4} sm={12} xs={12} sx={{mt:5}}>                
               <CustomTextField select fullWidth label='' defaultValue='0'>
                   <MenuItem value='0'>All</MenuItem>
                   <MenuItem value='manual'>Manual</MenuItem>
@@ -88,17 +88,26 @@ const ReplyTabView = () => {
                   <MenuItem value='call'>Call</MenuItem>
                   <MenuItem value='chat'>Chat</MenuItem>
               </CustomTextField> 
-            </Grid>                 
+            </Grid>                  */}
           </Grid>            
           {/* <EditorControlled/> */}
+          <CustomTextField
+                id='invoice-note'
+                rows={6}
+                fullWidth
+                multiline
+                className='border rounded'
+                placeholder='Type Here..'
+                defaultValue=''
+          />
           <Grid item xs={12} md={12} sm={12} mt={4} >                
-            <Grid item sm={12} md={12} xs={12} sx={{display:'flex', width:'100%', flexDirection:{xs:'column', md:'row'}}}>
+            <Grid item sm={12} md={12} xs={12} className='flex w-full flex-col md:flex-row lg:flex-row'>
               <Grid item sm={12} md={5} xs={12}>
                 <FormControlLabel label='Do not Notify Customer' control={<Checkbox defaultChecked name='customer' />} />
               </Grid>
               
-              <Grid item sm={8} md={7} xs={12} sx={{display:'flex', alignItems:'center'}}>
-                <Typography sx={{ marginRight:'1rem', marginTop:'0'}} variant='subtitle1'>Collaborators:- </Typography>
+              <Grid item sm={8} md={7} xs={12} className='flex items-center'>
+                <p className='me-1 mt-0 '>Collaborators:- </p>
                 <CustomTextField select fullWidth label='' defaultValue='-1'>
                   <MenuItem value='-1'>Select Collaborator</MenuItem>
                   <MenuItem value='0'>Pangale Shubham</MenuItem>
@@ -108,8 +117,8 @@ const ReplyTabView = () => {
                   <MenuItem value='4'>Mangera Aadil</MenuItem>
                 </CustomTextField>
                 <Tooltip placement='top' title='Add New User'>
-                  <IconButton>
-                    <Icon icon='ei:plus' color={`${theme.palette.primary.main}`} fontSize={35} />
+                  <IconButton className='border border-solid text-primary m-1 rounded-full p-0.5'>
+                    <i className='tabler-plus p-0'/>
                   </IconButton>
                 </Tooltip>  
               </Grid>               
@@ -123,23 +132,25 @@ const ReplyTabView = () => {
               </Button>
             </div>
           </Grid>
-          <Grid item sx={{mt:10}}>
-            <Accordion expanded={expanded === true} sx={{mb:5, mt:5}} onChange={handleChange('panel1')}>
+          <div>
+            <Accordion expanded={expanded === true} className='my-3' onChange={handleChange('panel1')}>
               <AccordionSummary
                 id='controlled-panel-header-1'
                 aria-controls='controlled-panel-content-1'
                 // expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
               >
-                <Typography>Conversation History</Typography>
+                <p>Conversation History</p>
               </AccordionSummary>
               <Divider/>
-              <AccordionDetails>
-                <Grid item height={500}>
-                  <ConversationView/>
-                </Grid>
-              </AccordionDetails>
+              <ScrollWrapper>
+                <AccordionDetails>               
+                  <div className='h-[600px]'>                
+                    <ConversationView/>                  
+                  </div>                  
+                </AccordionDetails>
+              </ScrollWrapper>
             </Accordion>  
-          </Grid>      
+          </div>      
         </Grid>        
       </Grid>
     // </EditorWrapper>    

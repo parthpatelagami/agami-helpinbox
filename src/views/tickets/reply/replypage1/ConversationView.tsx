@@ -50,9 +50,15 @@ const ConversationView = ()=>{
   const direction = "rtl";
 
   const prevMailIcon = direction === 'rtl' ? 'tabler:chevron-right' : 'tabler:chevron-left' 
+  const boxShadowValue = settings.skin === 'bordered' ? 'none' : '0 0 6px rgba(0, 0, 0, 0.1)';
+  const borderValue = `1px solid ${theme.palette.divider}`;
 
+  const styles = {
+    boxShadow: boxShadowValue,
+    border: borderValue
+  };
   return ( 
-    <Card sx={{mt:5, height:'600px'}}>
+    <Card className='mt-5 h-[600px]'>
       <Grid sm={12} item container spacing={1}
         sx={{
           display: 'flex',
@@ -68,7 +74,7 @@ const ConversationView = ()=>{
         }}
       >
         <Grid item sm={6}>
-          <Typography variant='h5' sx={{ mr: 3.5 }}>
+          <Typography variant='h5' className='me-3.5'>
             Conversation History
           </Typography>
         </Grid>
@@ -86,50 +92,30 @@ const ConversationView = ()=>{
       </Grid>
       <ScrollWrapper>
         <Fragment >         
-            <Box
-                sx={{
-                  p: 5,
-                  mb: 10,
-                  width: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  flexDirection: 'column',
-                  justifyContent: 'center'
-                }}
-              >                
+            <div className='p-5 mb-10 w-full flex items-center flex-col justify-center'>                
             {ReplyData.map((item:any, index:number) =>
-                <Box
-                  sx={{
-                    mb: 5,
-                    width: '100%',
-                    borderRadius: 1,
-                    overflow: 'visible',
-                    position: 'relative',
-                    backgroundColor: 'background.paper',
-                    boxShadow: settings.skin === 'bordered' ? 0 : 6,
-                    border: theme => `1px solid ${theme.palette.divider}`
-                  }}
+                <div
+                  style={styles}
+                  className='mb-5 w-full rounded overflow-visible relative'
                   key={index}
                 >
-                  <Box sx={{ py: 3, px: 6 }}>
-                    <Box
-                      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}
-                    >
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Avatar alt={item.from.name} src={item.from.avatar} sx={{ width: 32, height: 32, mr: 3 , backgroundColor:`${theme.palette.primary.main}`, color:'white'}} />
-                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  <div className='py-3 px-6'>
+                    <div className='flex items-center justify-between flex-wrap' >
+                      <div className='flex items-center'>
+                        <Avatar alt={item.from.name} src={item.from.avatar} className='w-10 h-10 me-3' />
+                        <div className='flex flex-col'>
                           <Typography variant='h6'>{item.from.name}</Typography>
-                          <Typography variant='body2' sx={{ color: 'text.disabled' }}>
+                          <p className='text-xs text-secondary'>
                             {item.from.email}
-                          </Typography>
-                        </Box>
-                      </Box>
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                          </p>
+                        </div>
+                      </div>
+                      <div className='flex items-center'>
                         {
                           item.split && <CustomChip label="Split Ticket" sx={{mr:2}} onClick={splitTicket} color="primary"/>
                         }
 
-                        <Typography variant='body2' sx={{ mr: 3, color: 'text.disabled' }}>
+                        <Typography variant='body2' className='me-3 font-light'>
                           {new Date(item.time).toDateString()}{' '}
                           {new Date(item.time).toLocaleTimeString('en-US', {
                             hour: '2-digit',
@@ -146,45 +132,46 @@ const ConversationView = ()=>{
                           item.tag && <CustomChip label={item.tag.label} color={item.tag.color}/>
                         }
                         
-                      </Box>
-                    </Box>
-                  </Box>
-                  <Divider sx={{ m: '0 !important' }} />
-                  <Box sx={{ px: 6 }}>
-                    <Box sx={{ color: 'text.secondary' }} dangerouslySetInnerHTML={{ __html: item.message }} />
+                      </div>
+                    </div>
+                  </div>
+                  <Divider className='m-0' />
+                  <div className='px-6 my-5'>
+                    <div className='text-secondary' dangerouslySetInnerHTML={{ __html: item.message }} />
                     <Link
                         component="button"
                         variant="body1"
-                        sx={{mb:4}}                            
+                        
+                        className='my-4 no-underline hover:underline'                           
                         >
                         Show More +
                       </Link>
-                  </Box>
+                  </div>
                   {item.attachments.length ? (
                     <>
-                      <Divider sx={{ mx: 5, my: '0 !important' }} />
-                      <Box sx={{ px: 6, pt: 3 }}>
-                        <Typography sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                      <Divider className='mx-5 my-0'/>
+                      <div className='px-6 pt-3'>
+                        <Typography className='text-secondary font-semibold'>
                           {`${item.attachments.length} Attachment${item.attachments.length > 1 ? 's' : ''}`}
                         </Typography>
                         <List>
                           {item.attachments.map((item: any) => {
                             return (
                               <ListItem disableGutters key={item.fileName}>
-                                <ListItemIcon sx={{ mr: 2 }}>
+                                <ListItemIcon className='mr-2'>
                                   <img src={item.thumbnail} alt={item.fileName} width='24' height='24' />
                                 </ListItemIcon>
-                                <Typography sx={{ color: 'text.secondary' }}>{item.fileName}</Typography>
+                                <Typography className='text-secondary'>{item.fileName}</Typography>
                               </ListItem>
                             )
                           })}
                         </List>
-                      </Box>
+                      </div>
                     </>
                   ) : null}
-                </Box>
+                </div>
             )}
-            </Box>            
+            </div>            
         </Fragment>   
       </ScrollWrapper> 
     </Card>

@@ -38,7 +38,7 @@ const JiraMainTabView = () => {
   }
 
     return (     
-      <Card sx={{mt:7 , height:'600px'}}>
+      <Card className='h-[600px]'>
         <ScrollWrapper>
           <Grid container item sm={12} md={12} xs={12}>              
             <StyledGrid sx={{ pt: 0 }} sm={12} md={9} xs={12}> 

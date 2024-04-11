@@ -21,7 +21,7 @@ const TicketFieldView = () => {
   // ** States
 
   return (
-    <Card sx={{mt:7}}>        
+    <Card className=''>        
         <CardContent>        
         <form onSubmit={e => e.preventDefault()}>                 
           {ticketFieldData && 

@@ -31,23 +31,23 @@ const RelatedTicketView = ()=>{
                                         <Icon icon='streamline:ticket-1-solid' color={`${theme.palette.primary.main}`} fontSize={30} />   
                                 </CustomAvatar> 
                             </div>
-                            <div className="col-span-5 border-r border-gray-300 mx-2">
-                                <p className="text-gray-800 font-bold">#{ticketData.id}</p>
+                            <div className="col-span-5 border-r mx-2">
+                                <p className=" font-bold">#{ticketData.id}</p>
                                 <p>{ticketData.ticketSubject}</p>
                             </div>
                             
-                            <div className="col-span-2 text-center border-r border-gray-300">
-                                <p className="text-gray-800 font-bold">Ticket Status</p>
+                            <div className="col-span-2 text-center border-r ">
+                                <p className=" font-bold">Ticket Status</p>
                                 <p>{ticketData.ticketStatus}</p>
                             </div>
         
-                            <div className="col-span-2 text-center border-r border-gray-300">
-                                <p className="text-gray-800 font-bold">Ticket Chanel</p>
+                            <div className="col-span-2 text-center border-r ">
+                                <p className=" font-bold">Ticket Chanel</p>
                                 <p>{ticketData.ticketChanel}</p>
                             </div>
 
                             <div className="col-span-2 text-center ">
-                                <p className="text-gray-800 font-bold">Reply Status</p>
+                                <p className="font-bold">Reply Status</p>
                                 <p>{ticketData.replyStatus}</p>
                             </div>
                         </div>

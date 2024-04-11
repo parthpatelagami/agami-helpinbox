@@ -46,11 +46,11 @@ const TransferTabView = () => {
   const theme = useTheme();
   return (
     // <EditorWrapper>
-      <Grid container sx={{mt:3}} spacing={4} className='match-height'>       
+      <Grid container spacing={4} className='match-height mt-3'>       
         <Grid item xs={12}>
           <Card>
             <CardContent>
-              <Grid item xs={12} sm={12} sx={{display:'flex', justifyContent:'space-between'}}>
+              <Grid item xs={12} sm={12} className='flex flex-col md:flex-row lg:flex-row justify-start md:justify-between lg:justify-between'>
                 <Grid item xs={12} sm={4} mb={5}>
                     <CustomTextField select fullWidth label='Department Transfer' defaultValue='0'>
                       <MenuItem value='0'>Select Department</MenuItem>
@@ -69,7 +69,16 @@ const TransferTabView = () => {
                 </Grid> 
               </Grid>             
               {/* <EditorControlled/> */}
-              <div className='flex items-center justify-end gap-4'>
+              <CustomTextField
+                id='invoice-note'
+                rows={6}
+                fullWidth
+                multiline
+                className='border rounded'
+                placeholder='Enter The Reason...'
+                defaultValue=''
+              />
+              <div className='flex items-center justify-end gap-4 py-3'>
                 <Button variant='contained' type='submit'>
                   Save
                 </Button>

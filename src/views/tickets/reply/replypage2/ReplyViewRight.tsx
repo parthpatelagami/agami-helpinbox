@@ -92,21 +92,14 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
 
   return (
     <Grid>
-      <Typography className="text-gray-950">Description </Typography> 
-      <Box
-        sx={{
-          p: 5,
-          display: 'flex',
-          borderRadius: 1,
-          flexDirection: 'column',
-          backgroundColor: 'action.selected',
-          mb: 5
-        }}
+      <p className="font-bold">Description </p> 
+      <div
+        className='p-5 rounded flex flex-col bg-blue-50 mb-5'
       >
-        <Typography className="text-gray-950 font-bold">
+        <p className="font-bold">
           Buying gift for a loved one?
-        </Typography>
-        <Typography sx={{ mb: 2, color: 'text.secondary' }}>
+        </p>
+        <p className='mb-2 text-gray-700'>
           Gift wrap and personalized message on , Only for $2.
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
           Dolorum minima possimus nisi laudantium! Aperiam earum ipsum velit impedit, 
@@ -117,8 +110,8 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. 
           Quo explicabo dolor rem eum quisquam sapiente ipsam, 
           unde eveniet! Nihil a in impedit tempora hic libero veritatis architecto perferendis porro maxime?
-        </Typography>
-        <Typography sx={{ mb: 2, color: 'text.secondary' }}>
+        </p>
+        <p className='mb-2 text-gray-700'>
           Gift wrap and personalized message on , Only for $2.
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
           Dolorum minima possimus nisi laudantium! Aperiam earum ipsum velit impedit, 
@@ -129,9 +122,9 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. 
           Quo explicabo dolor rem eum quisquam sapiente ipsam, 
           unde eveniet! Nihil a in impedit tempora hic libero veritatis architecto perferendis porro maxime?
-        </Typography>
-      </Box>   
-      <Divider sx={{mb:7, mt:7}}/>  
+        </p>
+      </div>   
+      <Divider className='my-7'/>  
       
       <TabContext value={activeTab}>
         <TabList
@@ -149,44 +142,44 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
           <Tab value='history' label='History' />
           <Tab value='jira' label='Jira' />        
         </TabList>
-        <Box sx={{ mt: 2 }}>
+        <div className='mt-2'>
           {isLoading ? (
-            <Box sx={{ mt: 6, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-              <CircularProgress sx={{ mb: 4 }} />
-              <Typography>Loading...</Typography>
-            </Box>
+            <div className='mt-6 flex items-center flex-col'>
+              <CircularProgress className='mb-4' />
+              <p>Loading...</p>
+            </div>
           ) : (
             <>
-              <TabPanel sx={{ p: 0 }} value='reply'>
+              <TabPanel value='reply'>
                 <ReplyTabView />
                 {/* <ConversationView/> */}
               </TabPanel>
-              <TabPanel sx={{ p: 0 }} value='transfer'>
+              <TabPanel value='transfer'>
                 <TransferTabView />
                 
               </TabPanel>
-              <TabPanel sx={{ p: 0 }} value='related-ticket'>
+              <TabPanel value='related-ticket'>
                 <RelatedTicketView />
                 
               </TabPanel>
-              <TabPanel sx={{ p: 0 }} value='ticket-field'>
+              <TabPanel value='ticket-field'>
                 <TicketFieldView />
                 
               </TabPanel>
-              <TabPanel sx={{ p: 0 }} value='child-ticket'>
+              <TabPanel value='child-ticket'>
                 <ChildTicketView />
                 
               </TabPanel>
-              <TabPanel sx={{ p: 0 }} value='history'>
+              <TabPanel value='history'>
                 <HistoryTabView/>
                 
               </TabPanel>
-              <TabPanel sx={{ p: 0 }} value='jira'>
+              <TabPanel value='jira'>
                 <JiraMainTabView/>
               </TabPanel>
             </>
           )}
-        </Box>
+        </div>
       </TabContext>
     </Grid>
   )

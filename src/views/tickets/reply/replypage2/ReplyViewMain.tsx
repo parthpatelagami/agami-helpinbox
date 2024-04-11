@@ -35,61 +35,61 @@ const ReplyViewMain = () => {
     return (     
           <Card >
             <Grid container item sm={12} md={12} xs={12}>              
-              <StyledGrid item sx={{ pt: 0 }} sm={12} md={9} xs={12}> 
-                <CardContent sx={{pt:0, pb:0}}>              
-                  <Grid item md={12} sm={12} xs={12}  sx={{ py: 3.75,  display: 'flex', justifyContent: {md:'space-between',sm: 'unset', xs:'unset'}, flexDirection: {md:'row', sm:'column', xs:'column'} }}>
-                    <Grid item md={7} sm={12} xs={12} sx={{  width: 'auto', display: 'flex', alignItems: 'center' }}>                      
-                      <Box  sx={{ mr: 3, ml:-2}}>
+              <StyledGrid item className='pt-0' sm={12} md={9} xs={12}> 
+                <CardContent className='py-0'>              
+                  <Grid item md={12} sm={12} xs={12} className='py-3.5 flex justify-start flex-col md:justify-between lg:justify-between md:flex-row lg:flex-row'>
+                    <Grid item md={7} sm={12} xs={12} className='w-auto flex items-center'>                      
+                      <div className='me-3 ms-0'>
                         <Icon icon='fontisto:ticket' color={`${theme.palette.primary.main}`} fontSize={25} />
-                      </Box>       
+                      </div>       
                       <Link
                           component="button"
                           variant="h5"
-                          sx={{textAlign:'start'}}
+                          className='text-start no-underline hover:underline' 
                         >
                         #12305 L.P.SAVANI Vidyabhavan and 7 others are new group suggestions for you
                       </Link>               
                       
                     </Grid>
-                    <Grid item md={5} sm={12} xs={12} sx={{ width: 'auto', display: 'flex', alignItems: 'center',justifyContent:['end'] }}>
+                    <Grid item md={5} sm={12} xs={12} className='w-auto flex items-center justify-end'>
                       <Tooltip placement='top' title='Create Jira Ticket'>                      
-                        <IconButton  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
-                          <Icon icon='simple-icons:jirasoftware' color={`${theme.palette.primary.main}`} fontSize={20} />
+                        <IconButton className='border border-dashed text-primary mr-1 rounded-full p-[5px]'>
+                          <Icon icon='simple-icons:jirasoftware' color={`${theme.palette.primary.main}`}/>
                         </IconButton>
                       </Tooltip>
                       <Tooltip placement='top' title='Ticket Merge'>      
-                        <IconButton  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
-                          <Icon icon='fluent:merge-16-regular' color={`${theme.palette.primary.main}`} fontSize={20} />
+                        <IconButton  className='border border-dashed text-primary mr-1 rounded-full p-[5px]'>
+                          <Icon icon='fluent:merge-16-regular' color={`${theme.palette.primary.main}`} />
                         </IconButton>
                       </Tooltip>  
                       <Tooltip placement='top' title='Child Ticket'>
-                        <IconButton  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
-                          <Icon icon='lets-icons:ticket-use-light' color={`${theme.palette.primary.main}`} fontSize={20} />
+                        <IconButton  className='border border-dashed text-primary mr-1 rounded-full p-[5px]'>
+                          <Icon icon='lets-icons:ticket-use-light' color={`${theme.palette.primary.main}`} />
                         </IconButton>  
                       </Tooltip>
                       <Tooltip placement='top' title='Forward Ticket'>
-                        <IconButton onClick={()=>setOpenForwardTicket(!openForwardTicket)}  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
-                          <Icon icon='solar:square-forward-bold'color={`${theme.palette.primary.main}`} fontSize={20} />
+                        <IconButton onClick={()=>setOpenForwardTicket(!openForwardTicket)}  className='border border-dashed text-primary mr-1 rounded-full p-[5px]'>
+                          <Icon icon='solar:square-forward-bold'color={`${theme.palette.primary.main}`} />
                         </IconButton>  
                       </Tooltip>
                       <Tooltip placement='top' title='Ticket Save As PDF'>
-                        <IconButton  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
-                          <Icon icon='basil:document-outline' color={`${theme.palette.primary.main}`} fontSize={20} />
+                        <IconButton  className='border border-dashed text-primary mr-1 rounded-full p-[5px]'>
+                          <Icon icon='basil:document-outline' color={`${theme.palette.primary.main}`} />
                         </IconButton>  
                       </Tooltip>
                       <Tooltip placement='top' title='Refresh Page'>
-                        <IconButton  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
-                          <Icon icon='tabler:reload' color={`${theme.palette.primary.main}`} fontSize={20} />
+                        <IconButton  className='border border-dashed text-primary mr-1 rounded-full p-[5px]'>
+                          <Icon icon='tabler:reload' color={`${theme.palette.primary.main}`} />
                         </IconButton>  
                       </Tooltip>
                       <Tooltip placement='top' title='Back'>
-                        <IconButton  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
-                          <Icon icon='ic:round-arrow-back-ios' color={`${theme.palette.primary.main}`} fontSize={20} />
+                        <IconButton  className='border border-dashed text-primary mr-1 rounded-full p-[5px]'>
+                          <Icon icon='ic:round-arrow-back-ios' color={`${theme.palette.primary.main}`} />
                         </IconButton>  
                       </Tooltip>
                       <Tooltip placement='top' title='Next'>
-                        <IconButton  sx={{ mr: 1, p:'5px', border:`1px solid ${theme.palette.primary.main}`, borderRadius:'2rem', borderStyle:'dashed' }}>
-                          <Icon icon='ic:round-arrow-forward-ios' color={`${theme.palette.primary.main}`} fontSize={20} />
+                        <IconButton  className='border border-dashed text-primary mr-1 rounded-full p-[5px]'>
+                          <Icon icon='ic:round-arrow-forward-ios' color={`${theme.palette.primary.main}`} />
                         </IconButton>  
                       </Tooltip>
                     </Grid>

@@ -59,7 +59,6 @@ const ReplyTabView = () => {
   const theme = useTheme();
   return (
     // <EditorWrapper>
-      <Grid container spacing={2} className='match-height'>       
         <Grid item xs={12} md={12} sm={12}>
           <Card>
             <CardContent>
@@ -72,15 +71,24 @@ const ReplyTabView = () => {
                   </CustomTextField>
               </Grid>            
               {/* <EditorControlled/> */}
+              <CustomTextField
+                id='invoice-note'
+                rows={6}
+                fullWidth
+                multiline
+                className='border rounded'
+                placeholder='Enter Here...'
+                defaultValue=''
+              />
               <Grid item xs={12} md={12} sm={12} mt={4} >
                 <Grid item sm={12} md={12} xs={12}>
-                  <Grid item sm={12} md={12} xs={12} sx={{display:'flex', width:'100%', flexDirection:{xs:'column', md:'row'}}}>
+                  <Grid item sm={12} md={12} xs={12} className='flex w-full flex-col md:flex-row lg:flex-row'>
                     <Grid item sm={12} md={5} xs={12}>
                       <FormControlLabel label='Do not Notify Customer' control={<Checkbox defaultChecked name='customer' />} />
                     </Grid>
                     
-                    <Grid item sm={8} md={7} xs={12} sx={{display:'flex', alignItems:'center'}}>
-                      <Typography sx={{ marginRight:'1rem', marginTop:'0'}} variant='subtitle1'>Collaborators:- </Typography>
+                    <Grid item sm={8} md={7} xs={12} className='flex items-center'>
+                      <Typography className='mr-1 mt-0 ' variant='subtitle1'>Collaborators:- </Typography>
                       <CustomTextField select fullWidth label='' defaultValue='-1'>
                         <MenuItem value='-1'>Select Collaborator</MenuItem>
                         <MenuItem value='0'>Pangale Shubham</MenuItem>
@@ -90,13 +98,13 @@ const ReplyTabView = () => {
                         <MenuItem value='4'>Mangera Aadil</MenuItem>
                       </CustomTextField>
                       <Tooltip placement='top' title='Add New User'>
-                        <IconButton>
-                          <Icon icon='ei:plus' color={`${theme.palette.primary.main}`} fontSize={35} />
+                        <IconButton className='border border-solid text-primary m-1 rounded-full p-0.5'>
+                          <i className='tabler-plus p-0'/>
                         </IconButton>
                       </Tooltip>  
                     </Grid>
                   </Grid>
-                  <Grid item md={4} sm={5} xs={12} sx={{display:'flex', alignItems:'center', mt:5}} className='demo-space-x'>
+                  <Grid item md={4} sm={5} xs={12} className='mt-5 items-center flex gap-2'>
                     <Typography variant='subtitle1'>Status:- </Typography>
                     <CustomTextField select fullWidth label='' defaultValue='0'>
                       <MenuItem value='0'>Open</MenuItem>
@@ -118,7 +126,6 @@ const ReplyTabView = () => {
             </CardContent>
           </Card>        
         </Grid>        
-      </Grid>
     // </EditorWrapper>    
   )
 }

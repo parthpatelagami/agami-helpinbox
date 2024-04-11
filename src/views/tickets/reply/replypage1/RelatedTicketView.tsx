@@ -19,7 +19,7 @@ const RelatedTicketView = ()=>{
     }
 
     return (
-        <Card className="h-[500px] mt-7">
+        <Card className="h-[500px]">
             <ScrollWrapper>
                 <div className="grid grid-rows-1 gap-2">          
                 {relatedTicketData.map((ticketData:any, index:number) =>
@@ -27,27 +27,27 @@ const RelatedTicketView = ()=>{
                         <CardContent>
                         <div className="grid grid-cols-12">
                             <div className="col-span-1">                        
-                                <CustomAvatar skin='light' sx={{ width: 50, height: 50, mb: 2.25 }}>
+                                <CustomAvatar skin='light' className="w-50 h-50 mb-2.5">
                                         <Icon icon='streamline:ticket-1-solid' color={`${theme.palette.primary.main}`} fontSize={30} />   
                                 </CustomAvatar> 
                             </div>
-                            <div className="col-span-5 border-r border-gray-300 mx-2">
-                                <p className="text-gray-800 font-bold">#{ticketData.id}</p>
+                            <div className="col-span-5 border-r  mx-2">
+                                <p className=" font-bold">#{ticketData.id}</p>
                                 <p>{ticketData.ticketSubject}</p>
                             </div>
                             
-                            <div className="col-span-2 text-center border-r border-gray-300">
-                                <p className="text-gray-800 font-bold">Ticket Status</p>
+                            <div className="col-span-2 text-center border-r ">
+                                <p className=" font-bold">Ticket Status</p>
                                 <p>{ticketData.ticketStatus}</p>
                             </div>
         
-                            <div className="col-span-2 text-center border-r border-gray-300">
-                                <p className="text-gray-800 font-bold">Ticket Chanel</p>
+                            <div className="col-span-2 text-center border-r ">
+                                <p className=" font-bold">Ticket Chanel</p>
                                 <p>{ticketData.ticketChanel}</p>
                             </div>
 
                             <div className="col-span-2 text-center ">
-                                <p className="text-gray-800 font-bold">Reply Status</p>
+                                <p className=" font-bold">Reply Status</p>
                                 <p>{ticketData.replyStatus}</p>
                             </div>
                         </div>

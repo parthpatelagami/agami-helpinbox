@@ -54,56 +54,48 @@ const ConversationView = ()=>{
 
   const prevMailIcon = direction === 'rtl' ? 'tabler:chevron-right' : 'tabler:chevron-left' 
 
-  return ( 
-      <ScrollWrapper>
-        <Fragment >         
-            <Grid container item xs={12} sm={12} md={12}
-                sx={{                
-                  mb: 10,
-                  mt:5,
-                  width: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  flexDirection: 'column',
-                  justifyContent: 'center'
-                }}
-              >                
+  return (   
+        <Fragment>    
+            <Grid item md={4} sm={12} xs={12} className='mt-5'>                
+              <CustomTextField select fullWidth label='' defaultValue='0'>
+                  <MenuItem value='0'>All</MenuItem>
+                  <MenuItem value='manual'>Manual</MenuItem>
+                  <MenuItem value='email'>Email</MenuItem>
+                  <MenuItem value='customer_portail'>Customer Portail</MenuItem>
+                  <MenuItem value='facebook'>Facebook</MenuItem>
+                  <MenuItem value='call'>Call</MenuItem>
+                  <MenuItem value='chat'>Chat</MenuItem>
+              </CustomTextField> 
+            </Grid>      
+            <Grid container item xs={12} sm={12} md={12} className='my-5 w-full flex flex-col justify-center items-center'>            
             {mails.map((item:any, index:number) =>
                 <Grid key={index} item xs={12} md={12} sm={12}
-                  sx={{
-                    mb: 5,
-                    width: '100%',
-                    borderRadius: 1,
-                    overflow: 'visible',
-                    position: 'relative',
-                    backgroundColor: 'background.paper',
-                    boxShadow: settings.skin === 'bordered' ? 0 : 6,
-                    border: theme => `1px solid ${theme.palette.divider}`
-                  }}
-                >                  
-                    <Grid item sm={12} xs={12} md={12} sx={{ display: 'flex', py: 3, px: 6, justifyContent: {md:'space-between', xs:'unset', sm:'space-between'}, flexDirection:{md:'unset', xs:'column', sm:'unset'} }}>
-                      <Grid item xs={12} md={4} sm={4} sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Avatar alt={item.from.name} src={item.from.avatar} sx={{ width: 32, height: 32, mr: 3 , backgroundColor:`${theme.palette.primary.main}`, color:'white'}} />
-                        <Grid sx={{ display: 'flex', flexDirection: 'column' }}>
-                          <Typography variant='h6'>{item.from.name}</Typography>
-                          <Typography variant='body2' sx={{ color: 'text.disabled' }}>
+                  sx={{ boxShadow: settings.skin === 'bordered' ? 0 : 6,  border: theme => `1px solid ${theme.palette.divider}` }}
+                  className='mb-5 w-full rounded overflow-visible relative'
+                  >                  
+                    <Grid item sm={12} xs={12} md={12} className='flex justify-between flex-col py-3 px-6 lg:justify-between lg:flex-row md:justify-between md:flex-row sm:justify-between sm:flex-col'>
+                      <Grid item xs={12} md={4} sm={4} className='flex items-center'>
+                        <Avatar alt={item.from.name} src={item.from.avatar} className='w-10 h-10 mr-3 text-white'  />
+                        <Grid className='flex flex-col'>
+                          <p className='text-sm font-semibold'>{item.from.name}</p>
+                          <p className='text-xs font-thin'>
                             {item.from.email}
-                          </Typography>
+                          </p>
                         </Grid>
                       </Grid>
-                      <Grid item xs={12} md={8} sm={8} sx={{ display: 'flex', alignItems:'center', flexDirection:{xs:'column', md:'row-reverse', sm:'row-reverse'} }}>
+                      <Grid item xs={12} md={8} sm={8} className='flex items-center md:flex-row-reverse'>
                         {
                           item.tag && <CustomChip  label={item.tag.label} color={item.tag.color}/>
                         }
                         
-                        <Typography variant='body2' sx={{color: 'text.disabled', pl:2, pr:2 }}>
+                        <p className='px-2'>
                           {new Date(item.time).toDateString()}{' '}
                           {new Date(item.time).toLocaleTimeString('en-US', {
                             hour: '2-digit',
                             minute: '2-digit',
                             hour12: true
                           })}
-                        </Typography>
+                        </p>
                         
                         {
                           item.split && <CustomChip label="Split Ticket"  onClick={splitTicket} color="primary"/>
@@ -111,22 +103,21 @@ const ConversationView = ()=>{
                                      
                       </Grid>                    
                   </Grid>
-                  <Divider sx={{ m: '0 !important' }} />
-                  <Grid item sx={{ px: 6 }}>
-                    <Grid sx={{ color: 'text.secondary' }} dangerouslySetInnerHTML={{ __html: item.message }} />
+                  <Divider className='mb-2'/>
+                  <Grid item className='px-6'>
+                    <Grid dangerouslySetInnerHTML={{ __html: item.message }} />
                     <Link
                         component="button"
-                        variant="body1"
-                        sx={{mb:4}}                            
+                        className='my-3 no-underline hover:underline'                                                   
                         >
                         Show More +
                       </Link>
                   </Grid>
                   {item.attachments.length ? (
                     <>
-                      <Divider sx={{ mx: 5, my: '0 !important' }} />
-                      <Grid item sx={{ px: 6, pt: 3 }}>
-                        <Typography sx={{ color: 'text.secondary', fontWeight: 500 }}>
+                      <Divider className='mx-5 my-0'/>
+                      <Grid item className='px-6 pt-3'>
+                        <Typography className='text-sm font-semibold'>
                           {`${item.attachments.length} Attachment${item.attachments.length > 1 ? 's' : ''}`}
                         </Typography>
                         <List>
@@ -136,7 +127,7 @@ const ConversationView = ()=>{
                                 <ListItemIcon sx={{ mr: 2 }}>
                                   <img src={item.thumbnail} alt={item.fileName} width='24' height='24' />
                                 </ListItemIcon>
-                                <Typography sx={{ color: 'text.secondary' }}>{item.fileName}</Typography>
+                                <Typography className='text-secondary'>{item.fileName}</Typography>
                               </ListItem>
                             )
                           })}
@@ -148,8 +139,6 @@ const ConversationView = ()=>{
             )}
             </Grid>            
         </Fragment>   
-      </ScrollWrapper> 
-
   )
 }
 

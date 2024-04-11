@@ -104,7 +104,7 @@ const ReplyLeftView = ()=>{
       <Grid item sm={12} xs={12} md={12}>
         <CardContent  sx={{ pb: 4 }}> 
           <Grid item md={12} sm={12} xs={12} className='gap-2 flex items-center mb-5' >
-            <p className='text-gray-700'>Status:- </p>           
+            <p className=''>Status:- </p>           
             <CustomTextField select fullWidth label='' className='rounded' sx={{backgroundColor:`${theme.palette.primary.main}`, '& .MuiInputBase-input:not(textarea).MuiInputBase-inputSizeSmall': { color: 'white', fontWeight: 'bold' } }} defaultValue='0'>
               <MenuItem value='0'>Open</MenuItem>
               <MenuItem value='pending'>Pending</MenuItem>
@@ -118,14 +118,14 @@ const ReplyLeftView = ()=>{
               aria-controls='controlled-panel-content-1'
               // expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
             >
-              <Typography>Customer Details</Typography>
+              <p>Customer Details</p>
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
               <div className='pt-2'>
                   <div className='flex mb-4 flex-col'>
                       <div className='flex justify-between'>
-                          <p className='me-2 text-gray-500'>Customer Name:</p>
+                          <p className='me-2'>Customer Name:</p>
                           <Tooltip placement='top' title='Update Customer Details'>
                           <Link
                               component="button"
@@ -136,15 +136,15 @@ const ReplyLeftView = ()=>{
                           </Link>
                           </Tooltip>
                       </div>
-                      <p className='text-gray-800 font-[500] '>{data.fullName}</p>                    
+                      <p className='font-bold'>{data.fullName}</p>                    
                   </div>
                   <div className='flex mb-4 flex-col'>
-                      <p className='me-2 text-gray-500'>Customer Email:</p>
-                      <p className='text-gray-800 font-[500] '>{data.email}</p>
+                      <p className='me-2 '>Customer Email:</p>
+                      <p className='font-bold '>{data.email}</p>
                   </div>
                   <div className='flex mb-4 flex-col'>
-                      <p className='me-2 text-gray-500'>Customer Number:</p>
-                      <p className='text-gray-800 font-[500] '>{data.contact}</p>
+                      <p className='me-2 '>Customer Number:</p>
+                      <p className='font-bold '>{data.contact}</p>
                   </div>                  
               </div>
             </AccordionDetails>
@@ -160,7 +160,7 @@ const ReplyLeftView = ()=>{
             <Divider/>
             <AccordionDetails>
               <div className='flex mb-4 flex-col mt-2'>
-                <p className='me-2 text-gray-500'>Assigneed To:</p>
+                <p className='me-2 '>Assigneed To:</p>
                 <CustomTextField select defaultValue='10' label='' className='' id='custom-select'>
                     <MenuItem value=''>
                     <em>None</em>
@@ -171,11 +171,11 @@ const ReplyLeftView = ()=>{
                 </CustomTextField>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 text-gray-500'>Due date:</p>
-                  <p className='text-gray-800 font-[500]'>2024-03-13 12:11:09 PM</p>
+                  <p className='me-2 '>Due date:</p>
+                  <p className='font-bold'>2024-03-13 12:11:09 PM</p>
               </div>
               <div className='flex mb-4 flex-col'>
-                <p className='me-2 text-gray-500'>Priority:</p>
+                <p className='me-2 '>Priority:</p>
                 <CustomTextField select defaultValue='10' label='' id='custom-select'>
                     <MenuItem value=''>
                     <em>None</em>
@@ -198,11 +198,11 @@ const ReplyLeftView = ()=>{
             <Divider/>
             <AccordionDetails>
               <div className='flex mb-4 flex-col mt-2'>
-                <p className='me-2 text-gray-500'>Channel:</p>
-                <p className='text-gray-800 font-[500]'>Manual</p>
+                <p className='me-2 '>Channel:</p>
+                <p className='font-bold'>Manual</p>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 text-gray-500'>Request Type:</p>
+                  <p className='me-2 '>Request Type:</p>
                   <CustomTextField select defaultValue='10' label='' id='custom-select'>
                       <MenuItem value=''>
                       <em>None</em>
@@ -213,7 +213,7 @@ const ReplyLeftView = ()=>{
                   </CustomTextField>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 text-gray-500'>Ticket Type:</p>
+                  <p className='me-2 '>Ticket Type:</p>
                   <CustomTextField select defaultValue='10' label='' id='custom-select'>
                       <MenuItem value=''>
                       <em>None</em>
@@ -224,7 +224,7 @@ const ReplyLeftView = ()=>{
                   </CustomTextField>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 text-gray-500'>Department Name:</p>
+                  <p className='me-2 '>Department Name:</p>
                   <CustomTextField select defaultValue='10' label='' id='custom-select'>
                       <MenuItem value=''>
                       <em>None</em>
@@ -235,7 +235,7 @@ const ReplyLeftView = ()=>{
                   </CustomTextField>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 text-gray-500'>Category:</p>
+                  <p className='me-2 '>Category:</p>
                   <CustomTextField select defaultValue='10' label='' id='custom-select'>
                       <MenuItem value=''>
                       <em>None</em>
@@ -246,7 +246,7 @@ const ReplyLeftView = ()=>{
                   </CustomTextField>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 text-gray-500'>Sub-Category:</p>
+                  <p className='me-2 '>Sub-Category:</p>
                   <CustomTextField select defaultValue='10' label='' id='custom-select'>
                       <MenuItem value=''>
                       <em>None</em>
@@ -269,13 +269,13 @@ const ReplyLeftView = ()=>{
             <Divider/>
             <AccordionDetails>
               <div className='flex mb-4 flex-col mt-2'>
-                <p className='me-2 text-gray-500'>CC:</p>
+                <p className='me-2 '>CC:</p>
                 <div className='mt-2'>
                   {collaboratorsdata.map((item, index) => <Chip key={index} label={item.email} className='mb-2' size='small' />)}
                 </div>
             </div>
             <div className='flex mb-4 flex-col'>
-                <p className='me-2 text-gray-500'>TO:</p>
+                <p className='me-2 '>TO:</p>
                 <div className='mt-2'>
                   {collaboratorsdata.map((item, index) => <Chip key={index} label={item.email} className='mb-2' size='small' />)}
                 </div>
@@ -401,7 +401,7 @@ const ReplyLeftView = ()=>{
                 pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
               }}
             >
-              <Button variant='contained' sx={{ mr: 2 }} onClick={handleEditClose}>
+              <Button variant='contained' className='mr-2' onClick={handleEditClose}>
                 Submit
               </Button>
               <Button variant='tonal' color='secondary' onClick={handleEditClose}>
