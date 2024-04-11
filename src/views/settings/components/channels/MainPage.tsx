@@ -19,7 +19,7 @@ const ChannelsComponents = () => {
 
   return (
     <Fragment>
-      <Box className='p-3'>
+      <Box className='p-3 mt-4'>
         <Typography variant='h5' className='font-bold-500 text-lg capitalize mb-4'>
           Channels
         </Typography>

@@ -10,7 +10,9 @@ import { Box, Breadcrumbs, Card, CardContent, Divider, IconButton, Tooltip, Typo
 // Type Imports
 import type { Locale } from '@/configs/i18n'
 import { getLocalizedUrl } from '@/utils/i18n'
-import Table from '@/views/sla/components/Table'
+
+// CUSTOM IMPORTS
+import Table from '@/views/settings/components/channels/emails/Table'
 
 const EmailListPageComponents = () => {
   const { lang: locale } = useParams()
@@ -35,7 +37,7 @@ const EmailListPageComponents = () => {
         </CardContent>
 
         <Box className='p-3'>
-          <Box className='flex justify-between items-center mb-3'>
+          <Box className='flex justify-between items-center mb-1'>
             <Typography variant='h5' className='font-bold-500 text-lg capitalize'>
               Emails
             </Typography>

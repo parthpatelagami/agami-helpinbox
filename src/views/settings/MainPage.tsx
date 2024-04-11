@@ -36,11 +36,6 @@ import { getLocalizedUrl } from '@/utils/i18n'
 // SIDE BAR MENU
 const steps = [
   {
-    icon: 'tabler:arrow-forward-up',
-    title: 'Recents',
-    subtitle: 'Recent Activity'
-  },
-  {
     icon: 'uil:channel',
     title: 'Channels',
     subtitle: 'Bring in customer queries from various sources'
@@ -113,16 +108,14 @@ const MainPage = () => {
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return ''
-      case 1:
         return <ChannelsComponents />
-      case 2:
+      case 1:
         return <ModulesComponents />
-      case 3:
+      case 2:
         return <WorkFlowComponents />
-      case 4:
+      case 3:
         return <TeamComponents />
-      case 5:
+      case 4:
         return <AccountDetailsComponents />
       default:
         return null
