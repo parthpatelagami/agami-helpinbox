@@ -60,7 +60,6 @@ const sources: BundleScriptConfig = {
   json: [
     // Iconify JSON file (@iconify/json is a package name, /json/ is directory where files are, then filename)
     require.resolve('@iconify/json/json/tabler.json')
-
     // Custom file with only few icons
     /* {
       filename: require.resolve('@iconify/json/json/line-md.json'),
@@ -86,6 +85,11 @@ const sources: BundleScriptConfig = {
       dir: 'src/assets/control-icons/svg',
       monotone: false,
       prefix: 'custom'
+    },
+    {
+      dir: 'src/assets/ticket-icons',
+      monotone: false,
+      prefix: 'ticket'
     }
   ]
 }

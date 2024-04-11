@@ -11,7 +11,7 @@ import { TabScrollButton, withStyles } from '@mui/material'
 import { useSettings } from '@core/hooks/useSettings'
 
 const TabsLayout = (props: any) => {
-  const [value, setValue] = useState<string>('1')
+  const [value, setValue] = useState<string | number>(1)
 
   const handleChange = (event: SyntheticEvent, newValue: string) => {
     setValue(newValue)
@@ -49,13 +49,17 @@ const TabsLayout = (props: any) => {
   console.log('IS bordered test', isBordered)
   const NewTab = styled(Tab)(({ theme }) => ({
     '&.Mui-selected': {
-      borderTop: isBordered ? 'none' : `1px solid red`,
-      borderLeft: `1px solid red`,
-      borderRight: `1px solid red`,
+      borderTop: isBordered ? 'none' : `1px solid var(--mui-palette-divider)`,
+      borderLeft: `1px solid var(--mui-palette-divider)`,
+      borderRight: `1px solid var(--mui-palette-divider)`,
       borderBottom: 'none',
-      boxShadow: '0 5px 0 0px white'
+      boxShadow: '0 5px 0 0px var(--background-color)',
+      backgroundColor: 'white'
     },
-    background: 'background.paper'
+    borderLeft: `1px solid var(--mui-palette-divider)`,
+    background: 'background.paper',
+    paddingRight: 1,
+    backgroundColor: `var(--mui-palette-primary-lightOpacity)`
     //borderRadius: "8px 8px 0 0"
   }))
 
@@ -63,7 +67,7 @@ const TabsLayout = (props: any) => {
     borderBottom: 'none !important',
 
     '& .MuiTabs-flexContainer': {
-      borderBottom: `1px solid red`,
+      borderBottom: `1px solid var(--mui-palette-divider)`,
       zIndex: 5,
       width: '100%',
       minWidth: 'max-content',
@@ -90,11 +94,7 @@ const TabsLayout = (props: any) => {
   //   }))(TabScrollButton)
   return (
     <>
-      <Card
-        sx={{
-          paddingBottom: '8px'
-        }}
-      >
+      <Card className='p-0.5'>
         <TabContext value={value}>
           <CustomTabList
             onChange={handleChange}
@@ -115,7 +115,7 @@ const TabsLayout = (props: any) => {
                   tabValue != 1 ? (
                     <Box onClick={() => handleRemoveTab(tabValue)}>
                       <IconButton size='small'>
-                        <i className='tabler-circle-x' />
+                        <i className='ticket-cancel' />
                       </IconButton>
                     </Box>
                   ) : (
@@ -127,7 +127,7 @@ const TabsLayout = (props: any) => {
             ))}
             <Box sx={{}}>
               <IconButton onClick={handleIncrement}>
-                <i className='tabler-square-rounded-plus' />
+                <i className='ticket-plus' />
               </IconButton>
             </Box>
           </CustomTabList>

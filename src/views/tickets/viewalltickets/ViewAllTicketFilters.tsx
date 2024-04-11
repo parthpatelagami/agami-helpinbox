@@ -10,7 +10,8 @@ import {
   Menu,
   Checkbox,
   ListItemText,
-  useTheme
+  useTheme,
+  Box
 } from '@mui/material'
 import { locale } from 'dayjs'
 import { useParams } from 'next/navigation'
@@ -45,7 +46,7 @@ export default function ViewAllTicketFilters(props: ViewAllTicketProps) {
   const popperPlacement: ReactDatePickerProps['popperPlacement'] = direction === 'ltr' ? 'bottom-start' : 'bottom-end'
   return (
     <CardContent className='flex justify-between flex-col gap-4 items-start sm:flex-row sm:items-center ml-3 mr-3'>
-      <div className='flex flex-wrap'>
+      <div className='flex flex-wrap items-center'>
         {FILTERS.map(filter => {
           const isSelected = selectedFilters.some(selectedFilter => selectedFilter.id === filter.id)
           if (!isSelected) {
@@ -57,17 +58,19 @@ export default function ViewAllTicketFilters(props: ViewAllTicketProps) {
             return <PickersRange popperPlacement={popperPlacement} label='Select Month' />
           }
         })}
-        <Button
-          size='small'
-          onClick={e => setAnchorEl(e.currentTarget)}
-          startIcon={
-            <IconButton size='small' title='Clear' aria-label='Clear' sx={{ padding: '0px' }}>
-              <i className='tabler-plus text-sm' />
-            </IconButton>
-          }
-        >
-          More
-        </Button>
+        <div className='mt-4'>
+          <Button
+            size='small'
+            onClick={e => setAnchorEl(e.currentTarget)}
+            startIcon={
+              <IconButton size='small' title='Clear' aria-label='Clear' sx={{ padding: '0px' }}>
+                <i className='ticket-plus' />
+              </IconButton>
+            }
+          >
+            More
+          </Button>
+        </div>
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}

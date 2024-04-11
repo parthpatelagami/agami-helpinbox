@@ -178,7 +178,7 @@ const TableServerSide = ({ tableData }: PropsType) => {
   })
 
   return (
-    <Card>
+    <>
       <ViewAllTicketFilters table={table} />
       <div className='overflow-x-auto'>
         <table className={tableStyles.table}>
@@ -244,7 +244,7 @@ const TableServerSide = ({ tableData }: PropsType) => {
           table.setPageIndex(page)
         }}
       />
-    </Card>
+    </>
   )
 }
 
