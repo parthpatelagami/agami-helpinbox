@@ -269,13 +269,13 @@ const AddNewSLA = () => {
         />
         <Divider />
         <CardContent>
-          <Box className='mb-5' display='flex' flexDirection='column'>
-            <Typography variant='h6' className='capitalize'>
+          <Box className='mb-3' display='flex' flexDirection='column'>
+            <Typography variant='h6' className='text-md font-normal capitalize'>
               When cases are set to certain statuses, SLA timers may pause (for example, while you are waiting to hear
               back from the customer).
             </Typography>
 
-            <Typography variant='h5' className='font-bold capitalize mt-10'>
+            <Typography variant='h6' className='font-bold capitalize mt-5'>
               SLA Details
             </Typography>
 
@@ -299,7 +299,7 @@ const AddNewSLA = () => {
             />
 
             <TextField
-              className='w-72 mt-8 mb-5'
+              className='w-72 mt-3 mb-3'
               id='standard-multiline-flexible'
               label='Description'
               variant='standard'
@@ -309,9 +309,9 @@ const AddNewSLA = () => {
               }}
             />
 
-            <Box className='mt-5' display='flex' flexDirection='row'>
+            <Box className='mt-3' display='flex' flexDirection='row'>
               <SLASwitch checked={checked} onChange={handleChange} />
-              <Typography variant='h6' className='capitalize ml-5 mt-1'>
+              <Typography variant='h6' className='text-md font-normal capitalize ml-5 mt-1'>
                 SLA is {checkedMessage}
               </Typography>
             </Box>
@@ -440,7 +440,7 @@ const AddNewSLA = () => {
               }}
             </Repeater>
 
-            <Grid container className='mt-4'>
+            <Grid container className='mt-3'>
               <Grid item xs={12}>
                 <Button variant='contained' onClick={handleAddNewItem}>
                   AND
@@ -451,18 +451,18 @@ const AddNewSLA = () => {
 
           <Divider />
 
-          <Box className='mt-5 mb-5' display='flex' flexDirection='column'>
-            <Typography variant='h6' className='capitalize mt-1'>
+          <Box className='mt-3 mb-3' display='flex' flexDirection='column'>
+            <Typography variant='h6' className='text-md font-normal capitalize mt-1'>
               Targets
             </Typography>
-            <Typography variant='h6' className='capitalize mt-1'>
+            <Typography variant='h6' className='text-md font-normal capitalize mt-1'>
               Specify goals for each metric across different case priorities.
             </Typography>
 
             <Box display='contents'>
               {/* LOW PRIORITY */}
-              <Box className='m-3 mt-10' display='flex' flexDirection='row' flexWrap='wrap'>
-                <Typography variant='h6' className='capitalize mt-4 w-20 absolute'>
+              <Box className='m-3 mt-5' display='flex' flexDirection='row' flexWrap='wrap'>
+                <Typography variant='h6' className='text-md font-normal capitalize mt-4 w-20 absolute'>
                   Low
                 </Typography>
                 <Grid container>
@@ -556,8 +556,8 @@ const AddNewSLA = () => {
               </Box>
 
               {/* MEDIUM PRIORITY */}
-              <Box className='m-3 mt-10' display='flex' flexDirection='row' flexWrap='wrap'>
-                <Typography variant='h6' className='capitalize mt-4 w-20 absolute'>
+              <Box className='m-3 mt-5' display='flex' flexDirection='row' flexWrap='wrap'>
+                <Typography variant='h6' className='text-md font-normal capitalize mt-4 w-20 absolute'>
                   Medium
                 </Typography>
                 <Grid container>
@@ -651,8 +651,8 @@ const AddNewSLA = () => {
               </Box>
 
               {/* HIGH PRIORITY */}
-              <Box className='m-3 mt-10' display='flex' flexDirection='row' flexWrap='wrap'>
-                <Typography variant='h6' className='capitalize mt-4 w-20 absolute'>
+              <Box className='m-3 mt-5' display='flex' flexDirection='row' flexWrap='wrap'>
+                <Typography variant='h6' className='text-md font-normal capitalize mt-4 w-20 absolute'>
                   High
                 </Typography>
 
@@ -747,8 +747,8 @@ const AddNewSLA = () => {
               </Box>
 
               {/* URGENT PRIORITY */}
-              <Box className='m-3 mt-10' display='flex' flexDirection='row' flexWrap='wrap'>
-                <Typography variant='h6' className='capitalize mt-4 w-20 absolute'>
+              <Box className='m-3 mt-5' display='flex' flexDirection='row' flexWrap='wrap'>
+                <Typography variant='h6' className='text-md font-normal capitalize mt-4 w-20 absolute'>
                   Urgent
                 </Typography>
                 <Grid container>
@@ -842,16 +842,16 @@ const AddNewSLA = () => {
               </Box>
             </Box>
 
-            <Typography variant='h6' className='capitalize mt-10'>
+            <Typography variant='h6' className='text-sm font-normal capitalize mt-5'>
               Specify whether these metrics will be measured according to your business hours or to calendar hours (24
               hours a day).{' '}
             </Typography>
 
-            <Box className='mt-10' display='flex' flexDirection='row'>
-              <Typography variant='h6' className='capitalize'>
+            <Box className='mt-5' display='flex' flexDirection='row'>
+              <Typography variant='h6' className='text-sm font-normal capitalize'>
                 Operational hours:
               </Typography>
-              <FormControl className='w-72 ml-10' size='small'>
+              <FormControl className='w-72 ml-5' size='small'>
                 <InputLabel id='demo-select-small-label'>Select</InputLabel>
                 <Select
                   labelId='demo-select-small-label'
@@ -868,7 +868,7 @@ const AddNewSLA = () => {
               </FormControl>
             </Box>
 
-            <Typography variant='h6' className='capitalize mt-10'>
+            <Typography variant='h6' className='text-sm font-normal capitalize mt-5'>
               When cases are set to certain statuses, SLA timers may pause (for example, while you are waiting to hear
               back from the customer). This behaviour can be configured under status settings.
             </Typography>
@@ -877,7 +877,7 @@ const AddNewSLA = () => {
           <Divider />
 
           {/* BUTTONS */}
-          <Box className='mt-5'>
+          <Box className='mt-3'>
             <Box className='flex items-center'>
               <Button className='mx-2' variant='contained'>
                 Save

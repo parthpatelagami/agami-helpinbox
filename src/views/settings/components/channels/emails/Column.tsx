@@ -27,20 +27,20 @@ export const columns: Column[] = [
   {
     accessorKey: 'id',
     header: () => 'Sr.No',
-    cell: info => <Typography className='text-center text-xs font-normal'>{info.getValue()}</Typography>,
+    cell: info => <Typography className='text-sm font-normal text-center'>{info.getValue()}</Typography>,
     size: 50
   },
   {
     accessorKey: 'product',
     header: () => 'Product Name',
-    cell: info => <Typography className='text-xs font-normal text-center'>{info.getValue()}</Typography>,
+    cell: info => <Typography className='text-sm font-normal text-center'>{info.getValue()}</Typography>,
     filterType: 'text',
     size: 150
   },
   {
     accessorKey: 'email',
     header: () => 'Email Id',
-    cell: info => <Typography className='text-xs font-normal'>{info.getValue()}</Typography>,
+    cell: info => <Typography className='text-sm font-normal'>{info.getValue()}</Typography>,
     filterType: 'text',
     size: 250
   },

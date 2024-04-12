@@ -28,6 +28,8 @@ import {
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { useTheme } from '@mui/material/styles'
+
 import dayjs from 'dayjs'
 
 // Type Imports
@@ -43,6 +45,7 @@ const AddNewBusinessHours: React.FC = () => {
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const [showAddHoliday, setShowAddHoliday] = useState(false)
   const router = useRouter()
+  const theme = useTheme()
   const { lang: locale } = useParams()
   const [dateValue, setDateValue] = useState<null>(null)
 
@@ -164,6 +167,9 @@ const AddNewBusinessHours: React.FC = () => {
     })
   }
 
+  const primaryBg = theme.palette.primary.lightOpacity
+  const TableBgColor = theme.palette.mode === 'light' ? primaryBg : primaryBg
+
   return (
     <Card>
       <CardHeader
@@ -182,10 +188,10 @@ const AddNewBusinessHours: React.FC = () => {
       />
       <Divider />
       <CardContent>
-        <Box className='p-5'>
+        <Box>
           {/* TITLE COMPONENT */}
-          <Box className='mt-10 mb-5' display='flex' flexDirection='column'>
-            <Typography variant='h6' className='font-bold text-lg capitalize'>
+          <Box className='mt-2 mb-4' display='flex' flexDirection='column'>
+            <Typography variant='h6' className='font-normal text-md capitalize'>
               Title
               <span className='text-red-500'>*</span>
             </Typography>
@@ -216,14 +222,14 @@ const AddNewBusinessHours: React.FC = () => {
           {/* CONTRIBUTION COMPONENT */}
           <Box>
             <Box className='flex justify-center' flexDirection='row'>
-              <Box className='w-28 mt-10'>
+              <Box className='w-28 mt-3'>
                 {daysOfWeek.map((day, index) => (
-                  <Typography key={index} variant='h6' className='mt-3 mx-2 text-right'>
+                  <Typography key={index} variant='h6' className='mt-2 mx-2 text-right'>
                     {day}
                   </Typography>
                 ))}
               </Box>
-              <Box className='mt-10 mb-4'>
+              <Box className='mt-4 mb-4'>
                 <TableContainer>
                   <Table>
                     <TableBody>
@@ -236,8 +242,8 @@ const AddNewBusinessHours: React.FC = () => {
                               className={`box ${selectedContributionBoxes.some(selectedBox => selectedBox.x === colIndex && selectedBox.y === rowIndex) ? 'selected' : ''}`}
                               style={{
                                 border: '1px solid #888888',
-                                width: '35px',
-                                height: '35px',
+                                width: '30px',
+                                height: '30px',
                                 padding: 0
                               }}
                               onMouseOver={e => handleContributionBoxHover({ x: colIndex, y: rowIndex }, e)}
@@ -253,12 +259,12 @@ const AddNewBusinessHours: React.FC = () => {
                 </TableContainer>
               </Box>
             </Box>
-            <Box className='pb-7 pl-20 ml-5'>
+            <Box className='pb-7 ml-32'>
               <Box className='flex justify-center' flexDirection='row'>
                 {[...Array(24)].map((_, index) => (
                   <Typography
                     key={index}
-                    variant='h6'
+                    variant='body2'
                     style={{ transform: 'rotate(-90deg)' }}
                   >{`${index}:00`}</Typography>
                 ))}
@@ -269,11 +275,11 @@ const AddNewBusinessHours: React.FC = () => {
           <Divider />
 
           {/* HOLIDAY COMPONENT */}
-          <Box className='mt-10 mb-5'>
-            <Typography variant='h2' className='text-lg font-bold capitalize mb-5'>
+          <Box className='mt-5 mb-3'>
+            <Typography variant='h6' className='text-md font-normal capitalize mb-5'>
               Holidays
             </Typography>
-            <Typography variant='h2' className='text-base font-normal capitalize mb-5'>
+            <Typography variant='h6' className='text-md font-normal capitalize mb-5'>
               You can use holidays to create exceptions to your regular business hours schedules. For example, you might
               add a holidays for reduced office hours, or perhaps for a day off (we hope that's not wishful thinking!)
             </Typography>
@@ -286,7 +292,7 @@ const AddNewBusinessHours: React.FC = () => {
 
           {showAddHoliday && (
             <>
-              <Box className='mt-10 mb-10 p-5'>
+              <Box className='mt-1 mb-1 p-3'>
                 <TextField
                   className='w-72'
                   id='standard-multiline-flexible'
@@ -307,7 +313,7 @@ const AddNewBusinessHours: React.FC = () => {
                     setHolidayHours(e.target.value)
                   }}
                 />
-                <Box className='w-full h-52 bg-gray-200 mt-5 p-5'>
+                <Box className='w-full h-50 mt-5 p-5' sx={{ backgroundColor: TableBgColor }}>
                   <Box className='flex' flexDirection='row'>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
@@ -368,7 +374,7 @@ const AddNewBusinessHours: React.FC = () => {
           <Divider />
 
           {/* BUTTON COMPONENTS */}
-          <Box className='mt-5'>
+          <Box className='mt-3'>
             <Box className='flex items-center'>
               <Button className='mx-2' variant='contained'>
                 Save
