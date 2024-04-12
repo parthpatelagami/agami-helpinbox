@@ -28,21 +28,21 @@ export const columns: Column[] = [
     accessorKey: 'id',
     header: () => 'Sr.No',
     cell: info => <Typography className='text-sm font-normal text-center'>{info.getValue()}</Typography>,
-    size: 100
+    size: 70
   },
   {
     accessorKey: 'title',
     header: () => 'Title',
     cell: info => <Typography className='text-sm font-normal'>{info.getValue()}</Typography>,
     filterType: 'text',
-    size: 250
+    size: 150
   },
   {
     accessorKey: 'description',
     header: () => 'Description',
     cell: info => <Typography className='text-sm font-normal'>{info.getValue()}</Typography>,
     filterType: 'text',
-    size: 400
+    size: 500
   },
   {
     accessorKey: 'action',

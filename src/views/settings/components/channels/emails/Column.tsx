@@ -70,7 +70,7 @@ export const columns: Column[] = [
               className='hover:border-1 hover:border-inherit hover:border-solid'
               onClick={e => handleEdit(info.getValue(), e)}
             >
-              <i className='tabler-edit text-base text-textSecondary' />
+              <i className='tabler-edit text-[20px] text-textSecondary' />
             </IconButton>
           </Tooltip>
 
@@ -79,7 +79,7 @@ export const columns: Column[] = [
               className='hover:border-1 hover:border-inherit hover:border-solid'
               onClick={() => handleDelete(info.getValue())}
             >
-              <i className='tabler-trash text-base text-red-700' />
+              <i className='tabler-trash text-[20px] text-red-700' />
             </IconButton>
           </Tooltip>
         </Stack>

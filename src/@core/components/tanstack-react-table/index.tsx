@@ -162,7 +162,7 @@ const TanstackReactTable: React.FC<TanstackReactTableProps> = ({
             {table.getHeaderGroups().map((headerGroup: any) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header: any) => (
-                  <th key={header.id} className='p-2'>
+                  <th key={header.id} className='p-2' style={{ width: header.getSize() }}>
                     <span style={{ display: '', width: header.column.getSize() }} className='text-xs'>
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                       {showFilters ? <ColumnFilter column={header.column} table={table} /> : null}
