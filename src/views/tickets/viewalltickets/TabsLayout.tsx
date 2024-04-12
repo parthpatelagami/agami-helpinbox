@@ -94,7 +94,7 @@ const TabsLayout = (props: any) => {
   //   }))(TabScrollButton)
   return (
     <>
-      <Card className='p-0.5'>
+      <Card className=''>
         <TabContext value={value}>
           <CustomTabList
             onChange={handleChange}
