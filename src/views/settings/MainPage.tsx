@@ -3,6 +3,10 @@
 // REACT IMPORTS
 import React, { useState } from 'react'
 
+// NEXT IMPPORTS
+import { useParams } from 'next/navigation'
+import Link from 'next/link'
+
 // MUI IMPORTS
 import styled from 'styled-components'
 import { useTheme } from '@mui/material/styles'
@@ -10,7 +14,7 @@ import type { CardContentProps } from '@mui/material/CardContent'
 import CardContent from '@mui/material/CardContent'
 import type { StepProps } from '@mui/material/Step'
 import MuiStep from '@mui/material/Step'
-import { Avatar, Card, StepLabel, Stepper, Typography } from '@mui/material'
+import { Avatar, Box, Card, StepLabel, Stepper, Typography, Breadcrumbs } from '@mui/material'
 
 // CORE IMPORTS
 import Icon from '@core/components/icon'
@@ -19,19 +23,18 @@ import CustomAvatar from '@/@core/components/mui/Avatar'
 import { hexToRGBA } from '@/utils/hex-to-rgba'
 
 // CUSTOM COMPONENTS
-import ChannelsComponents from './components/Channels'
+import ChannelsComponents from './components/channels/MainPage'
 import ModulesComponents from './components/Modules'
 import WorkFlowComponents from './components/WorkFlow'
 import TeamComponents from './components/Team'
 import AccountDetailsComponents from './components/AccountDetails'
 
+// Type Imports
+import type { Locale } from '@/configs/i18n'
+import { getLocalizedUrl } from '@/utils/i18n'
+
 // SIDE BAR MENU
 const steps = [
-  {
-    icon: 'tabler:arrow-forward-up',
-    title: 'Recents',
-    subtitle: 'Recent Activity'
-  },
   {
     icon: 'uil:channel',
     title: 'Channels',
@@ -95,24 +98,24 @@ const Step = styled(MuiStep)<StepProps>(() => ({
 const MainPage = () => {
   // STATES
   const [activeStep, setActiveStep] = useState<number>(0)
+  const [selectedStep, setSelectedStep] = useState<number>(0)
 
   // HOOKS
   const theme = useTheme()
+  const { lang: locale } = useParams()
 
   // DEFINE STEP COMPONENTS
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return ''
-      case 1:
         return <ChannelsComponents />
-      case 2:
+      case 1:
         return <ModulesComponents />
-      case 3:
+      case 2:
         return <WorkFlowComponents />
-      case 4:
+      case 3:
         return <TeamComponents />
-      case 5:
+      case 4:
         return <AccountDetailsComponents />
       default:
         return null
@@ -124,48 +127,75 @@ const MainPage = () => {
     return getStepContent(activeStep)
   }
 
+  const handleStepClick = (index: number) => {
+    setActiveStep(index)
+    setSelectedStep(index)
+  }
+
+  const renderBreadcrumbs = () => {
+    if (selectedStep !== null) {
+      const currentUrl = getLocalizedUrl('settings', locale as Locale)
+
+      return (
+        <Box className='mt-[-15px]'>
+          <Breadcrumbs aria-label='breadcrumb'>
+            <Typography color='textPrimary'>Settings</Typography>
+            <Link underline='hover' color='inherit' href={currentUrl} aria-current='page'>
+              {steps[selectedStep].title}
+            </Link>
+          </Breadcrumbs>
+        </Box>
+      )
+    } else {
+      return null
+    }
+  }
+
   return (
     <>
-      <Card className='flex flex-col lg:flex-row'>
-        <StepperHeaderContainer>
-          <StepperWrapper className='h-full'>
-            <Stepper connector={<></>} orientation='vertical' activeStep={activeStep} className='h-full min-w-15rem'>
-              {steps.map((step, index) => {
-                const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar
+      <Card className='flex flex-col lg:flex-row mt-1'>
+        <CardContent>
+          <div>{renderBreadcrumbs()}</div>
+          <StepperHeaderContainer>
+            <StepperWrapper className='h-full'>
+              <Stepper connector={<></>} orientation='vertical' activeStep={activeStep} className='h-full min-w-15rem'>
+                {steps.map((step, index) => {
+                  const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar
 
-                return (
-                  <Step
-                    key={index}
-                    onClick={() => setActiveStep(index)}
-                    className={activeStep === index ? 'Mui-completed' : ''}
-                  >
-                    <StepLabel>
-                      <div className='step-label'>
-                        <RenderAvatar
-                          variant='rounded'
-                          {...(activeStep >= index && { skin: 'light' })}
-                          {...(activeStep === index && { skin: 'filled' })}
-                          {...(activeStep >= index && { color: 'primary' })}
-                          className={`
+                  return (
+                    <Step
+                      key={index}
+                      onClick={() => handleStepClick(index)}
+                      className={activeStep === index ? 'Mui-completed' : ''}
+                    >
+                      <StepLabel>
+                        <div className='step-label'>
+                          <RenderAvatar
+                            variant='rounded'
+                            {...(activeStep >= index && { skin: 'light' })}
+                            {...(activeStep === index && { skin: 'filled' })}
+                            {...(activeStep >= index && { color: 'primary' })}
+                            className={`
                             ${activeStep === index && theme.shadows[5]}
                             ${activeStep > index && hexToRGBA(theme.palette.primary.main, 0.4)}
                           `}
-                        >
-                          <Icon icon={step.icon} fontSize='1.5rem' />
-                        </RenderAvatar>
-                        <div>
-                          <Typography className='font-bold text-sm'>{step.title}</Typography>
-                          <Typography className='font-normal text-xs'>{step.subtitle}</Typography>
+                          >
+                            <Icon icon={step.icon} fontSize='1.5rem' />
+                          </RenderAvatar>
+                          <div>
+                            <Typography className='font-bold text-sm'>{step.title}</Typography>
+                            <Typography className='font-normal text-xs'>{step.subtitle}</Typography>
+                          </div>
                         </div>
-                      </div>
-                    </StepLabel>
-                  </Step>
-                )
-              })}
-            </Stepper>
-          </StepperWrapper>
-        </StepperHeaderContainer>
-        <CardContent className='w-full'>{renderContent()}</CardContent>
+                      </StepLabel>
+                    </Step>
+                  )
+                })}
+              </Stepper>
+            </StepperWrapper>
+          </StepperHeaderContainer>
+        </CardContent>
+        <CardContent className='w-full ml-[-40px]'>{renderContent()}</CardContent>
       </Card>
     </>
   )

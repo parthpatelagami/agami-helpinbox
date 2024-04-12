@@ -4,7 +4,7 @@
 import React from 'react'
 
 // MUI IMPORTS
-import { IconButton, Stack, Tooltip, Typography } from '@mui/material'
+import { Badge, IconButton, Stack, Tooltip, Typography } from '@mui/material'
 
 interface Column {
   accessorKey: string
@@ -31,11 +31,33 @@ export const columns: Column[] = [
     size: 50
   },
   {
-    accessorKey: 'title',
-    header: () => 'Title',
+    accessorKey: 'product',
+    header: () => 'Product Name',
+    cell: info => <Typography className='text-sm font-normal text-center'>{info.getValue()}</Typography>,
+    filterType: 'text',
+    size: 150
+  },
+  {
+    accessorKey: 'email',
+    header: () => 'Email Id',
     cell: info => <Typography className='text-sm font-normal'>{info.getValue()}</Typography>,
     filterType: 'text',
-    size: 500
+    size: 250
+  },
+  {
+    accessorKey: 'status',
+    header: () => 'Status',
+    cell: info => (
+      <Stack alignItems='center' spacing={1}>
+        {info.getValue() === 'verified' ? (
+          <Badge color='success' badgeContent='verified' />
+        ) : (
+          <Badge color='warning' badgeContent='pending' />
+        )}
+      </Stack>
+    ),
+    filterType: 'text',
+    size: 200
   },
   {
     accessorKey: 'action',
@@ -43,12 +65,6 @@ export const columns: Column[] = [
     cell: info => (
       <div>
         <Stack display='flex' flexDirection='row' justifyContent='center'>
-          <Tooltip placement='top' title='Check'>
-            <IconButton className='hover:border-1 hover:border-inherit hover:border-solid'>
-              <i className='tabler-circle-check text-base text-textSecondary' />
-            </IconButton>
-          </Tooltip>
-
           <Tooltip placement='top' title='Edit'>
             <IconButton
               className='hover:border-1 hover:border-inherit hover:border-solid'

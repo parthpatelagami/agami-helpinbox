@@ -27,22 +27,22 @@ export const columns: Column[] = [
   {
     accessorKey: 'id',
     header: () => 'Sr.No',
-    cell: info => <Typography className='text-center text-sm font-normal'>{info.getValue()}</Typography>,
-    size: 70
+    cell: info => <Typography className='text-sm font-normal text-center'>{info.getValue()}</Typography>,
+    size: 100
   },
   {
     accessorKey: 'title',
     header: () => 'Title',
     cell: info => <Typography className='text-sm font-normal'>{info.getValue()}</Typography>,
     filterType: 'text',
-    size: 180
+    size: 250
   },
   {
     accessorKey: 'description',
     header: () => 'Description',
     cell: info => <Typography className='text-sm font-normal'>{info.getValue()}</Typography>,
     filterType: 'text',
-    size: 500
+    size: 400
   },
   {
     accessorKey: 'action',
@@ -76,6 +76,6 @@ export const columns: Column[] = [
         </Stack>
       </div>
     ),
-    size: 200
+    size: 150
   }
 ]
