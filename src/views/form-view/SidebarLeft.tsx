@@ -27,7 +27,7 @@ interface PropsType {
 const SidebarLeft = (props: PropsType) => {
   const { fields, setFields } = props
   const theme = useTheme()
-
+  const [searchValue, setSearchValue] = useState('')
   const handleDragStart = (e: DragEvent<HTMLDivElement>, item: { type: string; label: string; index: number }) => {
     e.dataTransfer.setData('text/plain', '')
     e.dataTransfer.setData('type', item.type)
@@ -51,6 +51,7 @@ const SidebarLeft = (props: PropsType) => {
                 </InputAdornment>
               )
             }}
+            onChange={e => setSearchValue(e.target.value)}
           />
         </div>
       </Stack>
@@ -63,6 +64,7 @@ const SidebarLeft = (props: PropsType) => {
             <Stack direction='column' spacing={3}>
               {fields.map(
                 (item, index) =>
+                  (searchValue.trim() !== '' ? item.label.toLowerCase().includes(searchValue.toLowerCase()) : true) &&
                   item.category == 'static' && (
                     <div
                       key={index}
@@ -98,6 +100,7 @@ const SidebarLeft = (props: PropsType) => {
             <Stack direction='column' spacing={3}>
               {fields.map(
                 (item, index) =>
+                  (searchValue.trim() !== '' ? item.label.toLowerCase().includes(searchValue.toLowerCase()) : true) &&
                   item.category == 'custom' && (
                     <div
                       key={index}
