@@ -25,6 +25,10 @@ const horizontalMenuData = (): HorizontalMenuDataType[] => [
         href: '/tickets/viewalltickets'
       },
       {
+        label: 'View All Tickets 2',
+        href: '/tickets/viewalltickets2'
+      },
+      {
         label: 'Reply Page 1',
         href: '/tickets/replypage1'
       },

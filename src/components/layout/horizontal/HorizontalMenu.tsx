@@ -98,6 +98,7 @@ const HorizontalMenu = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof 
         </SubMenu>
         <SubMenu label='Tickets' icon={<i className='tabler-ticket' />}>
           <MenuItem href={`/${locale}/tickets/viewalltickets`}>View All Tickets</MenuItem>
+          <MenuItem href={`/${locale}/tickets/viewalltickets2`}>View All Tickets 2</MenuItem>
           <MenuItem href={`/${locale}/tickets/replypage1`}>Reply Page 1</MenuItem>
           <MenuItem href={`/${locale}/tickets/replypage2`}>Reply Page 2</MenuItem>
         </SubMenu>
