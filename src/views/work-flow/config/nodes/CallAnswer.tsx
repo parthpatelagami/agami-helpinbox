@@ -13,11 +13,13 @@ const CallAnswerControl: React.FC<PhoneControls> = ({ data, isConnectable }) => 
 
   return (
     <>
-      <Handle type='target' position={Position.Top} />
       <div>
-        <i className='custom-call-answer text-4xl' />
+        <Handle type='target' position={Position.Top} style={{}} />
+        <i className='custom-call-answer text-4xl block' />
+        <Handle type='source' position={Position.Bottom} />
+        <Handle type='source' position={Position.Left} />
+        <Handle type='source' position={Position.Right} />
       </div>
-      <Handle type='source' position={Position.Bottom} />
     </>
   )
 }

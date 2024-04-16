@@ -8,9 +8,8 @@ import { useTheme } from '@mui/material/styles'
 import 'reactflow/dist/style.css'
 
 // * React Flow
-import type { NodeChange, EdgeChange, DefaultEdgeOptions, Node, ReactFlowInstance } from 'reactflow'
-import {
-  ReactFlow,
+import type { NodeChange, EdgeChange, DefaultEdgeOptions, Node } from 'reactflow'
+import ReactFlow, {
   Background,
   MiniMap,
   Controls,
@@ -19,8 +18,7 @@ import {
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
-  ReactFlowProvider,
-  useReactFlow
+  ReactFlowProvider
 } from 'reactflow'
 
 // Custom Node Data Import
@@ -30,8 +28,6 @@ import NodeSkeleton from './config/NodeSkeleton'
 import WorkFlowControlPanel from './WorkFlowControlPannel'
 
 const nodeTypes = { ResizeSelectedNode, NodeSkeleton, CallAnswerControl: CallAnswerControl }
-
-const onInit = ReactFlowInstance => console.log('flow loaded:', ReactFlowInstance)
 
 const defaultEdgeOptions: DefaultEdgeOptions = {
   animated: true
@@ -50,7 +46,6 @@ const WorkFlowMainBoard: React.FC = () => {
   const [nodes, setNodes] = useNodesState(initialNodes)
   const [edges, setEdges] = useEdgesState([])
   const [backgroundVariant, setBackgroundVariant] = useState('cross')
-
   const [reactFlowInstance, setReactFlowInstance] = useState(null)
 
   const onConnect = useCallback(
@@ -95,42 +90,13 @@ const WorkFlowMainBoard: React.FC = () => {
         id: getId(),
         type: 'CallAnswerControl',
         position,
-        data: { label: `${type} node` },
-        style: { background: '#fff', border: '1px solid black', fontSize: 10 }
+        data: { label: `${type} node` }
       }
 
       setNodes(nds => nds.concat(newNode))
     },
     [reactFlowInstance]
   )
-
-  /*const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    console.log('----drag event')
-    console.log(event)
-
-    event.preventDefault()
-
-    const type = event.dataTransfer.getData('application/reactflow')
-
-    if (typeof type === 'undefined' || !type) {
-      return
-    }
-
-      const position = reactFlowInstance.screenToFlowPosition({
-        x: event.clientX,
-        y: event.clientY,
-      });
-
-    const newNode = {
-      id: getId(),
-      type: 'CallAnswerControl',
-      position,
-      data: { label: `${type} node` },
-      style: { background: '#fff', border: '1px solid black', fontSize: 10 }
-    }
-
-    setNodes(nds => nds.concat(newNode))
-  }*/
 
   const onNodeClick = (event: React.MouseEvent, node: Node) => {
     console.log('Node clicked:', node)
@@ -162,7 +128,7 @@ const WorkFlowMainBoard: React.FC = () => {
                     onConnect={onConnect}
                     onDrop={onDrop}
                     onDragOver={onDragOver}
-                    onInit={onInit}
+                    onInit={setReactFlowInstance}
                     defaultViewport={defaultViewport}
                     defaultEdgeOptions={defaultEdgeOptions}
                     defaultzoom={1.5}
