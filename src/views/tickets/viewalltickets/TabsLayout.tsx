@@ -51,6 +51,7 @@ const TabsLayout = () => {
       borderRadius: '3px',
       backgroundColor: `white`,
       paddingRight: 5,
+      boxShadow: '3px 2px 3px 0px',
       color: `${theme.palette.primary.main}`,
       zIndex: 5,
       transform: 'perspective(60px) rotateX(10deg)'
