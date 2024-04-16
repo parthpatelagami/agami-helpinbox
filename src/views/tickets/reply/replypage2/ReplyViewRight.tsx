@@ -9,7 +9,7 @@ import Box from '@mui/material/Box'
 import TabPanel from '@mui/lab/TabPanel'
 import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
-import { styled } from '@mui/material/styles'
+import { styled, useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import MuiTab, { TabProps } from '@mui/material/Tab'
 import MuiTabList, { TabListProps } from '@mui/lab/TabList'
@@ -68,7 +68,7 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
   // ** State
   const [activeTab, setActiveTab] = useState<string>(tab)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-
+  const theme = useTheme();
   // ** Hooks
   // const router = useRouter()
 
@@ -89,17 +89,18 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
       setIsLoading(false)
     }
   }, [invoiceData])
-
+ 
   return (
     <Grid>
       <p className="font-bold">Description </p> 
       <div
-        className='p-5 rounded flex flex-col bg-blue-50 mb-5'
+        className='p-5 rounded flex flex-col mb-5'
+        style={{backgroundColor:theme.palette.primary.lighterOpacity}}
       >
         <p className="font-bold">
           Buying gift for a loved one?
         </p>
-        <p className='mb-2 text-gray-700'>
+        <p className='mb-2'>
           Gift wrap and personalized message on , Only for $2.
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
           Dolorum minima possimus nisi laudantium! Aperiam earum ipsum velit impedit, 
@@ -111,7 +112,7 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
           Quo explicabo dolor rem eum quisquam sapiente ipsam, 
           unde eveniet! Nihil a in impedit tempora hic libero veritatis architecto perferendis porro maxime?
         </p>
-        <p className='mb-2 text-gray-700'>
+        <p className='mb-2'>
           Gift wrap and personalized message on , Only for $2.
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
           Dolorum minima possimus nisi laudantium! Aperiam earum ipsum velit impedit, 
