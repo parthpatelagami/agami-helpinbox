@@ -4,13 +4,13 @@ import { useState, forwardRef } from 'react'
 // ** MUI Imports
 import Box from '@mui/material/Box'
 
-// ** Custom Component Import
-import CustomTextField from '@core/components/mui/TextField'
-
 // ** Third Party Imports
-
 import { format, addDays } from 'date-fns'
-import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
+import type { ReactDatePickerProps } from 'react-datepicker'
+
+// import DatePicker from 'react-datepicker'
+
+import CustomTextField from '@core/components/mui/TextField'
 import AppReactDatepicker from '@/libs/styles/AppReactDatepicker'
 
 interface PickerProps {
@@ -27,16 +27,17 @@ const PickersRange = ({
   label: string
 }) => {
   // ** States
-  const [startDate, setStartDate] = useState<Date | null | undefined>(new Date())
-  const [endDate, setEndDate] = useState<Date | null | undefined>(addDays(new Date(), 15))
+  // const [startDate, setStartDate] = useState<Date | null | undefined>(new Date())
+  // const [endDate, setEndDate] = useState<Date | null | undefined>(addDays(new Date(), 15))
   const [startDateRange, setStartDateRange] = useState<Date | null | undefined>(new Date())
   const [endDateRange, setEndDateRange] = useState<Date | null | undefined>(addDays(new Date(), 45))
 
-  const handleOnChange = (dates: any) => {
-    const [start, end] = dates
-    setStartDate(start)
-    setEndDate(end)
-  }
+  // const handleOnChange = (dates: any) => {
+  //   const [start, end] = dates
+
+  //   setStartDate(start)
+  //   setEndDate(end)
+  // }
 
   const handleOnChangeRange = (dates: any) => {
     const [start, end] = dates

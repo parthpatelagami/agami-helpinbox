@@ -2,15 +2,16 @@
 import { useEffect, useState, useCallback, ChangeEvent, SyntheticEvent, useMemo } from 'react'
 
 // ** MUI Imports
+import { useParams } from 'next/navigation'
+
 import Card from '@mui/material/Card'
 
 // ** ThirdParty Components
 import axios from 'axios'
 import { AppBar, Chip, TablePagination, Typography } from '@mui/material'
-import tableStyles from '@core/styles/table.module.css'
+
+import type { ColumnDef, FilterFn } from '@tanstack/react-table'
 import {
-  ColumnDef,
-  FilterFn,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
@@ -22,9 +23,11 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-import { useParams } from 'next/navigation'
 import { rankItem } from '@tanstack/match-sorter-utils'
 import classnames from 'classnames'
+
+import tableStyles from '@core/styles/table.module.css'
+
 import TablePaginationComponent from '@/components/TablePaginationComponent'
 import ViewAllTicketFilters from './ViewAllTicketFilters'
 
@@ -50,6 +53,7 @@ const columnHelper = createColumnHelper<ViewAllTicketType>()
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item
   const itemRank = rankItem(row.getValue(columnId), value)
+
   console.log('Fuzzy Filter is called and rank item is', itemRank)
 
   // Store the itemRank info
@@ -60,6 +64,7 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Return if the item should be filtered in/out
   return itemRank.passed
 }
+
 const TableServerSide = ({ tableData }: PropsType) => {
   const [data, setData] = useState(...[tableData])
   const [globalFilter, setGlobalFilter] = useState('')
@@ -148,6 +153,7 @@ const TableServerSide = ({ tableData }: PropsType) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
+
   const table = useReactTable({
     data: data as ViewAllTicketType[],
     columns,

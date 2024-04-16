@@ -1,7 +1,9 @@
 import { TabPanel } from '@mui/lab'
+
 import TableServerSide from './TableServerSide'
 import { data } from './ViewAllTicketData'
 import ReplyPage from '../reply/replypage1/ReplyPage'
+
 const TabComponent = (props: any) => {
   return (
     <>
@@ -22,4 +24,5 @@ const TabComponent = (props: any) => {
     </>
   )
 }
+
 export default TabComponent
