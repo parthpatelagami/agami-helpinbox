@@ -208,6 +208,7 @@ const data = [
     DueDate: '07/04/2024'
   }
 ]
+
 const FILTERS = [
   { id: 1, label: 'Agent', options: ['Mustafa Dahodwala', 'Parth Patel', 'Aadil', 'Nimit'], type: 'select' },
   { id: 2, label: 'Product', options: ['Helpinbox', 'Intalk', 'ChatinBox', 'Aniceya'], type: 'select' },
@@ -217,9 +218,10 @@ const FILTERS = [
   { id: 8, label: 'Issue Type', options: ['Incident', 'Problem', 'Task', 'Dev'], type: 'select' },
   {
     id: 9,
-    label: 'Filter 3',
+    label: 'Date Range Filter',
     options: ['filter3-option1', 'filter3-option2', 'filter3-option3', 'filter3-option4'],
-    type: 'dfse'
+    type: 'date'
   }
 ]
+
 export { FILTERS, data }

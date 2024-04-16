@@ -1,6 +1,8 @@
 import { TabPanel } from '@mui/lab'
+
 import TableServerSide from './TableServerSide'
 import { data } from './ViewAllTicketData'
+
 const TabComponent = (props: any) => {
   return (
     <>
@@ -23,4 +25,5 @@ const TabComponent = (props: any) => {
     </>
   )
 }
+
 export default TabComponent
