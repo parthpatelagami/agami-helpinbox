@@ -6,21 +6,23 @@ import Tab from '@mui/material/Tab'
 import TabList from '@mui/lab/TabList'
 import { styled } from '@mui/material/styles'
 import TabContext from '@mui/lab/TabContext'
-import { Card, IconButton } from '@mui/material'
+import { AppBar, Box, Card, IconButton, useTheme, TabScrollButton, withStyles } from '@mui/material'
+
+import { borderRadius, borderRight } from '@mui/system'
 
 import TabComponent from './TabComponent'
 
 import { useSettings } from '@core/hooks/useSettings'
 
-const TabsLayout = () => {
+const TabsLayout = (props: any) => {
   const [value, setValue] = useState<string | number>(1)
 
   const handleChange = (event: SyntheticEvent, newValue: string) => {
     setValue(newValue)
   }
 
-  const [incremntTab, setIncremntTab] = useState<[1] | number[]>([1])
-  const [closedTabs, setClosedTabs] = useState<[] | number[]>([])
+  const [incremntTab, setIncremntTab] = useState<[1] | Number[]>([1])
+  const [closedTabs, setClosedTabs] = useState<[] | Number[]>([])
   const [tabCounter, setTabCounter] = useState(2)
   const { settings } = useSettings()
   const { skin } = settings
@@ -41,35 +43,44 @@ const TabsLayout = () => {
     setClosedTabs(closedTabs => [...closedTabs, tabValue])
   }
 
+  const StyledTab = styled(Tab)(({ theme }) => ({
+    '&.Mui-selected': {
+      backgroundColor: 'grey',
+      color: theme.palette.primary.contrastText,
+      borderRadius: '15px 15px 0 0'
+    },
+
+    // backgroundColor: "background.paper",
+    borderRadius: '15px 15px 0 0',
+    minWidth: 'auto'
+  }))
+
   const isBordered = skin == 'bordered'
+
+  console.log('IS bordered test', isBordered)
 
   const NewTab = styled(Tab)(({ theme }) => ({
     '&.Mui-selected': {
-      borderTop: isBordered ? 'none' : `5px solid transparent`,
-      borderLeft: `1px solid transparent`,
-      borderRight: `1px solid transparent`,
-      borderRadius: '3px',
-      backgroundColor: `white`,
-      paddingRight: 5,
-      boxShadow: '3px 2px 3px 0px',
-      color: `${theme.palette.primary.main}`,
-      zIndex: 5,
-      transform: 'perspective(60px) rotateX(10deg)'
+      borderTop: isBordered ? 'none' : `1px solid var(--mui-palette-divider)`,
+      borderLeft: `1px solid var(--mui-palette-divider)`,
+      borderRight: `1px solid var(--mui-palette-divider)`,
+      borderBottom: 'none',
+      boxShadow: '0 5px 0 0px var(--background-color)',
+      backgroundColor: 'white'
     },
-    borderRadius: '3px',
-    backgroundColor: `${theme.palette.primary.darkOpacity}`,
-    paddingRight: 5,
-    color: `${theme.palette.primary.main}`,
-    zIndex: 1,
-    transform: 'perspective(60px) rotateX(10deg)',
-    margin: '10px 0px -1px 5px'
+    borderLeft: `1px solid var(--mui-palette-divider)`,
+    background: 'background.paper',
+    paddingRight: 1,
+    backgroundColor: `var(--mui-palette-primary-lightOpacity)`
+
+    //borderRadius: "8px 8px 0 0"
   }))
 
   const CustomTabList = styled(TabList)(({ theme }) => ({
     borderBottom: 'none !important',
-    backgroundColor: `${theme.palette.primary.darkerOpacity}`,
 
     '& .MuiTabs-flexContainer': {
+      borderBottom: `1px solid var(--mui-palette-divider)`,
       zIndex: 5,
       width: '100%',
       minWidth: 'max-content',
@@ -84,6 +95,18 @@ const TabsLayout = () => {
     }
   }))
 
+  const theme = useTheme()
+
+  //   const MyTabScrollButton = withStyles(theme => ({
+  //     root: {
+  //       width: 28,
+  //       overflow: 'hidden',
+  //       transition: 'width 0.5s',
+  //       '&.Mui-disabled': {
+  //         width: 0
+  //       }
+  //     }
+  //   }))(TabScrollButton)
   return (
     <>
       <Card className=''>
@@ -98,23 +121,30 @@ const TabsLayout = () => {
           >
             {incremntTab.map((tabValue, index) => (
               <NewTab
-                className='w-48 h-5 justify-between'
+                className='w-48 h-12 justify-between'
                 key={index}
                 value={tabValue.toString()}
+                // label={`Tab ${tabValue}`}
                 label={`Tab ${tabValue}`}
                 icon={
-                  tabValue !== 1 && (
-                    <IconButton size='small' onClick={() => handleRemoveTab(tabValue)}>
-                      <i className='custom-cross-icon text-[20px]' />
-                    </IconButton>
+                  tabValue != 1 ? (
+                    <Box onClick={() => handleRemoveTab(tabValue)}>
+                      <IconButton size='small'>
+                        <i className='ticket-cancel' />
+                      </IconButton>
+                    </Box>
+                  ) : (
+                    <></>
                   )
                 }
                 iconPosition='end'
               />
             ))}
-            <IconButton onClick={handleIncrement} className='mt-2 ml-2'>
-              <i className='tabler-plus text-[20px]' />
-            </IconButton>
+            <Box sx={{}}>
+              <IconButton onClick={handleIncrement}>
+                <i className='ticket-plus' />
+              </IconButton>
+            </Box>
           </CustomTabList>
           <TabComponent value={value} incremntTab={incremntTab} />
         </TabContext>
