@@ -73,7 +73,7 @@ const TabsLayout = () => {
 
   const CustomTabList = styled(TabList)(({ theme }) => ({
     borderBottom: 'none !important',
-    backgroundColor: `${theme.palette.primary.darkerOpacity}`,
+    backgroundColor: `${theme.palette.primary.darkOpacity}`,
 
     '& .MuiTabs-flexContainer': {
       zIndex: 5,
