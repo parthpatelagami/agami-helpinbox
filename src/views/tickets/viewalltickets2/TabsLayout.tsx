@@ -1,15 +1,20 @@
 'use client'
+
+// REACT IMPORTS
 import type { SyntheticEvent } from 'react'
 import { useState } from 'react'
 
+// MUI IMPORTS
 import Tab from '@mui/material/Tab'
 import TabList from '@mui/lab/TabList'
 import { styled } from '@mui/material/styles'
 import TabContext from '@mui/lab/TabContext'
 import { Card, IconButton } from '@mui/material'
 
+// CUSTOM IMPORTS
 import TabComponent from './TabComponent'
 
+// CORE IMPORTS
 import { useSettings } from '@core/hooks/useSettings'
 
 const TabsLayout = () => {
@@ -48,21 +53,22 @@ const TabsLayout = () => {
       borderTop: isBordered ? 'none' : `5px solid transparent`,
       borderLeft: `1px solid transparent`,
       borderRight: `1px solid transparent`,
-      borderRadius: '3px',
+      borderRadius: '10px 10px 0px 0px',
       backgroundColor: `white`,
-      paddingRight: 5,
+      paddingRight: 1,
       boxShadow: '3px 2px 3px 0px',
       color: `${theme.palette.primary.main}`,
       zIndex: 5,
-      transform: 'perspective(60px) rotateX(10deg)'
+      transform: 'perspective(50px) rotateX(0deg)'
     },
-    borderRadius: '3px',
+    borderRadius: '10px 10px 0px 0px',
+    paddingRight: 1,
+    boxShadow: '3px 2px 3px 0px',
     backgroundColor: `${theme.palette.primary.darkOpacity}`,
-    paddingRight: 5,
     color: `${theme.palette.primary.main}`,
-    zIndex: 1,
-    transform: 'perspective(60px) rotateX(10deg)',
-    margin: '7px 0px 1px 6px'
+    zIndex: 5,
+    transform: 'perspective(50px) rotateX(0deg)',
+    margin: '10px 0px 0px 6px'
   }))
 
   const CustomTabList = styled(TabList)(({ theme }) => ({
@@ -81,6 +87,10 @@ const TabsLayout = () => {
     },
     '& .MuiTab-root:hover': {
       borderBlockEnd: 0
+    },
+    '& .MuiTab-root:not(.Mui-selected):hover': {
+      backgroundColor: `${theme.palette.primary.darkerOpacity}`,
+      transition: 'background-color 1s ease-in-out'
     }
   }))
 
@@ -98,7 +108,7 @@ const TabsLayout = () => {
           >
             {incremntTab.map((tabValue, index) => (
               <NewTab
-                className='w-48 h-5 justify-between'
+                className='w-60 h-5 justify-between'
                 key={index}
                 value={tabValue.toString()}
                 label={`Tab ${tabValue}`}
@@ -112,7 +122,7 @@ const TabsLayout = () => {
                 iconPosition='end'
               />
             ))}
-            <IconButton onClick={handleIncrement} className='mt-1 ml-2'>
+            <IconButton onClick={handleIncrement} className='mt-2 ml-2'>
               <i className='tabler-plus text-[20px]' />
             </IconButton>
           </CustomTabList>
