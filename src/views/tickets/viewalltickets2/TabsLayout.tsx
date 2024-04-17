@@ -62,7 +62,7 @@ const TabsLayout = () => {
     color: `${theme.palette.primary.main}`,
     zIndex: 1,
     transform: 'perspective(60px) rotateX(10deg)',
-    margin: '10px 0px -1px 5px'
+    margin: '7px 0px 1px 6px'
   }))
 
   const CustomTabList = styled(TabList)(({ theme }) => ({
@@ -112,7 +112,7 @@ const TabsLayout = () => {
                 iconPosition='end'
               />
             ))}
-            <IconButton onClick={handleIncrement} className='mt-2 ml-2'>
+            <IconButton onClick={handleIncrement} className='mt-1 ml-2'>
               <i className='tabler-plus text-[20px]' />
             </IconButton>
           </CustomTabList>
