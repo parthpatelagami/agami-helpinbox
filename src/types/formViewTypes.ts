@@ -1,4 +1,5 @@
 export type FieldType = {
+  id: string
   type: string
   label: string
   category: string

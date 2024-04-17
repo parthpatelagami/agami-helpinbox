@@ -51,9 +51,11 @@ const DashboardCRM = () => {
   const toggleFilterDrawer = () => setFilterOpen(!filterOpen)
 
   const calculateHeight = (key: string) => {
-    if (!document.getElementById(key)) return 1
-    const height = document.getElementById(key)?.clientHeight || 160
-    return (height + 20) / (150 + 20)
+    var height = 150
+    if (document.getElementById(key)) {
+      height = document.getElementById(key)?.clientHeight || 150
+    }
+    return height / 150
   }
 
   const updateHeights = () => {
@@ -108,9 +110,9 @@ const DashboardCRM = () => {
             layouts={layoutState}
             isDraggable={lockLayout ? false : true}
             isResizable={false}
+            onWidthChange={updateHeights}
             onBreakpointChange={updateHeights}
             draggableHandle='#handle'
-            margin={[15, 20]}
             cols={{ xxs: 12, xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
           >
             <Grid key='stat3' item xs={12}>

@@ -2,13 +2,15 @@ import FormView from '@/views/form-view'
 import { FieldType } from '@/types/formViewTypes'
 
 const initialFields: FieldType[] = [
-  { type: 'input', label: 'Subject', category: 'static' },
-  { type: 'select', label: 'Status', category: 'static' },
-  { type: 'area', label: 'Comment', category: 'static' },
-  { type: 'select', label: 'Channel', category: 'static' },
-  { type: 'select', label: 'Country', category: 'custom' },
-  { type: 'select', label: 'State', category: 'custom' },
-  { type: 'select', label: 'City', category: 'custom' }
+  { id: '1', type: 'input', label: 'Subject', category: 'static' },
+  { id: '2', type: 'select', label: 'Status', category: 'static' },
+  { id: '3', type: 'area', label: 'Agent Reply', category: 'static' },
+  { id: '4', type: 'editor', label: 'Comment', category: 'static' },
+  { id: '5', type: 'select', label: 'Channel', category: 'static' },
+  { id: '6', type: 'select', label: 'Country', category: 'custom' },
+  { id: '7', type: 'select', label: 'State', category: 'custom' },
+  { id: '8', type: 'select', label: 'City', category: 'custom' },
+  { id: '9', type: 'date', label: 'Date', category: 'custom' }
 ]
 
 const FromViewPage = () => {
