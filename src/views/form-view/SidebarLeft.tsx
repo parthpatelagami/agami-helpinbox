@@ -40,7 +40,10 @@ const SidebarLeft = (props: PropsType) => {
   const filteredFields = useMemo(
     () =>
       unusedFields.filter(field =>
-        searchValue.trim() ? field.label.toLowerCase().includes(searchValue.toLowerCase()) : true
+        searchValue.trim()
+          ? field.label.toLowerCase().includes(searchValue.toLowerCase()) ||
+            field.type.toLowerCase().includes(searchValue.toLowerCase())
+          : true
       ),
     [unusedFields, searchValue]
   )
