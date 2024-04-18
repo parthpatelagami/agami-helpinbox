@@ -15,6 +15,8 @@ import { Icon } from '@iconify/react'
 
 import CustomTextField from '@core/components/mui/TextField'
 
+import { NodeControlData } from './config/data/NodeControlData'
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -100,57 +102,15 @@ const WorkFlowControlPanel = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                       <Stack display='flex' flexDirection='row' spacing={0}>
-                        <Item elevation={0}>
-                          <i
-                            className='custom-call-answer cursor-move text-3xl'
-                            onDragStart={event => onDragStart(event, 'output')}
-                            draggable
-                          />
-                        </Item>
-                        <Item elevation={0}>
-                          <i
-                            className='custom-case-when cursor-move text-3xl'
-                            onDragStart={event => onDragStart(event, 'output')}
-                            draggable
-                          />
-                        </Item>
-                        <Item elevation={0}>
-                          <i
-                            className='custom-get-output cursor-move text-3xl'
-                            onDragStart={event => onDragStart(event, 'output')}
-                            draggable
-                          />
-                        </Item>
-                        <Item elevation={0}>
-                          <i
-                            className='custom-ivr-list cursor-move text-3xl'
-                            onDragStart={event => onDragStart(event, 'output')}
-                            draggable
-                          />
-                        </Item>
-                        <Item elevation={0}>
-                          <i
-                            className='custom-language-menu cursor-move text-3xl'
-                            onDragStart={event => onDragStart(event, 'output')}
-                            draggable
-                          />
-                        </Item>
-                      </Stack>
-                      <Stack display='flex' flexDirection='row' spacing={0}>
-                        <Item elevation={0}>
-                          <i
-                            className='custom-play-audio cursor-move text-3xl'
-                            onDragStart={event => onDragStart(event, 'output')}
-                            draggable
-                          />
-                        </Item>
-                        <Item elevation={0}>
-                          <i
-                            className='custom-tts cursor-move text-3xl'
-                            onDragStart={event => onDragStart(event, 'output')}
-                            draggable
-                          />
-                        </Item>
+                        {NodeControlData.map(controlData => (
+                          <Item elevation={0} key={controlData.id}>
+                            <i
+                              className={`custom-${controlData.icon_name} cursor-move text-3xl`}
+                              onDragStart={event => onDragStart(event, controlData.type)}
+                              draggable
+                            />
+                          </Item>
+                        ))}
                       </Stack>
                     </AccordionDetails>
                   </Accordion>

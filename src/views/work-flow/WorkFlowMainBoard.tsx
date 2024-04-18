@@ -23,11 +23,23 @@ import ReactFlow, {
 
 // Custom Node Data Import
 import CallAnswerControl from './config/nodes/CallAnswer'
-import ResizeSelectedNode from './config/ResizeSelectedNode'
-import NodeSkeleton from './config/NodeSkeleton'
+import ResizeSelectedNode from './config/nodes/ResizeSelectedNode'
+import NodeSkeleton from './config/nodes/NodeSkeleton'
 import WorkFlowControlPanel from './WorkFlowControlPannel'
+import CaseWhenControl from './config/nodes/CaseWhenControl'
+import GetOutPutControl from './config/nodes/GetOutPutControl'
+import IvrControl from './config/nodes/IvrControl'
+import LanguageMenuControl from './config/nodes/LanguageMenuControl'
 
-const nodeTypes = { ResizeSelectedNode, NodeSkeleton, CallAnswerControl: CallAnswerControl }
+const nodeTypes = {
+  ResizeSelectedNode,
+  NodeSkeleton,
+  CallAnswerControl,
+  CaseWhenControl,
+  GetOutPutControl,
+  IvrControl,
+  LanguageMenuControl
+}
 
 const defaultEdgeOptions: DefaultEdgeOptions = {
   animated: true
@@ -45,7 +57,7 @@ const WorkFlowMainBoard: React.FC = () => {
   const theme = useTheme()
   const [nodes, setNodes] = useNodesState(initialNodes)
   const [edges, setEdges] = useEdgesState([])
-  const [backgroundVariant, setBackgroundVariant] = useState('cross')
+  const [backgroundVariant, setBackgroundVariant] = useState('dots')
   const [reactFlowInstance, setReactFlowInstance] = useState(null)
 
   const onConnect = useCallback(
@@ -88,7 +100,7 @@ const WorkFlowMainBoard: React.FC = () => {
 
       const newNode = {
         id: getId(),
-        type: 'CallAnswerControl',
+        type: type,
         position,
         data: { label: `${type} node` }
       }
