@@ -10,6 +10,8 @@ import { menuClasses } from '@menu/utils/menuClasses'
 
 const menuItemStyles = (settings: Settings, theme: Theme): MenuItemStyles => ({
   root: ({ level }) => ({
+    fontSize: '14px',
+    height: 'var(--nav-menu-height)',
     ...(level === 0 && {
       borderRadius: 6
     }),
@@ -50,7 +52,7 @@ const menuItemStyles = (settings: Settings, theme: Theme): MenuItemStyles => ({
     borderRadius: 'var(--border-radius)',
     paddingInline: theme.spacing(4),
     '&:not(:has(.MuiChip-root))': {
-      paddingBlock: theme.spacing(2)
+      paddingBlock: theme.spacing(1)
     },
     '&:has(.MuiChip-root)': {
       paddingBlock: theme.spacing(1.75)

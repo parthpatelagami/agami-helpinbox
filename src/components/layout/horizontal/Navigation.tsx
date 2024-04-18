@@ -59,7 +59,10 @@ const Navigation = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof getD
         isContentCompact={headerContentCompact}
         isBreakpointReached={isBreakpointReached}
         {...(!isBreakpointReached && {
-          className: classnames(horizontalLayoutClasses.navigationContentWrapper, 'flex items-center is-full plb-1')
+          className: classnames(
+            horizontalLayoutClasses.navigationContentWrapper,
+            'flex items-center is-full plb-1 text-sm'
+          )
         })}
       >
         <HorizontalMenu dictionary={dictionary} />
