@@ -1,17 +1,26 @@
 'use client'
 
-import { useSettings } from '@/@core/hooks/useSettings'
-import { CardHeader, useTheme, Divider, IconButton, Tooltip, MenuItem } from '@mui/material'
-import SidebarLeft from './SidebarLeft'
-import FormArea from './FormArea'
-import { StyledGrid } from './styles'
 import { useState } from 'react'
-import { FieldType } from '@/types/formViewTypes'
+import { CardHeader, useTheme, Divider, IconButton, Tooltip, MenuItem } from '@mui/material'
 
+import { useSettings } from '@/@core/hooks/useSettings'
 import CustomTextField from '@/@core/components/mui/TextField'
+
+import { FieldType, LayoutBreakpoints } from '@/types/formViewTypes'
+
+import FormArea from './FormArea'
 import FormAreaNew from './FormAreaNew'
+import SidebarLeft from './SidebarLeft'
+import { StyledGrid } from './styles'
+import FormPreview from './FormPreview'
 interface PropsType {
   fields: FieldType[]
+}
+
+const initialLayout: LayoutBreakpoints = {
+  lg: [],
+  md: [],
+  sm: []
 }
 
 const FormView = (props: PropsType) => {
@@ -24,7 +33,9 @@ const FormView = (props: PropsType) => {
 
   // ** States
   const [unusedFields, setUnusedFields] = useState(props.fields)
-  const [layout, setLayout] = useState(3)
+  const [usedFields, setUsedFields] = useState<FieldType[]>([])
+  const [layoutState, setLayoutState] = useState<LayoutBreakpoints>(initialLayout)
+  const [columns, setColumns] = useState(3)
 
   return (
     <StyledGrid className='h-full flex flex-col'>
@@ -40,7 +51,7 @@ const FormView = (props: PropsType) => {
                 select
                 className='rounded border-solid border border-primary'
                 defaultValue='3'
-                onChange={e => setLayout(parseInt(e.target.value))}
+                onChange={e => setColumns(parseInt(e.target.value))}
                 sx={{
                   '& .MuiInputBase-input:not(textarea).MuiInputBase-inputSizeSmall': {
                     color: theme.palette.primary.main
@@ -55,9 +66,7 @@ const FormView = (props: PropsType) => {
                 <MenuItem value={4}>4 Columns</MenuItem>
               </CustomTextField>
               <Tooltip placement='top' title='Preview'>
-                <IconButton size='small' className='mx-1 p-1 border-solid border border-primary rounded-full'>
-                  <i className={`tabler-player-play-filled text-primary`} />
-                </IconButton>
+                <FormPreview layoutState={layoutState} usedFields={usedFields} columns={columns} />
               </Tooltip>
             </div>
           }
@@ -65,7 +74,15 @@ const FormView = (props: PropsType) => {
         <Divider className='pt-2' />
         <div className='flex-grow flex'>
           <SidebarLeft unusedFields={unusedFields} setUnusedFields={setUnusedFields} />
-          <FormAreaNew unusedFields={unusedFields} layout={layout} setUnusedFields={setUnusedFields} />
+          <FormAreaNew
+            columns={columns}
+            unusedFields={unusedFields}
+            setUnusedFields={setUnusedFields}
+            usedFields={usedFields}
+            setUsedFields={setUsedFields}
+            layoutState={layoutState}
+            setLayoutState={setLayoutState}
+          />
         </div>
       </div>
     </StyledGrid>

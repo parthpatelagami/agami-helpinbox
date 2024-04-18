@@ -1,22 +1,16 @@
 'use client'
 
+import { DragEvent, useMemo, useState } from 'react'
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Box,
-  Card,
-  CardHeader,
-  Grid,
   InputAdornment,
-  Paper,
   Stack,
-  styled,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 import CustomTextField from '@core/components/mui/TextField'
-import { DragEvent, useMemo, useState } from 'react'
 import { FieldType } from '@/types/formViewTypes'
 
 interface PropsType {

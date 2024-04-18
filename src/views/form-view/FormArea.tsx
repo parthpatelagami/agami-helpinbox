@@ -65,6 +65,7 @@ const FormArea = (props: PropsType) => {
       })
       setUsedFields(
         usedFields.concat({
+          id: e.dataTransfer?.getData('id') || '',
           type: e.dataTransfer?.getData('type') || '',
           label: e.dataTransfer?.getData('label') || '',
           category: e.dataTransfer?.getData('category') || ''

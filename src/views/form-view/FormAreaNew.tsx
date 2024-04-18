@@ -1,43 +1,73 @@
 'use client'
-
-import { Card, CardHeader, Divider, Grid, IconButton, Tooltip } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
-
-import { Layout, Responsive, WidthProvider } from 'react-grid-layout'
 import { useState } from 'react'
+
+import { Button, Card, CardHeader, Divider, Grid, IconButton, Tooltip, useTheme } from '@mui/material'
+import { Layout, Responsive, WidthProvider } from 'react-grid-layout'
+
+// Types Import
 import { LayoutBreakpoints, FieldType } from '@/types/formViewTypes'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
-const initialLayout: LayoutBreakpoints = {
-  lg: [],
-  md: [],
-  sm: []
-}
-
 interface PropsType {
+  columns: number
   unusedFields: FieldType[]
   setUnusedFields: (val: any) => void
-  layout: number
+  usedFields: FieldType[]
+  setUsedFields: (val: any) => void
+  layoutState: LayoutBreakpoints
+  setLayoutState: (val: any) => void
 }
 
 var currentX = 0
 var currentY = 0
 
 const FormAreaNew = (props: PropsType) => {
-  const { unusedFields, setUnusedFields, layout } = props
-  const [layoutState, setLayoutState] = useState<LayoutBreakpoints>(initialLayout)
+  const { columns, unusedFields, setUnusedFields, usedFields, setUsedFields, layoutState, setLayoutState } = props
   const [itemsCount, setItemsCount] = useState<number>(0)
   const [breakpoint, setBreakpoint] = useState<string>('lg')
-  const [usedFields, setUsedFields] = useState<FieldType[]>([])
 
   const theme = useTheme()
 
+  const onDragStop = (newLayout: Layout[]) => {
+    const updatedLayout: LayoutBreakpoints = { ...layoutState }
+
+    Object.keys(updatedLayout).forEach((breakpoint: string) => {
+      updatedLayout[breakpoint] = newLayout.map(item => ({
+        ...item,
+        x: Math.round(item.x),
+        y: Math.round(item.y)
+      }))
+    })
+    console.log(updatedLayout)
+    setLayoutState(updatedLayout)
+  }
+
   const deleteField = (field: FieldType, index: number) => {
+    const updatedLayout: LayoutBreakpoints = {}
     const newFields = [...usedFields]
     newFields.splice(index, 1)
     setUsedFields(newFields)
     setUnusedFields(unusedFields.concat(field))
+    Object.keys(layoutState).forEach((breakpoint: string) => {
+      updatedLayout[breakpoint] = layoutState[breakpoint].filter(item => item.i != field.label)
+    })
+    let maxX = 0
+    let maxY = 0
+    Object.values(updatedLayout).forEach(layout => {
+      layout.forEach(item => {
+        maxX = Math.max(maxX, item.x)
+        maxY = Math.max(maxY, item.y)
+      })
+    })
+    if (maxX < currentX) {
+      currentX = maxX
+    }
+    if (maxY < currentY) {
+      currentY = maxY
+    }
+    setItemsCount(itemsCount - 1)
+    setLayoutState(updatedLayout)
   }
 
   const onDrop = (layouts: Layout[], item: Layout, e: DragEvent) => {
@@ -51,7 +81,7 @@ const FormAreaNew = (props: PropsType) => {
       updatedLayout[breakpoint] = layoutState[breakpoint].concat({
         i: fieldLabel,
         x: currentX,
-        y: Infinity,
+        y: currentY,
         w: fieldWidth,
         h: fieldType == 'area' ? 2 : fieldType == 'editor' ? 3.5 : 1
       })
@@ -64,12 +94,12 @@ const FormAreaNew = (props: PropsType) => {
         })
       )
     })
-    currentY = currentX + fieldWidth >= layout ? (currentY += 1) : currentY
-    currentX = currentX + fieldWidth >= layout ? 0 : currentX + fieldWidth
+    currentY = currentX + fieldWidth >= columns ? (currentY += 1) : currentY
+    currentX = currentX + fieldWidth >= columns ? 0 : currentX + fieldWidth
+    console.log(updatedLayout)
 
     setItemsCount(itemsCount + 1)
     setLayoutState(updatedLayout)
-    console.log(updatedLayout)
     const newFields = [...unusedFields]
     const index = parseInt(e.dataTransfer?.getData('index') || '')
     newFields.splice(index, 1)
@@ -137,23 +167,31 @@ const FormAreaNew = (props: PropsType) => {
     </Grid>
   )
   return (
-    <div className='w-full border-solid h-full border-r border-b overflow-y-auto max-h-[calc(100vh-153px)]'>
-      <ResponsiveGridLayout
-        onDragStop={newLayout => {
-          setLayoutState({ ...layoutState, [breakpoint]: newLayout })
-        }}
-        rowHeight={70}
-        layouts={layoutState}
-        isDraggable
-        cols={{ xxs: 1, xs: 2, sm: layout, md: layout, lg: layout, xl: layout }}
-        isDroppable
-        onDrop={onDrop}
-        isResizable={false}
-        style={{ minHeight: '100%' }}
-        draggableHandle='#handle'
-      >
-        {usedFields?.map((field, index) => renderFieldItem(field, index))}
-      </ResponsiveGridLayout>
+    <div className='w-full border-solid h-full border-r border-b '>
+      <div className='h-full overflow-y-auto max-h-[calc(100vh-201px)]'>
+        <ResponsiveGridLayout
+          onDragStop={onDragStop}
+          rowHeight={70}
+          layouts={layoutState}
+          isDraggable
+          cols={{ xxs: 1, xs: 2, sm: columns, md: columns, lg: columns, xl: columns }}
+          isDroppable
+          onDrop={onDrop}
+          isResizable={false}
+          style={{ minHeight: '100%' }}
+          draggableHandle='#handle'
+        >
+          {usedFields?.map((field, index) => renderFieldItem(field, index))}
+        </ResponsiveGridLayout>
+      </div>
+      <div className='flex justify-end p-2 border-solid border-t'>
+        <Button size='small' variant='text'>
+          Close
+        </Button>
+        <Button size='small' variant='contained'>
+          Save
+        </Button>
+      </div>
     </div>
   )
 }
