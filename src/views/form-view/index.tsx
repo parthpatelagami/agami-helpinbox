@@ -30,7 +30,7 @@ const FormView = (props: PropsType) => {
 
   // ** Vars
   const { skin } = settings
-  const backgroundColor = theme.palette.mode === 'dark' ? '#1A2027' : '#fff'
+  const backgroundColor = theme.palette.mode === 'dark' ? '#1A2027' : 'white'
 
   // ** States
   const [unusedFields, setUnusedFields] = useState(props.fields)
