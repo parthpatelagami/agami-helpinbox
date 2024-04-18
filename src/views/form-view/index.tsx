@@ -30,6 +30,7 @@ const FormView = (props: PropsType) => {
 
   // ** Vars
   const { skin } = settings
+  const backgroundColor = theme.palette.mode === 'dark' ? '#1A2027' : '#fff'
 
   // ** States
   const [unusedFields, setUnusedFields] = useState(props.fields)
@@ -39,7 +40,9 @@ const FormView = (props: PropsType) => {
 
   return (
     <StyledGrid className='h-full flex flex-col'>
-      <div className={`bg-white p-0 pt-3 border ${skin == 'default' && 'shadow'} rounded flex flex-col flex-grow`}>
+      <div
+        className={`bg-[${backgroundColor}] p-0 pt-3 border ${skin == 'default' && 'shadow'} rounded flex flex-col flex-grow`}
+      >
         <CardHeader
           title='Form View'
           subheader='Last updated at ...'

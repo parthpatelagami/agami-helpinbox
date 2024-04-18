@@ -73,7 +73,12 @@ const FormPreview = (props: PropsType) => {
         aria-labelledby='scroll-dialog-title'
         aria-describedby='scroll-dialog-description'
       >
-        <DialogTitle id='scroll-dialog-title'>Form View</DialogTitle>
+        <DialogTitle id='scroll-dialog-title' className='flex justify-between'>
+          Form View
+          <IconButton aria-label='close' className='text-base' onClick={handleClose}>
+            <i className={`tabler-x text-secondary`} />
+          </IconButton>
+        </DialogTitle>
         <DialogContent
           id='scroll-dialog-description'
           ref={descriptionElementRef}
@@ -144,9 +149,6 @@ const FormPreview = (props: PropsType) => {
             ))}
           </ResponsiveGridLayout>
         </DialogContent>
-        <DialogActions className={classnames('dialog-actions-dense', { '!pt-3': scroll === 'body' })}>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
       </Dialog>
     </div>
   )
