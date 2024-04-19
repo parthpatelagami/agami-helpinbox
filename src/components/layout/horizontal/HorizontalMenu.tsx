@@ -118,8 +118,8 @@ const HorizontalMenu = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof 
         <MenuItem href={`/${locale}/sla`} icon={<i className='tabler-list-tree' />}>
           SLA
         </MenuItem>
-        <MenuItem href={`/${locale}/form-view`} icon={<i className='tabler-layout-2' />}>
-          Form View
+        <MenuItem href={`/${locale}/custom-form`} icon={<i className='tabler-layout-2' />}>
+          Custom Form
         </MenuItem>
         <MenuItem href={`/${locale}/settings`} icon={<i className='tabler-settings' />}>
           Settings

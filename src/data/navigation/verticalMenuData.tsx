@@ -50,9 +50,9 @@ const verticalMenuData = (): VerticalMenuDataType[] => [
     href: '/sla'
   },
   {
-    label: 'Form View',
+    label: 'Custom Form',
     icon: 'tabler-layout-2',
-    href: '/form-view'
+    href: '/custom-form'
   }
 ]
 

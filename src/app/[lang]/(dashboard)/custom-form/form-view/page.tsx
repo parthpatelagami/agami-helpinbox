@@ -1,4 +1,4 @@
-import FormView from '@/views/form-view'
+import FormView from '@/views/custom-form/form-view'
 import { FieldType } from '@/types/formViewTypes'
 
 const initialFields: FieldType[] = [

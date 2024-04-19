@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 
 // MUI Imports
-import { Grid, Card, CardContent, CardHeader, Divider, IconButton } from '@mui/material'
+import { Grid, Card, CardContent, CardHeader, Divider, IconButton, Tooltip } from '@mui/material'
 
 // Component Imports
 import CardStatisticsStatistics3 from './CardStatisticsStatistics3'
@@ -95,12 +95,21 @@ const DashboardCRM = () => {
           className='p-2'
           action={
             <>
-              <IconButton size='small' className='text-textPrimary' aria-label='collapse'>
-                <i className='tabler-refresh' />
-              </IconButton>
-              <IconButton onClick={toggleFilterDrawer} size='small' className='text-textPrimary' aria-label='collapse'>
-                <i className='tabler-filter' />
-              </IconButton>
+              <Tooltip placement='top' title='Refresh'>
+                <IconButton size='small' className='text-textPrimary' aria-label='collapse'>
+                  <i className='tabler-refresh' />
+                </IconButton>
+              </Tooltip>
+              <Tooltip placement='top' title='Filter'>
+                <IconButton
+                  onClick={toggleFilterDrawer}
+                  size='small'
+                  className='text-textPrimary'
+                  aria-label='collapse'
+                >
+                  <i className='tabler-filter' />
+                </IconButton>
+              </Tooltip>
             </>
           }
         />
