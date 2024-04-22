@@ -139,7 +139,7 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: Table<
           value={(columnFilterValue as [number, number])?.[0] ?? ''}
           onChange={value => column.setFilterValue((old: [number, number]) => [value, old?.[1]])}
           placeholder={`Min ${column.getFacetedMinMaxValues()?.[0] ? `(${column.getFacetedMinMaxValues()?.[0]})` : ''}`}
-          className='w-24 border shadow rounded h-[35px] p-1'
+          className='w-24 border shadow rounded h-[30px] p-1'
         />
         <DebouncedInput
           type='number'
@@ -148,10 +148,9 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: Table<
           value={(columnFilterValue as [number, number])?.[1] ?? ''}
           onChange={value => column.setFilterValue((old: [number, number]) => [old?.[0], value])}
           placeholder={`Max ${column.getFacetedMinMaxValues()?.[1] ? `(${column.getFacetedMinMaxValues()?.[1]})` : ''}`}
-          className='w-24 border shadow rounded h-[35px] p-1'
+          className='w-24 border shadow rounded h-[30px] p-1'
         />
       </div>
-      <div className='h-1' />
     </div>
   ) : (
     <>
@@ -160,10 +159,9 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: Table<
         value={(columnFilterValue ?? '') as string}
         onChange={value => column.setFilterValue(value)}
         placeholder='Search...'
-        className='w-36 border rounded h-[35px] p-1'
+        className='w-36 border rounded h-[30px] p-1'
         list={column.id + 'list'}
       />
-      <div className='h-1' />
     </>
   )
 }
@@ -185,6 +183,7 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
         id: 'select',
         header: ({ table }) => (
           <Checkbox
+            size='small'
             {...{
               checked: table.getIsAllRowsSelected(),
               indeterminate: table.getIsSomeRowsSelected(),
@@ -194,6 +193,7 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
         ),
         cell: ({ row }) => (
           <Checkbox
+            size='small'
             {...{
               checked: row.getIsSelected(),
               disabled: !row.getCanSelect(),
@@ -208,7 +208,7 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
         cell: ({ row }) => (
           <div className='flex items-center gap-4'>
             <div className='flex flex-col'>
-              <Typography className='font-medium' color='text.primary'>
+              <Typography className='text-sm' color='text.primary'>
                 {row.original.formName}
               </Typography>
             </div>
@@ -219,7 +219,7 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
         header: 'Request Type',
         cell: ({ row }) => (
           <div className='flex items-center gap-2'>
-            <Typography className='capitalize' color='text.primary'>
+            <Typography className='text-sm' color='text.primary'>
               {row.original.requestType}
             </Typography>
           </div>
@@ -228,7 +228,7 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
       columnHelper.accessor('ticketType', {
         header: 'Ticket Type',
         cell: ({ row }) => (
-          <Typography className='capitalize' color='text.primary'>
+          <Typography className='text-sm' color='text.primary'>
             {row.original.ticketType}
           </Typography>
         )
@@ -238,14 +238,14 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
         cell: ({ row }) => (
           <div className='flex items-center'>
             <IconButton>
-              <i className='tabler-trash text-[22px] text-textSecondary' />
+              <i className='tabler-trash text-[18px] text-error' />
             </IconButton>
             <IconButton>
               <Link
                 href={getLocalizedUrl(`custom-form/form-view/${row.original.id}`, locale as Locale)}
                 className='flex'
               >
-                <i className='tabler-eye text-[22px] text-textSecondary' />
+                <i className='tabler-eye text-[18px] text-textSecondary' />
               </Link>
             </IconButton>
             <IconButton>
@@ -253,7 +253,7 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
                 href={getLocalizedUrl(`custom-form/form-view/${row.original.id}`, locale as Locale)}
                 className='flex'
               >
-                <i className='tabler-edit text-[22px] text-textSecondary' />
+                <i className='tabler-edit text-[18px] text-textSecondary' />
               </Link>
             </IconButton>
           </div>
@@ -296,15 +296,16 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
 
   return (
     <Card className='h-full'>
-      <CardContent className='flex justify-between flex-col gap-2 items-start sm:flex-row sm:items-center pb-0'>
+      <CardContent className='flex justify-between flex-col gap-2 items-start sm:flex-row sm:items-center pt-3 pb-0'>
         <div className='flex gap-2'>
-          <Typography>Show</Typography>
           <CustomTextField
+            size='small'
             select
             value={table.getState().pagination.pageSize}
             onChange={e => table.setPageSize(Number(e.target.value))}
             className='is-[70px]'
           >
+            <MenuItem value='5'>5</MenuItem>
             <MenuItem value='10'>10</MenuItem>
             <MenuItem value='25'>25</MenuItem>
             <MenuItem value='50'>50</MenuItem>
@@ -313,49 +314,49 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
         <div className='flex gap-2 !items-start is-full sm:flex-row sm:is-auto sm:items-center'>
           <Link href={getLocalizedUrl(`custom-form/form-view`, locale as Locale)}>
             <IconButton className=''>
-              <i className='tabler-plus border-solid text-[20px] text-textSecondary' />
+              <i className='tabler-plus border-solid text-[18px] text-textSecondary' />
             </IconButton>
           </Link>
           <IconButton className=''>
-            <i className='tabler-trash text-[20px] text-textSecondary' />
+            <i className='tabler-trash text-[18px] text-error' />
           </IconButton>
         </div>
       </CardContent>
-      <div className='overflow-x-auto p-5'>
+      <div className='overflow-x-auto px-5 py-3'>
         <table className={`${tableStyles.table} border`}>
           {table.getHeaderGroups().map(headerGroup => (
             <thead
-              className={`bg-${theme.palette.mode === 'dark' ? 'dark-default' : 'black'}`}
+              style={{ backgroundColor: theme.palette.mode === 'dark' ? '#25293C' : '#F3F2F5' }}
               key={`${headerGroup.id}-headers`}
             >
               <tr>
                 {headerGroup.headers.map(header => (
-                  <th key={header.id}>
+                  <th className='h-[45px]' key={header.id}>
                     {header.isPlaceholder ? null : (
-                      <>
-                        <div
-                          className={classnames({
-                            'flex items-center': header.column.getIsSorted(),
-                            'cursor-pointer select-none': header.column.getCanSort()
-                          })}
-                          onClick={header.column.getToggleSortingHandler()}
-                        >
-                          {flexRender(header.column.columnDef.header, header.getContext())}
-                          {header.column.getCanSort() && (
-                            <>
-                              {header.column.getIsSorted() ? (
-                                header.column.getAutoSortDir() ? (
-                                  <i className='tabler-chevron-down text-xl' />
-                                ) : (
-                                  <i className='tabler-chevron-up text-xl' />
-                                )
+                      <div
+                        className={classnames({
+                          'flex items-center': header.column.getIsSorted(),
+                          'cursor-pointer select-none': header.column.getCanSort(),
+                          'text-base': true,
+                          'normal-case': true
+                        })}
+                        onClick={header.column.getToggleSortingHandler()}
+                      >
+                        {flexRender(header.column.columnDef.header, header.getContext())}
+                        {header.column.getCanSort() && (
+                          <>
+                            {header.column.getIsSorted() ? (
+                              header.column.getAutoSortDir() ? (
+                                <i className='tabler-chevron-down text-xl' />
                               ) : (
-                                <i className='tabler-chevron-up text-xl opacity-0' />
-                              )}
-                            </>
-                          )}
-                        </div>
-                      </>
+                                <i className='tabler-chevron-up text-xl' />
+                              )
+                            ) : (
+                              <i className='tabler-chevron-up text-xl opacity-0' />
+                            )}
+                          </>
+                        )}
+                      </div>
                     )}
                   </th>
                 ))}
@@ -366,11 +367,9 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
             <thead key={`${headerGroup.id}-search`}>
               <tr>
                 {headerGroup.headers.map(header => (
-                  <th className='p-0' key={header.id}>
+                  <th className='py-0 h-[41px]' key={header.id}>
                     {header.column.getCanFilter() && header.column.columnDef.header != 'Actions' ? (
-                      <div>
-                        <Filter column={header.column} table={table} />
-                      </div>
+                      <Filter column={header.column} table={table} />
                     ) : null}
                   </th>
                 ))}
@@ -392,9 +391,11 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
                 .rows.slice(0, table.getState().pagination.pageSize)
                 .map(row => {
                   return (
-                    <tr key={row.id} className={classnames({ selected: row.getIsSelected() })}>
+                    <tr key={row.id} className={`${classnames({ selected: row.getIsSelected() })}`}>
                       {row.getVisibleCells().map(cell => (
-                        <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                        <td className='py-0 h-[39px]' key={cell.id}>
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </td>
                       ))}
                     </tr>
                   )
@@ -403,6 +404,7 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
           )}
         </table>
         <TablePagination
+          size='small'
           component={() => <TablePaginationComponent table={table} />}
           count={table.getFilteredRowModel().rows.length}
           rowsPerPage={table.getState().pagination.pageSize}
