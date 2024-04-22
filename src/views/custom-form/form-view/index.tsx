@@ -43,7 +43,7 @@ const FormView = (props: PropsType) => {
     <div className='h-full flex flex-col'>
       <StyledGrid className='h-full flex flex-col'>
         <div
-          className={`bg-[${backgroundColor}] p-0 border ${skin == 'default' && 'shadow'} rounded flex flex-col flex-grow`}
+          className={`bg-[${theme.palette.mode === 'dark' ? '#1A2027' : 'white'}] p-0 border ${skin == 'default' && 'shadow'} rounded flex flex-col flex-grow`}
         >
           <CardHeader
             title='Form View'

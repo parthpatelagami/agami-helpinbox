@@ -53,7 +53,7 @@ import { getLocalizedUrl } from '@/utils/i18n'
 // Style Imports
 import tableStyles from '@core/styles/table.module.css'
 import React from 'react'
-
+import { useTheme } from '@mui/material'
 declare module '@tanstack/table-core' {
   interface FilterFns {
     fuzzy: FilterFn<unknown>
@@ -91,6 +91,82 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 
 // Column Definitions
 const columnHelper = createColumnHelper<TariffTypeWithAction>()
+const DebouncedInput = ({
+  value: initialValue,
+  onChange,
+  debounce = 500,
+  ...props
+}: {
+  value: string | number
+  onChange: (value: string | number) => void
+  debounce?: number
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) => {
+  // States
+  const [value, setValue] = useState(initialValue)
+
+  useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      onChange(value)
+    }, debounce)
+
+    return () => clearTimeout(timeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
+
+  return <input {...props} value={value} onChange={e => setValue(e.target.value)} />
+}
+
+function Filter({ column, table }: { column: Column<any, unknown>; table: Table<any> }) {
+  const firstValue = table.getPreFilteredRowModel().flatRows[0]?.getValue(column.id)
+
+  const columnFilterValue = column.getFilterValue()
+  const sortedUniqueValues = React.useMemo(
+    () => (typeof firstValue === 'number' ? [] : Array.from(column.getFacetedUniqueValues().keys()).sort()),
+    [column.getFacetedUniqueValues()]
+  )
+
+  return typeof firstValue === 'number' ? (
+    <div>
+      <div className='flex space-x-2'>
+        <DebouncedInput
+          type='number'
+          min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
+          max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
+          value={(columnFilterValue as [number, number])?.[0] ?? ''}
+          onChange={value => column.setFilterValue((old: [number, number]) => [value, old?.[1]])}
+          placeholder={`Min ${column.getFacetedMinMaxValues()?.[0] ? `(${column.getFacetedMinMaxValues()?.[0]})` : ''}`}
+          className='w-24 border shadow rounded h-[35px] p-1'
+        />
+        <DebouncedInput
+          type='number'
+          min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
+          max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
+          value={(columnFilterValue as [number, number])?.[1] ?? ''}
+          onChange={value => column.setFilterValue((old: [number, number]) => [old?.[0], value])}
+          placeholder={`Max ${column.getFacetedMinMaxValues()?.[1] ? `(${column.getFacetedMinMaxValues()?.[1]})` : ''}`}
+          className='w-24 border shadow rounded h-[35px] p-1'
+        />
+      </div>
+      <div className='h-1' />
+    </div>
+  ) : (
+    <>
+      <DebouncedInput
+        type='text'
+        value={(columnFilterValue ?? '') as string}
+        onChange={value => column.setFilterValue(value)}
+        placeholder='Search...'
+        className='w-36 border rounded h-[35px] p-1'
+        list={column.id + 'list'}
+      />
+      <div className='h-1' />
+    </>
+  )
+}
 
 const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
   // States
@@ -101,86 +177,7 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
 
   // Hooks
   const { lang: locale } = useParams()
-
-  function DebouncedInput({
-    value: initialValue,
-    onChange,
-    debounce = 5000,
-    ...props
-  }: {
-    value: string | number
-    onChange: (value: string | number) => void
-    debounce?: number
-  } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
-    const [value, setValue] = React.useState(initialValue)
-
-    React.useEffect(() => {
-      setValue(initialValue)
-    }, [initialValue])
-
-    React.useEffect(() => {
-      const timeout = setTimeout(() => {
-        onChange(value)
-      }, debounce)
-
-      return () => clearTimeout(timeout)
-    }, [value])
-
-    return <input {...props} value={value} onChange={e => setValue(e.target.value)} />
-  }
-
-  function Filter({ column, table }: { column: Column<any, unknown>; table: Table<any> }) {
-    const firstValue = table.getPreFilteredRowModel().flatRows[0]?.getValue(column.id)
-
-    const columnFilterValue = column.getFilterValue()
-    const sortedUniqueValues = React.useMemo(
-      () => (typeof firstValue === 'number' ? [] : Array.from(column.getFacetedUniqueValues().keys()).sort()),
-      [column.getFacetedUniqueValues()]
-    )
-
-    return typeof firstValue === 'number' ? (
-      <div>
-        <div className='flex space-x-2'>
-          <DebouncedInput
-            type='number'
-            min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-            max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
-            value={(columnFilterValue as [number, number])?.[0] ?? ''}
-            onChange={value => column.setFilterValue((old: [number, number]) => [value, old?.[1]])}
-            placeholder={`Min ${column.getFacetedMinMaxValues()?.[0] ? `(${column.getFacetedMinMaxValues()?.[0]})` : ''}`}
-            className='w-24 border shadow rounded h-[35px] p-1'
-          />
-          <DebouncedInput
-            type='number'
-            min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-            max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
-            value={(columnFilterValue as [number, number])?.[1] ?? ''}
-            onChange={value => column.setFilterValue((old: [number, number]) => [old?.[0], value])}
-            placeholder={`Max ${column.getFacetedMinMaxValues()?.[1] ? `(${column.getFacetedMinMaxValues()?.[1]})` : ''}`}
-            className='w-24 border shadow rounded h-[35px] p-1'
-          />
-        </div>
-        <div className='h-1' />
-      </div>
-    ) : (
-      <>
-        <datalist id={column.id + 'list'}>
-          {sortedUniqueValues.slice(0, 5000).map((value: any) => (
-            <option value={value} key={value} />
-          ))}
-        </datalist>
-        <DebouncedInput
-          type='text'
-          value={(columnFilterValue ?? '') as string}
-          onChange={value => column.setFilterValue(value)}
-          placeholder='Search...'
-          className='w-36 border rounded h-[35px] p-1'
-          list={column.id + 'list'}
-        />
-        <div className='h-1' />
-      </>
-    )
-  }
+  const theme = useTheme()
 
   const columns = useMemo<ColumnDef<TariffTypeWithAction, any>[]>(
     () => [
@@ -327,55 +324,51 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
       <div className='overflow-x-auto p-5'>
         <table className={`${tableStyles.table} border`}>
           {table.getHeaderGroups().map(headerGroup => (
-            <>
-              <thead className='bg-default'>
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map(header => (
-                    <th key={header.id}>
-                      {header.isPlaceholder ? null : (
-                        <>
-                          <div
-                            className={classnames({
-                              'flex items-center': header.column.getIsSorted(),
-                              'cursor-pointer select-none': header.column.getCanSort()
-                            })}
-                            onClick={header.column.getToggleSortingHandler()}
-                          >
-                            {flexRender(header.column.columnDef.header, header.getContext())}
-                            {header.column.getCanSort() && (
-                              <>
-                                {header.column.getIsSorted() ? (
-                                  header.column.getAutoSortDir() ? (
-                                    <i className='tabler-chevron-down text-xl' />
-                                  ) : (
-                                    <i className='tabler-chevron-up text-xl' />
-                                  )
+            <thead key={headerGroup.id}>
+              <tr key='headers' className={`bg-${theme.palette.mode === 'dark' ? 'dark-default' : 'primary'}`}>
+                {headerGroup.headers.map(header => (
+                  <th key={header.id}>
+                    {header.isPlaceholder ? null : (
+                      <>
+                        <div
+                          className={classnames({
+                            'flex items-center': header.column.getIsSorted(),
+                            'cursor-pointer select-none': header.column.getCanSort()
+                          })}
+                          onClick={header.column.getToggleSortingHandler()}
+                        >
+                          {flexRender(header.column.columnDef.header, header.getContext())}
+                          {header.column.getCanSort() && (
+                            <>
+                              {header.column.getIsSorted() ? (
+                                header.column.getAutoSortDir() ? (
+                                  <i className='tabler-chevron-down text-xl' />
                                 ) : (
-                                  <i className='tabler-chevron-up text-xl opacity-0' />
-                                )}
-                              </>
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <thead>
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map(header => (
-                    <th key={header.id}>
-                      {header.column.getCanFilter() ? (
-                        <div>
-                          <Filter column={header.column} table={table} />
+                                  <i className='tabler-chevron-up text-xl' />
+                                )
+                              ) : (
+                                <i className='tabler-chevron-up text-xl opacity-0' />
+                              )}
+                            </>
+                          )}
                         </div>
-                      ) : null}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-            </>
+                      </>
+                    )}
+                  </th>
+                ))}
+              </tr>
+              <tr key='search'>
+                {headerGroup.headers.map(header => (
+                  <th key={header.id}>
+                    {header.column.getCanFilter() && header.column.columnDef.header != 'Actions' ? (
+                      <div>
+                        <Filter column={header.column} table={table} />
+                      </div>
+                    ) : null}
+                  </th>
+                ))}
+              </tr>
+            </thead>
           ))}
           {table.getFilteredRowModel().rows.length === 0 ? (
             <tbody>

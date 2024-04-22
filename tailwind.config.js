@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,css}'],
   corePlugins: {
@@ -9,7 +10,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        default: '#F3F2F5'
+        'light-default': '#F3F2F5',
+        'dark-default': '#25293C'
       }
     }
   }
