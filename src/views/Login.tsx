@@ -4,7 +4,7 @@
 import { useState } from 'react'
 
 // Next Imports
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 
 // MUI Imports
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -22,6 +22,7 @@ import classnames from 'classnames'
 
 // Type Imports
 import type { SystemMode } from '@core/types'
+import type { Locale } from '@configs/i18n'
 
 // Component Imports
 import Link from '@components/Link'
@@ -34,6 +35,8 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
+
+import { getLocalizedUrl } from '@/utils/i18n'
 
 // Styled Custom Components
 const LoginIllustration = styled('img')(({ theme }) => ({
@@ -74,6 +77,7 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
   // Hooks
   const router = useRouter()
   const { settings } = useSettings()
+  const { lang: locale } = useParams()
   const theme = useTheme()
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
   const authBackground = useImageVariant(mode, lightImg, darkImg)
@@ -144,7 +148,12 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
             />
             <div className='flex justify-between items-center gap-x-3 gap-y-1 flex-wrap'>
               <FormControlLabel control={<Checkbox />} label='Remember me' />
-              <Typography className='text-end' color='primary' component={Link}>
+              <Typography
+                className='text-end'
+                color='primary'
+                component={Link}
+                href={getLocalizedUrl('/forgot-password', locale as Locale)}
+              >
                 Forgot password?
               </Typography>
             </div>
