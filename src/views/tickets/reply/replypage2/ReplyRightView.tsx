@@ -18,8 +18,7 @@ import { useState, SyntheticEvent } from 'react'
 import Grid, { GridProps } from '@mui/material/Grid'
 import Tooltip from '@mui/material/Tooltip'
 import Chip from '@mui/material/Chip'
-// import { UsersType } from 'src/types/apps/Usertypes'
-// import Icon from 'src/@core/components/icon'
+// import { StyledGrid } from './styles'
 import MuiListItem, { ListItemProps } from '@mui/material/ListItem'
 import { styled, useTheme } from '@mui/material/styles'
 import MuiTextField, { TextFieldProps } from '@mui/material/TextField'
@@ -29,6 +28,7 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import { Divider } from '@mui/material'
+import '@/app/globals.css'
 
 
 const collaboratorsdata = [
@@ -72,7 +72,7 @@ const data = {
     },
   }))
 
-const ReplyLeftView = ()=>{
+const ReplyRightView = ()=>{
     const [openEdit, setOpenEdit] = useState<boolean>(false)
     const [suspendDialogOpen, setSuspendDialogOpen] = useState<boolean>(false)
     const [subscriptionDialogOpen, setSubscriptionDialogOpen] = useState<boolean>(false)
@@ -118,14 +118,14 @@ const ReplyLeftView = ()=>{
               aria-controls='controlled-panel-content-1'
               // expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
             >
-              <p>Customer Details</p>
+              <p className='font-bold'>Customer Details</p>
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
               <div className='pt-2'>
                   <div className='flex mb-4 flex-col'>
                       <div className='flex justify-between'>
-                          <p className='me-2'>Customer Name:</p>
+                          <p className='me-2 font-bold'>Customer Name:</p>
                           <Tooltip placement='top' title='Update Customer Details'>
                           <Link
                               component="button"
@@ -136,15 +136,15 @@ const ReplyLeftView = ()=>{
                           </Link>
                           </Tooltip>
                       </div>
-                      <p className='font-bold'>{data.fullName}</p>                    
+                      <p className=''>{data.fullName}</p>                    
                   </div>
                   <div className='flex mb-4 flex-col'>
-                      <p className='me-2 '>Customer Email:</p>
-                      <p className='font-bold '>{data.email}</p>
+                      <p className='me-2 font-bold'>Customer Email:</p>
+                      <p className=' '>{data.email}</p>
                   </div>
                   <div className='flex mb-4 flex-col'>
-                      <p className='me-2 '>Customer Number:</p>
-                      <p className='font-bold '>{data.contact}</p>
+                      <p className='me-2 font-bold'>Customer Number:</p>
+                      <p className=' '>{data.contact}</p>
                   </div>                  
               </div>
             </AccordionDetails>
@@ -155,35 +155,31 @@ const ReplyLeftView = ()=>{
               aria-controls='controlled-panel-content-1'
               // expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
             >
-              <p>Agent Details</p>
+              <p className='font-bold'>Agent Details</p>
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
               <div className='flex mb-4 flex-col mt-2'>
-                <p className='me-2 '>Assigneed To:</p>
-                <CustomTextField select defaultValue='10' label='' className='' id='custom-select'>
-                    <MenuItem value=''>
-                    <em>None</em>
-                    </MenuItem>
+                <p className='font-bold mb-2'>Assigneed To:</p>                            
+                <CustomTextField select defaultValue='10' label='' className='' sx={{'& .MuiInputBase-root':{border:'0px'}, '& .MuiInputBase-input': { paddingLeft: '0px !important'}}} id="">                   
                     <MenuItem value={10}>Shubham Pangale</MenuItem>
                     <MenuItem value={20}>Parth Patel</MenuItem>
                     <MenuItem value={30}>Vinod Suvare</MenuItem>
-                </CustomTextField>
+                </CustomTextField>                
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 '>Due date:</p>
-                  <p className='font-bold'>2024-03-13 12:11:09 PM</p>
+                  <p className='me-2 font-bold'>Due date:</p>
+                  <p className=''>2024-03-13 12:11:09 PM</p>
               </div>
               <div className='flex mb-4 flex-col'>
-                <p className='me-2 '>Priority:</p>
-                <CustomTextField select defaultValue='10' label='' id='custom-select'>
-                    <MenuItem value=''>
-                    <em>None</em>
-                    </MenuItem>
+                <p className='me-2 font-bold mb-2'>Priority:</p>
+                <CustomTextField select defaultValue='10' label='' sx={{'& .MuiInputBase-root':{border:'0px'}, '& .MuiInputBase-input': { paddingLeft: '0px !important'}}} id='custom-select'>
+                   
                     <MenuItem value={10}>Low</MenuItem>
                     <MenuItem value={20}>High</MenuItem>
                     <MenuItem value={30}>Medium</MenuItem>
                 </CustomTextField>
+                
               </div>
             </AccordionDetails>
           </Accordion>  
@@ -193,64 +189,53 @@ const ReplyLeftView = ()=>{
               aria-controls='controlled-panel-content-1'
               // expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
             >
-              <p>Other Details</p>
+              <p className='font-bold'>Other Details</p>
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
               <div className='flex mb-4 flex-col mt-2'>
-                <p className='me-2 '>Channel:</p>
-                <p className='font-bold'>Manual</p>
+                <p className='me-2 font-bold'>Channel:</p>
+                <p className=''>Manual</p>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 '>Request Type:</p>
-                  <CustomTextField select defaultValue='10' label='' id='custom-select'>
-                      <MenuItem value=''>
-                      <em>None</em>
-                      </MenuItem>
+                  <p className='me-2 font-bold'>Request Type:</p>
+                  <CustomTextField select defaultValue='10' label='' className='Mui-focused' sx={{'& .MuiInputBase-root':{border:'0px'}, '& .MuiInputBase-input': { paddingLeft: '0px !important',}}} id='custom-select'>
                       <MenuItem value={10}>Incident</MenuItem>
                       <MenuItem value={20}>HD</MenuItem>
                       <MenuItem value={30}>Task</MenuItem>
                   </CustomTextField>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 '>Ticket Type:</p>
-                  <CustomTextField select defaultValue='10' label='' id='custom-select'>
-                      <MenuItem value=''>
-                      <em>None</em>
-                      </MenuItem>
+                  <p className='me-2 font-bold'>Ticket Type:</p>
+                  <CustomTextField select defaultValue='10' label='' sx={{'& .MuiInputBase-root':{border:'0px'}, '& .MuiInputBase-input': { paddingLeft: '0px !important',}}} id='custom-select'>
+                    
                       <MenuItem value={10}>Complaint</MenuItem>
                       <MenuItem value={20}>Issue</MenuItem>
                       <MenuItem value={30}>Somthing</MenuItem>
                   </CustomTextField>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 '>Department Name:</p>
-                  <CustomTextField select defaultValue='10' label='' id='custom-select'>
-                      <MenuItem value=''>
-                      <em>None</em>
-                      </MenuItem>
+                  <p className='me-2 font-bold'>Department Name:</p>
+                  <CustomTextField select defaultValue='10' label='' sx={{'& .MuiInputBase-root':{border:'0px'}, '& .MuiInputBase-input': { paddingLeft: '0px !important',}}} id='custom-select'>
+                      
                       <MenuItem value={10}>Developer</MenuItem>
                       <MenuItem value={20}>QA</MenuItem>
                       <MenuItem value={30}>Tester</MenuItem>
                   </CustomTextField>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 '>Category:</p>
-                  <CustomTextField select defaultValue='10' label='' id='custom-select'>
-                      <MenuItem value=''>
-                      <em>None</em>
-                      </MenuItem>
+                  <p className='me-2 font-bold'>Category:</p>
+                  <CustomTextField select defaultValue='10' label='' sx={{'& .MuiInputBase-root':{border:'0px'}, '& .MuiInputBase-input': { paddingLeft: '0px !important',}}} id='custom-select'>
+                      
                       <MenuItem value={10}>Requirement</MenuItem>
                       <MenuItem value={20}>Service Affecting</MenuItem>
                       <MenuItem value={30}>Non-Service Affecting</MenuItem>
                   </CustomTextField>
               </div>
               <div className='flex mb-4 flex-col'>
-                  <p className='me-2 '>Sub-Category:</p>
-                  <CustomTextField select defaultValue='10' label='' id='custom-select'>
-                      <MenuItem value=''>
-                      <em>None</em>
-                      </MenuItem>
+                  <p className='me-2 font-bold'>Sub-Category:</p>
+                  <CustomTextField select defaultValue='10' label='' sx={{'& .MuiInputBase-root':{border:'0px'}, '& .MuiInputBase-input': { paddingLeft: '0px !important',}}} id='custom-select'>
+                     
                       <MenuItem value={10}>Requirement</MenuItem>
                       <MenuItem value={20}>Service Affecting</MenuItem>
                       <MenuItem value={30}>Non-Service Affecting</MenuItem>
@@ -264,18 +249,18 @@ const ReplyLeftView = ()=>{
               aria-controls='controlled-panel-content-1'
               // expandIcon={<Icon fontSize='1.25rem' icon='tabler:chevron-down' />}
             >
-              <p>Email Details</p>
+              <p className='font-bold'>Email Details</p>
             </AccordionSummary>
             <Divider/>
             <AccordionDetails>
               <div className='flex mb-4 flex-col mt-2'>
-                <p className='me-2 '>CC:</p>
+                <p className='me-2 font-bold'>CC:</p>
                 <div className='mt-2'>
                   {collaboratorsdata.map((item, index) => <Chip key={index} label={item.email} className='mb-2' size='small' />)}
                 </div>
             </div>
             <div className='flex mb-4 flex-col'>
-                <p className='me-2 '>TO:</p>
+                <p className='me-2 font-bold'>TO:</p>
                 <div className='mt-2'>
                   {collaboratorsdata.map((item, index) => <Chip key={index} label={item.email} className='mb-2' size='small' />)}
                 </div>
@@ -412,4 +397,4 @@ const ReplyLeftView = ()=>{
       </Grid>
     )
 }
-export default ReplyLeftView;
+export default ReplyRightView;

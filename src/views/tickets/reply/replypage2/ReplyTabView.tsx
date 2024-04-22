@@ -10,7 +10,7 @@ import Link from 'next/link'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import React, { useState, ReactNode, SyntheticEvent } from 'react'
-
+// import { StyledGrid } from './styles'
 // ** Icon Imports
 import {Icon} from '@iconify/react'
 import IconButton from '@mui/material/IconButton'
@@ -71,7 +71,7 @@ const ReplyTabView = () => {
         <Grid item xs={12} md={12} sm={12}>
           <Grid item xs={12} sm={12} md={12} mb={5} className='flex flex-col justify-normal md:justify-between lg:justify-between sm:justify-normal md:flex-row sm:flex-col'>
             <Grid item md={4} sm={12} xs={12} className='mt-5'>
-              <CustomTextField select fullWidth label='' defaultValue='0'>
+              <CustomTextField select fullWidth label='' className='' defaultValue='0'>
                 <MenuItem value='0'>Select Canned Response</MenuItem>
                 <MenuItem value='pending'>Shubham</MenuItem>
                 <MenuItem value='active'>Parth</MenuItem>

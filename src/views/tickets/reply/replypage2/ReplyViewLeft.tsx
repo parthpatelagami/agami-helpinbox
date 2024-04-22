@@ -64,7 +64,7 @@ const Tab = styled(MuiTab)<TabProps>(({ theme }) => ({
 //   }
 // }))
 const tab = 'reply'
-const ReplyViewRight = ({ invoiceData }: Props) => {
+const ReplyViewLeft = ({ invoiceData }: Props) => {
   // ** State
   const [activeTab, setActiveTab] = useState<string>(tab)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -186,4 +186,4 @@ const ReplyViewRight = ({ invoiceData }: Props) => {
   )
 }
 
-export default ReplyViewRight
+export default ReplyViewLeft

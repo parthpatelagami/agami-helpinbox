@@ -8,13 +8,13 @@ import CardContent from '@mui/material/CardContent'
 import IconButton from '@mui/material/IconButton'
 // import Icon from 'src/@core/components/icon'
 import Tooltip from '@mui/material/Tooltip'
-import ReplyViewRight from './ReplyViewRight'
+import ReplyViewLeft from './ReplyViewLeft'
 import { Icon } from '@iconify/react'
 
 import Grid, { GridProps } from '@mui/material/Grid'
 import { styled, useTheme } from '@mui/material/styles'
 import { Divider } from '@mui/material'
-import ReplyLeftView from './ReplyLeftView'
+import ReplyRightView from './ReplyRightView'
 import ForwardTicket from './ForwardTicket/ForwardTicket'
 
 const StyledGrid = styled(Grid)<GridProps>(({ theme }) => ({
@@ -98,7 +98,7 @@ const ReplyViewMain = () => {
                 <Divider/>
                 <CardContent>  
                   <Grid item sm={12}>
-                    <ReplyViewRight invoiceData={[]} />                     
+                    <ReplyViewLeft invoiceData={[]} />                     
                   </Grid>
                 </CardContent>  
               </StyledGrid>
@@ -110,7 +110,7 @@ const ReplyViewMain = () => {
                   xs={12}
                   md={3}
                 >
-                <ReplyLeftView/>
+                <ReplyRightView/>
               </Grid>
           </Grid>
           <ForwardTicket open={openForwardTicket} handleClose={() => setOpenForwardTicket(!openForwardTicket)} />
