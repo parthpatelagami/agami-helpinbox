@@ -1,7 +1,7 @@
 'use client'
 
 // REACT IMPORTS
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 
 // NEXT IMPORTS
 import Link from 'next/link'
@@ -9,13 +9,56 @@ import { useParams } from 'next/navigation'
 
 // MUI IMPORTS
 import { Box, Card, Divider, Grid, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 
 // Type Imports
 import type { Locale } from '@/configs/i18n'
+
 import { getLocalizedUrl } from '@/utils/i18n'
 
 const ChannelsComponents = () => {
   const { lang: locale } = useParams()
+  const theme = useTheme()
+  const [emailHovered, setEmailHovered] = useState(false)
+  const [fbHovered, setFbHovered] = useState(false)
+  const [phoneHovered, setPhoneHovered] = useState(false)
+  const [whatsappHovered, setWhatsappHovered] = useState(false)
+
+  const lightBg = theme.palette.primary.lightOpacity
+  const darBg = theme.palette.primary.main
+  const cardBgColor = theme.palette.mode === 'light' ? lightBg : darBg
+
+  const handleEmailMouseEnter = () => {
+    setEmailHovered(true)
+  }
+
+  const handleEmailMouseLeave = () => {
+    setEmailHovered(false)
+  }
+
+  const handleFbMouseEnter = () => {
+    setFbHovered(true)
+  }
+
+  const handleFbMouseLeave = () => {
+    setFbHovered(false)
+  }
+
+  const handlePhoneMouseEnter = () => {
+    setPhoneHovered(true)
+  }
+
+  const handlePhoneMouseLeave = () => {
+    setPhoneHovered(false)
+  }
+
+  const handleWhatsappMouseEnter = () => {
+    setWhatsappHovered(true)
+  }
+
+  const handleWhatsappMouseLeave = () => {
+    setWhatsappHovered(false)
+  }
 
   return (
     <Fragment>
@@ -30,7 +73,12 @@ const ChannelsComponents = () => {
           <Grid item xs={12} display='flex' flexDirection='row'>
             <Grid item xs={4} className='m-1'>
               <Link href={getLocalizedUrl('settings/channels/email', locale as Locale)}>
-                <Card className='p-4 flex group transition-colors duration-300 hover:bg-gray-200'>
+                <Card
+                  className='p-4 flex group transition-colors duration-300'
+                  style={{ backgroundColor: emailHovered ? cardBgColor : 'transparent' }}
+                  onMouseEnter={handleEmailMouseEnter}
+                  onMouseLeave={handleEmailMouseLeave}
+                >
                   <i className='custom-email-icon text-4xl' />
                   <Box className='ml-3' display='flex' flexDirection='column'>
                     <Typography variant='h5' className='font-normal text-lg'>
@@ -44,7 +92,12 @@ const ChannelsComponents = () => {
               </Link>
             </Grid>
             <Grid item xs={4} className='m-1'>
-              <Card className='p-4 flex group transition-colors duration-300 hover:bg-gray-200'>
+              <Card
+                className='p-4 flex group transition-colors duration-300'
+                style={{ backgroundColor: fbHovered ? cardBgColor : 'transparent' }}
+                onMouseEnter={handleFbMouseEnter}
+                onMouseLeave={handleFbMouseLeave}
+              >
                 <i className='custom-facebook-icon text-4xl' />
                 <Box className='ml-3' display='flex' flexDirection='column'>
                   <Typography variant='h5' className='font-normal text-lg'>
@@ -57,7 +110,12 @@ const ChannelsComponents = () => {
               </Card>
             </Grid>
             <Grid item xs={4} className='m-1'>
-              <Card className='p-4 flex group transition-colors duration-300 hover:bg-gray-200'>
+              <Card
+                className='p-4 flex group transition-colors duration-300'
+                style={{ backgroundColor: phoneHovered ? cardBgColor : 'transparent' }}
+                onMouseEnter={handlePhoneMouseEnter}
+                onMouseLeave={handlePhoneMouseLeave}
+              >
                 <i className='custom-phone-icon text-4xl' />
                 <Box className='ml-3' display='flex' flexDirection='column'>
                   <Typography variant='h5' className='font-normal text-lg'>
@@ -72,7 +130,12 @@ const ChannelsComponents = () => {
           </Grid>
           <Grid item xs={12} display='flex' flexDirection='row'>
             <Grid item xs={4} className='m-1'>
-              <Card className='p-4 flex group transition-colors duration-300 hover:bg-gray-200'>
+              <Card
+                className='p-4 flex group transition-colors duration-300'
+                style={{ backgroundColor: whatsappHovered ? cardBgColor : 'transparent' }}
+                onMouseEnter={handleWhatsappMouseEnter}
+                onMouseLeave={handleWhatsappMouseLeave}
+              >
                 <i className='custom-whatsapp-icon text-4xl' />
                 <Box className='ml-3' display='flex' flexDirection='column'>
                   <Typography variant='h5' className='font-normal text-lg'>
