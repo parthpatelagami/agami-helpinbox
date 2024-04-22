@@ -168,7 +168,7 @@ const FormAreaNew = (props: PropsType) => {
   )
   return (
     <div className='w-full border-solid h-full border-r border-b '>
-      <div className='h-full overflow-y-auto max-h-[calc(100%-45px)]'>
+      <div className='h-full overflow-y-auto max-h-[calc(100vh-180px)]'>
         <ResponsiveGridLayout
           onDragStop={onDragStop}
           rowHeight={70}

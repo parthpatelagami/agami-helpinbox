@@ -324,8 +324,11 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
       <div className='overflow-x-auto p-5'>
         <table className={`${tableStyles.table} border`}>
           {table.getHeaderGroups().map(headerGroup => (
-            <thead key={headerGroup.id}>
-              <tr key='headers' className={`bg-${theme.palette.mode === 'dark' ? 'dark-default' : 'primary'}`}>
+            <thead
+              className={`bg-${theme.palette.mode === 'dark' ? 'dark-default' : 'black'}`}
+              key={`${headerGroup.id}-headers`}
+            >
+              <tr>
                 {headerGroup.headers.map(header => (
                   <th key={header.id}>
                     {header.isPlaceholder ? null : (
@@ -357,9 +360,13 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
                   </th>
                 ))}
               </tr>
-              <tr key='search'>
+            </thead>
+          ))}
+          {table.getHeaderGroups().map(headerGroup => (
+            <thead key={`${headerGroup.id}-search`}>
+              <tr>
                 {headerGroup.headers.map(header => (
-                  <th key={header.id}>
+                  <th className='p-0' key={header.id}>
                     {header.column.getCanFilter() && header.column.columnDef.header != 'Actions' ? (
                       <div>
                         <Filter column={header.column} table={table} />
