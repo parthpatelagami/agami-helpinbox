@@ -48,7 +48,7 @@
     "react-grid-layout": "^1.4.4",
     "react-hook-form": "^7.51.2",
     "react-paginate": "^8.2.0",
-    "react-perfect-scrollbar": "1.5.8",
+    "react-perfect-scrollbar": "^1.5.8",
     "react-select": "^5.8.0",
     "react-toastify": "10.0.4",
     "react-use": "17.5.0",
