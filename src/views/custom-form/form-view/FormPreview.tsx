@@ -2,18 +2,14 @@
 import { useEffect, useRef, useState } from 'react'
 
 // MUI Imports
-import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContentText from '@mui/material/DialogContentText'
 import type { DialogProps } from '@mui/material/Dialog'
 import { Grid, IconButton, MenuItem } from '@mui/material'
 
 // Third-party Imports
 import { Responsive, WidthProvider } from 'react-grid-layout'
-import classnames from 'classnames'
 
 import { FieldType, LayoutBreakpoints } from '@/types/formViewTypes'
 import CustomTextField from '@/@core/components/mui/TextField'

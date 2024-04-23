@@ -6,6 +6,7 @@ import { Layout, Responsive, WidthProvider } from 'react-grid-layout'
 
 // Types Import
 import { LayoutBreakpoints, FieldType } from '@/types/formViewTypes'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
@@ -168,22 +169,24 @@ const FormAreaNew = (props: PropsType) => {
   )
   return (
     <div className='w-full border-solid h-full border-r border-b '>
-      <div className='h-full overflow-y-auto max-h-[calc(100vh-180px)]'>
-        <ResponsiveGridLayout
-          onDragStop={onDragStop}
-          rowHeight={70}
-          layouts={layoutState}
-          isDraggable
-          cols={{ xxs: 1, xs: 2, sm: columns, md: columns, lg: columns, xl: columns }}
-          isDroppable
-          onDrop={onDrop}
-          isResizable={false}
-          style={{ minHeight: '100%' }}
-          draggableHandle='#handle'
-        >
-          {usedFields?.map((field, index) => renderFieldItem(field, index))}
-        </ResponsiveGridLayout>
-      </div>
+      <PerfectScrollbar className='max-h-[calc(100vh-180px)]'>
+        <div className='h-full max-h-[calc(100vh-180px)]'>
+          <ResponsiveGridLayout
+            onDragStop={onDragStop}
+            rowHeight={70}
+            layouts={layoutState}
+            isDraggable
+            cols={{ xxs: 1, xs: 2, sm: columns, md: columns, lg: columns, xl: columns }}
+            isDroppable
+            onDrop={onDrop}
+            isResizable={false}
+            style={{ minHeight: '100%' }}
+            draggableHandle='#handle'
+          >
+            {usedFields?.map((field, index) => renderFieldItem(field, index))}
+          </ResponsiveGridLayout>
+        </div>
+      </PerfectScrollbar>
       <div className='flex justify-end p-2 border-solid border-t'>
         <Button size='small' variant='text'>
           Close

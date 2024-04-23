@@ -11,12 +11,10 @@ import { useParams } from 'next/navigation'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import MenuItem from '@mui/material/MenuItem'
-import Chip from '@mui/material/Chip'
 import Typography from '@mui/material/Typography'
 import Checkbox from '@mui/material/Checkbox'
 import IconButton from '@mui/material/IconButton'
 import TablePagination from '@mui/material/TablePagination'
-import type { TextFieldProps } from '@mui/material/TextField'
 
 // Third-party Imports
 import classnames from 'classnames'
@@ -43,7 +41,6 @@ import type { RankingInfo } from '@tanstack/match-sorter-utils'
 import type { Locale } from '@configs/i18n'
 
 // Component Imports
-import OptionMenu from '@core/components/option-menu'
 import CustomTextField from '@core/components/mui/TextField'
 import TablePaginationComponent from '@components/TablePaginationComponent'
 
@@ -63,15 +60,9 @@ declare module '@tanstack/table-core' {
   }
 }
 
-type FormDataType = {
-  id: Number
-  formName: string
-  requestType: string
-  ticketType: string
-}
-
-type TariffTypeWithAction = FormDataType & {
-  action?: string
+type columnType = {
+  accessor: string
+  header: string
 }
 
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
@@ -90,7 +81,7 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 }
 
 // Column Definitions
-const columnHelper = createColumnHelper<TariffTypeWithAction>()
+const columnHelper = createColumnHelper<any>()
 const DebouncedInput = ({
   value: initialValue,
   onChange,
@@ -166,7 +157,8 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: Table<
   )
 }
 
-const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
+const ClientSideTable = (props: any) => {
+  const { tableData, columnNames, redirectUrl } = props
   // States
   const [rowSelection, setRowSelection] = useState({})
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -177,11 +169,11 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
   const { lang: locale } = useParams()
   const theme = useTheme()
 
-  const columns = useMemo<ColumnDef<TariffTypeWithAction, any>[]>(
+  const columns = useMemo(
     () => [
       {
         id: 'select',
-        header: ({ table }) => (
+        header: ({ table }: any) => (
           <Checkbox
             size='small'
             {...{
@@ -191,7 +183,7 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
             }}
           />
         ),
-        cell: ({ row }) => (
+        cell: ({ row }: any) => (
           <Checkbox
             size='small'
             {...{
@@ -203,36 +195,20 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
           />
         )
       },
-      columnHelper.accessor('formName', {
-        header: 'Form Name',
-        cell: ({ row }) => (
-          <div className='flex items-center gap-4'>
-            <div className='flex flex-col'>
-              <Typography className='text-sm' color='text.primary'>
-                {row.original.formName}
-              </Typography>
+      ...columnNames.map((column: columnType) =>
+        columnHelper.accessor(column.accessor, {
+          header: column.header,
+          cell: ({ row }) => (
+            <div className='flex items-center gap-4'>
+              <div className='flex flex-col'>
+                <Typography className='text-sm' color='text.primary'>
+                  {row.original[column.accessor]}
+                </Typography>
+              </div>
             </div>
-          </div>
-        )
-      }),
-      columnHelper.accessor('requestType', {
-        header: 'Request Type',
-        cell: ({ row }) => (
-          <div className='flex items-center gap-2'>
-            <Typography className='text-sm' color='text.primary'>
-              {row.original.requestType}
-            </Typography>
-          </div>
-        )
-      }),
-      columnHelper.accessor('ticketType', {
-        header: 'Ticket Type',
-        cell: ({ row }) => (
-          <Typography className='text-sm' color='text.primary'>
-            {row.original.ticketType}
-          </Typography>
-        )
-      }),
+          )
+        })
+      ),
       columnHelper.accessor('action', {
         header: 'Actions',
         cell: ({ row }) => (
@@ -241,18 +217,12 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
               <i className='tabler-trash text-[18px] text-error' />
             </IconButton>
             <IconButton>
-              <Link
-                href={getLocalizedUrl(`custom-form/form-view/${row.original.id}`, locale as Locale)}
-                className='flex'
-              >
+              <Link href={getLocalizedUrl(`${redirectUrl}/${row.original.id}`, locale as Locale)} className='flex'>
                 <i className='tabler-eye text-[18px] text-textSecondary' />
               </Link>
             </IconButton>
             <IconButton>
-              <Link
-                href={getLocalizedUrl(`custom-form/form-view/${row.original.id}`, locale as Locale)}
-                className='flex'
-              >
+              <Link href={getLocalizedUrl(`${redirectUrl}/${row.original.id}`, locale as Locale)} className='flex'>
                 <i className='tabler-edit text-[18px] text-textSecondary' />
               </Link>
             </IconButton>
@@ -261,12 +231,11 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
         enableSorting: false
       })
     ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [columnNames]
   )
 
   const table = useReactTable({
-    data: data as FormDataType[],
+    data: data as any,
     columns,
     filterFns: {
       fuzzy: fuzzyFilter
@@ -312,7 +281,7 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
           </CustomTextField>
         </div>
         <div className='flex gap-2 !items-start is-full sm:flex-row sm:is-auto sm:items-center'>
-          <Link href={getLocalizedUrl(`custom-form/form-view`, locale as Locale)}>
+          <Link href={getLocalizedUrl(redirectUrl, locale as Locale)}>
             <IconButton className=''>
               <i className='tabler-plus border-solid text-[18px] text-textSecondary' />
             </IconButton>
@@ -418,4 +387,4 @@ const FormTable = ({ tableData }: { tableData?: FormDataType[] }) => {
   )
 }
 
-export default FormTable
+export default ClientSideTable

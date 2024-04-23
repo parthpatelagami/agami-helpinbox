@@ -111,9 +111,13 @@ const FormData = [
     ticketType: 'Rupee'
   }
 ]
-
+const columns = [
+  { accessor: 'formName', header: 'Form Name' },
+  { accessor: 'requestType', header: 'Request Type' },
+  { accessor: 'ticketType', header: 'Ticket Type' }
+]
 const CustomFormPage = () => {
-  return <CustomForm data={FormData} />
+  return <CustomForm data={FormData} columns={columns} />
 }
 
 export default CustomFormPage

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { CardHeader, useTheme, Divider, IconButton, Tooltip, MenuItem } from '@mui/material'
+import { CardHeader, useTheme, Divider, Tooltip, MenuItem } from '@mui/material'
 
 import { useSettings } from '@/@core/hooks/useSettings'
 import CustomTextField from '@/@core/components/mui/TextField'
@@ -13,7 +13,8 @@ import FormAreaNew from './FormAreaNew'
 import SidebarLeft from './SidebarLeft'
 import { StyledGrid } from './styles'
 import FormPreview from './FormPreview'
-import FormTable from '../FormTable'
+import PerfectScrollbar from 'react-perfect-scrollbar'
+
 interface PropsType {
   fields: FieldType[]
 }
@@ -40,59 +41,54 @@ const FormView = (props: PropsType) => {
   const [columns, setColumns] = useState(3)
 
   return (
-    <div className='h-full flex flex-col'>
-      <StyledGrid className='h-full flex flex-col'>
-        <div
-          className={`bg-[${theme.palette.mode === 'dark' ? '#1A2027' : 'white'}] p-0 border ${skin == 'default' && 'shadow'} rounded flex flex-col flex-grow`}
-        >
-          <CardHeader
-            title='Form View'
-            subheader='Last updated at ...'
-            subheaderTypographyProps={{ className: 'text-xs' }}
-            className='px-2 pb-0 pt-1'
-            action={
-              <div className='flex items-center gap-2'>
-                <CustomTextField
-                  size='small'
-                  select
-                  className='rounded border-solid border border-primary'
-                  defaultValue='3'
-                  onChange={e => setColumns(parseInt(e.target.value))}
-                  sx={{
-                    '& .MuiInputBase-input:not(textarea).MuiInputBase-inputSizeSmall': {
-                      color: theme.palette.primary.main
-                    },
-                    '& .tabler-chevron-down': {
-                      color: theme.palette.primary.main
-                    }
-                  }}
-                >
-                  <MenuItem value={2}>2 Columns</MenuItem>
-                  <MenuItem value={3}>3 Columns</MenuItem>
-                  <MenuItem value={4}>4 Columns</MenuItem>
-                </CustomTextField>
-                <Tooltip placement='top' title='Preview'>
-                  <FormPreview layoutState={layoutState} usedFields={usedFields} columns={columns} />
-                </Tooltip>
-              </div>
-            }
-          />
-          <Divider />
-          <div className='flex-grow flex'>
-            <SidebarLeft unusedFields={unusedFields} setUnusedFields={setUnusedFields} />
-            <FormAreaNew
-              columns={columns}
-              unusedFields={unusedFields}
-              setUnusedFields={setUnusedFields}
-              usedFields={usedFields}
-              setUsedFields={setUsedFields}
-              layoutState={layoutState}
-              setLayoutState={setLayoutState}
-            />
+    <StyledGrid className='h-full flex flex-col'>
+      <div className={`bg-[white] p-0 border ${skin == 'default' && 'shadow'} h-full rounded-t f`}>
+        <div className='rounded-t border border-solid w-full p-1 pl-2 flex justify-between'>
+          <div>
+            <p className='text-base'>Form-View</p>
+            <div className='flex gap-1 text-gray-500'>
+              <p className='pt-[0.5px] text-xs'>Last updated at...</p>
+            </div>
+          </div>
+          <div className='flex items-center gap-2'>
+            <CustomTextField
+              size='small'
+              select
+              className='rounded border-solid border border-primary'
+              defaultValue='3'
+              onChange={e => setColumns(parseInt(e.target.value))}
+              sx={{
+                '& .MuiInputBase-input:not(textarea).MuiInputBase-inputSizeSmall': {
+                  color: theme.palette.primary.main
+                },
+                '& .tabler-chevron-down': {
+                  color: theme.palette.primary.main
+                }
+              }}
+            >
+              <MenuItem value={2}>2 Columns</MenuItem>
+              <MenuItem value={3}>3 Columns</MenuItem>
+              <MenuItem value={4}>4 Columns</MenuItem>
+            </CustomTextField>
+            <Tooltip placement='top' title='Preview'>
+              <FormPreview layoutState={layoutState} usedFields={usedFields} columns={columns} />
+            </Tooltip>
           </div>
         </div>
-      </StyledGrid>
-    </div>
+        <div className='flex h-[calc(100%-50px)]'>
+          <SidebarLeft unusedFields={unusedFields} setUnusedFields={setUnusedFields} />
+          <FormAreaNew
+            columns={columns}
+            unusedFields={unusedFields}
+            setUnusedFields={setUnusedFields}
+            usedFields={usedFields}
+            setUsedFields={setUsedFields}
+            layoutState={layoutState}
+            setLayoutState={setLayoutState}
+          />
+        </div>
+      </div>
+    </StyledGrid>
   )
 }
 

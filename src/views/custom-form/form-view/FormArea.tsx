@@ -1,11 +1,11 @@
 'use client'
 
-import { FormControl, Grid, InputLabel, MenuItem, Paper, Select, styled, TextField } from '@mui/material'
+import { Grid, MenuItem } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import CustomTextField from '@core/components/mui/TextField'
 import { Layout, Responsive, WidthProvider } from 'react-grid-layout'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { LayoutBreakpoints, FieldType } from '@/types/formViewTypes'
 import AppReactDatepicker from '@/libs/styles/AppReactDatepicker'
 import AppReactDraftWysiwyg from '@/libs/styles/AppReactDraftWysiwyg'

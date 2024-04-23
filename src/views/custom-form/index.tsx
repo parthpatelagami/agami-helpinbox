@@ -1,8 +1,9 @@
 'use client'
 
-import FormTable from './FormTable'
+import ClientSideTable from '@/components/layout/shared/table/ClientSideTable'
 interface PropsType {
   data: FormDataType[]
+  columns: ColumnsType[]
 }
 type FormDataType = {
   id: Number
@@ -11,10 +12,15 @@ type FormDataType = {
   ticketType: string
 }
 
+type ColumnsType = {
+  accessor: string
+  header: string
+}
+
 const CustomForm = (props: PropsType) => {
   return (
     <div className='h-full flex flex-col'>
-      <FormTable tableData={props.data} />
+      <ClientSideTable tableData={props.data} columnNames={props.columns} redirectUrl='custom-form/form-view' />
     </div>
   )
 }
