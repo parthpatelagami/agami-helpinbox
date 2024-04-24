@@ -13,6 +13,7 @@ import {
 import CustomTextField from '@core/components/mui/TextField'
 import { FieldType } from '@/types/formViewTypes'
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import { useSettings } from '@/@core/hooks/useSettings'
 
 interface PropsType {
   unusedFields: FieldType[]
@@ -22,7 +23,9 @@ interface PropsType {
 const SidebarLeft = (props: PropsType) => {
   const { unusedFields, setUnusedFields } = props
   const theme = useTheme()
+  const { settings } = useSettings()
   const [searchValue, setSearchValue] = useState('')
+  const navbarHeight = settings.layout === 'horizontal' ? '220px' : '190px'
 
   const handleDragStart = (
     e: DragEvent<HTMLDivElement>,
@@ -94,7 +97,7 @@ const SidebarLeft = (props: PropsType) => {
         />
       </div>
       <PerfectScrollbar className='h-[calc(100%-55px)]'>
-        <div className='h-full max-h-[calc(100vh-190px)]'>
+        <div style={{ maxHeight: `calc(100vh - ${navbarHeight})` }}>
           <Accordion defaultExpanded className='border-none shadow-none overflow-auto'>
             <AccordionSummary className='p-3' id='panel-header-1' aria-controls='panel-content-1'>
               <Typography className='text-sm'>Static Fields</Typography>
