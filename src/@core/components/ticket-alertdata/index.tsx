@@ -1,5 +1,7 @@
-export const UserData = [
+import { UserDataType } from "@/types/ticketAlertType"
+export const UserData:UserDataType[] = [
     {
+      id: 'ag',
       title: 'Agent',
       value: '2,459',
       avatarIcon: 'tabler-users',
@@ -7,6 +9,7 @@ export const UserData = [
       subTitle: 'Total User'
     },
     {
+      id: 'sp',
       title: 'Superusers',
       value: '459',
       avatarIcon: 'tabler-users',
@@ -14,6 +17,7 @@ export const UserData = [
       subTitle: 'Total User'
     },
     {
+      id: 'cr',
       title: 'Customer',
       value: '21,459',
       avatarIcon: 'tabler-users',
@@ -22,96 +26,96 @@ export const UserData = [
     }
 ]
 
-export const AllUsersData = [
+export const AllUsersData:UserDataType[] = [
     {
-        id:1,
-        slug: 'changing-your-username',
-        name: 'Shubham Pangale'
+        id: '1',
+        value:'shubham@agami-tech.com',
+        title: 'Shubham Pangale'
     },
     {
-        id:2,
-        slug: 'changing-your-primary-email-address',
-        name: 'Mustafa Dahodvala',
+        id: '2',
+        value:'shubham@agami-tech.com',
+        title: 'Mustafa Dahodvala',
     },
     {
-        id:3,
-        slug: 'changing-your-profile-picture',
-        name: 'Aadil mangera',
+        id: '3',
+        value:'shubham@agami-tech.com',
+        title: 'Aadil mangera',
     },
     {
-        id:4,
-        slug: 'setting-your-profile-to-private',
-        name: 'Nimit Desai',
+        id: '4',
+        value:'shubham@agami-tech.com',
+        title: 'Nimit Desai',
     },
     {
-        id:5,
-        slug: 'deleting-your-personal-account',
-        name: 'Parth Patel',
+        id: '5',
+        value:'shubham@agami-tech.com',
+        title: 'Parth Patel',
     },
     {
-        id:6,
-        slug: 'changing-your-username',
-        name: 'Shubham Pangale',
+        id: '6',
+        value:'shubham@agami-tech.com',
+        title: 'Shubham Pangale',
     },
     {
-        id:7,
-        slug: 'changing-your-primary-email-address',
-        name: 'Mustafa Dahodvala',
+        id: '7',
+        value:'shubham@agami-tech.com',
+        title: 'Mustafa Dahodvala',
     },
     {
-        id:8,
-        slug: 'changing-your-profile-picture',
-        name: 'Aadil mangera',
+        id: '8',
+        value:'8',
+        title: 'Aadil mangera',
     },
     {
-        id:9,
-        slug: 'setting-your-profile-to-private',
-        name: 'Nimit Desai',
+        id: '9',
+        value:'9',
+        title: 'Nimit Desai',
     },
     {
-        id:10,
-        slug: 'deleting-your-personal-account',
-        name: 'Parth Patel',
+        id: '10',
+        value:'10',
+        title: 'Parth Patel',
     },
     {
-        id:11,
-        slug: 'deleting-your-personal-account',
-        name: 'Ravikala Suvare',
+        id: '11',
+        value:'11',
+        title: 'Ravikala Suvare',
     },
     {
-        id:12,
-        slug: 'deleting-your-personal-account',
-        name: 'Vinod Suvare',
+        id: '12',
+        value:'12',
+        title: 'Vinod Suvare',
     },
     {
-        id:13,
-        slug: 'deleting-your-personal-account',
-        name: 'Swati Pangale',
+        id: '13',
+        value:'13',
+        title: 'Swati Pangale',
     },
     {
-        id:14,
-        slug: 'deleting-your-personal-account',
-        name: 'Aniket Dodiya',
+        id: '14',
+        value:'14',
+        title: 'Aniket Dodiya',
     },
     {
-        id:16,
-        slug: 'deleting-your-personal-account',
-        name: 'Amrat',
+        id: '15',
+        value:'16',
+        title: 'Amrat',
     },
     {
-        id:17,
-        slug: 'deleting-your-personal-account',
-        name: 'Khushi Thakore',
+        id: '16',
+        value:'17',
+        title: 'Khushi Thakore',
     },
     {
-        id:18,
-        slug: 'deleting-your-personal-account',
-        name: 'Shubham P',
+        id: '17',
+        value:'18',
+        title: 'Shubham P',
     },
     {
-        id:19,
-        slug: 'deleting-your-personal-account',
-        name: 'Sonali Gotad',
+        id: '18',
+        value:'19',
+        title: 'Sonali Gotad',
     }
 ]
 

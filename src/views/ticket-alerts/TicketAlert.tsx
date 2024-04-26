@@ -67,11 +67,11 @@ const renderTabs = (value: TabCategory) => {
       label={
         <div
           className={classnames(
-            'flex flex-col items-center justify-center gap-2 is-[210px] bs-[100px] border rounded-xl',
+            'flex flex-col items-center justify-center gap-2 is-[170px] bs-[80px] border rounded-xl',
             item.type === value ? 'border-2 border-[var(--mui-palette-primary-main)]' : 'border'
           )}
         >
-          <CustomAvatar variant='rounded' skin='light' size={40} {...(item.type === value && { color: 'primary' })}>
+          <CustomAvatar variant='rounded' skin='light' size={35} {...(item.type === value && { color: 'primary' })}>
             <i className={classnames('text-[25px]', { 'text-textSecondary': item.type !== value }, item.avatarIcon)} />
           </CustomAvatar>
           <Typography className='font-medium capitalize' color='text.primary'>

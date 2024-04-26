@@ -46,10 +46,12 @@ type AppAlertTabPanelProps = {
 const AppAlertTabPanel:React.FC<AppAlertTabPanelProps> = (props) => {
     
     const [activeStep, setActiveStep] = useState<number>(0)
-      
+    const [data, setData] = useState();
+    
+    
     return (
       <CardContent className='py-3 h-full'>
-          <FormControlLabel key={1} value='start' label='Enable' labelPlacement='start' className='gap-6 px-2' control={<Switch defaultChecked={false} />} />
+          <FormControlLabel key={1} value='start' label='Enable' labelPlacement='start' className='gap-6 pb-4 px-2' control={<Switch defaultChecked={false} />} />
           <TabPanel key={2} value={props.value} className='!p-0'>
             <Grid container spacing={6}>
               <Grid key={1} item xs={12} md={12} lg={3} >
@@ -94,7 +96,7 @@ const AppAlertTabPanel:React.FC<AppAlertTabPanelProps> = (props) => {
                 </Card>
               </Grid>
               <Grid key={2} item xs={12} md={12} lg={6}>
-                <Card className='h-full'>
+                <Card className='h-full cursor-move'>
                   <CardContent className='h-full'>
                     <div className='flex flex-wrap justify-between gap-2'>
                     {
@@ -102,7 +104,7 @@ const AppAlertTabPanel:React.FC<AppAlertTabPanelProps> = (props) => {
                         <Grid key={index} className='' item xs={12} sm={5} lg={3} md={3}>
                           <Card>                        
                           <div draggable='true' className=''>                               
-                            <div key={index} className='flex justify-between  w-full p-1 pl-2' >
+                            <div key={index} className='flex justify-between  w-full p-4 pl-2' >
                               <Typography color='text.primary' className='text-sm'>{item.title}</Typography>                                 
                               <p className='pt-[1.5px] text-sm font-bold'>
                                 {item.title === 'Agent'
@@ -111,7 +113,7 @@ const AppAlertTabPanel:React.FC<AppAlertTabPanelProps> = (props) => {
                                     ? item.value
                                     :item.title === 'Customer'
                                       ? item.value
-                                        : 'Editor'}
+                                        : ''}
                               </p>                                   
                             </div>                           
                           </div>
@@ -125,7 +127,7 @@ const AppAlertTabPanel:React.FC<AppAlertTabPanelProps> = (props) => {
                     <div className='flex my-4 flex-col justify-between'>
                       <div className=''>
                         <Typography className='font-medium capitalize mb-2' color='text.primary'>Specific User :-</Typography>
-                        <UserListGet/>                        
+                        <UserListGet data={data} setData={setData}/>                        
                       </div>
                     </div>
                   </CardContent>
