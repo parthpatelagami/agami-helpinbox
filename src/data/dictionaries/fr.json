@@ -79,6 +79,10 @@
     "menuLevels": "Niveaux de menus",
     "menuLevel2": "Niveau menu 2",
     "menuLevel3": "Niveau menu 3",
-    "disabledMenu": "Menu désactivé"
+    "disabledMenu": "Menu désactivé",
+    "ticketalert": "Alerte billet",
+    "replypage1": "Reply Page 1",
+    "replypage2": "Reply Page 2",
+    "tickets": "Tickets"
   }
 }

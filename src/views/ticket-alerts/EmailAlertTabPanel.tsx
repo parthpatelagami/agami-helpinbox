@@ -113,8 +113,8 @@ const EmailAlertTabPanel:React.FC<EmailAlertTabPanelProps> = (props) => {
 
     return (
       <CardContent className='py-3 h-full'>
-          <FormControlLabel key={1} value='start' label='Enable' labelPlacement='start' className='gap-6 pb-4 px-2' control={<Switch defaultChecked={true} />} />
-          <TabPanel key={2} value={props.value} className='!p-0'>
+          <FormControlLabel key={1} value='start' label='Enable' labelPlacement='start' className='gap-6 px-2' control={<Switch defaultChecked={true} />} />
+          <TabPanel key={2} value={props.value} className='!p-0 my-3'>
             <Grid container spacing={6}>
               <Grid key={1} item xs={12} md={12} lg={2} >
                 <Card className='h-full'>  
@@ -168,7 +168,7 @@ const EmailAlertTabPanel:React.FC<EmailAlertTabPanelProps> = (props) => {
                           <div draggable onDragStart={e => handleDragStart(e, {...item, index})} className=''>                               
                             <div key={index} className='flex justify-between rounded border border-solid border-gray-300 w-full p-4 pl-2' >
                               <Typography color='text.primary' className='text-sm'>{item.title}</Typography>                                 
-                              <p className='pt-[1.5px] text-sm'>
+                              <p className='pt-[1.5px] text-sm font-bold'>
                                 {item.title === 'Agent'
                                   ? item.value
                                   : item.title === 'Superusers'
@@ -202,7 +202,7 @@ const EmailAlertTabPanel:React.FC<EmailAlertTabPanelProps> = (props) => {
                     <div className='grid gap-y-4'>
                       <div 
                        
-                        className='flex items-center flex-col md:flex-row sm:flex-row lg:flex-row justify-between'
+                        className='flex items-start md:items-center sm:items-center lg:items-center flex-col md:flex-row sm:flex-row lg:flex-row justify-between'
                         onDrop={e => onDrop(e, 'TO')}
                         onDragOver={e => onDragOver(e, 'TO')}
 
@@ -220,7 +220,7 @@ const EmailAlertTabPanel:React.FC<EmailAlertTabPanelProps> = (props) => {
                         </div>
                       </div>
                       <div 
-                        className='flex items-center flex-col md:flex-row sm:flex-row lg:flex-row justify-between'
+                        className='flex items-start md:items-center sm:items-center lg:items-center flex-col md:flex-row sm:flex-row lg:flex-row justify-between'
                         onDrop={e => onDrop(e, 'CC')}
                         onDragOver={e => onDragOver(e, 'CC')}
                       >
@@ -239,7 +239,7 @@ const EmailAlertTabPanel:React.FC<EmailAlertTabPanelProps> = (props) => {
                         </div>
                       </div>
                       <div 
-                        className='flex items-center flex-col md:flex-row sm:flex-row lg:flex-row justify-between'
+                        className='flex items-start md:items-center sm:items-center lg:items-center flex-col md:flex-row sm:flex-row lg:flex-row justify-between'
                         onDrop={e => onDrop(e, 'BCC')}
                         onDragOver={e => onDragOver(e, 'BCC')}
                         >
@@ -262,13 +262,12 @@ const EmailAlertTabPanel:React.FC<EmailAlertTabPanelProps> = (props) => {
                              
                         </div>
                       </div>
-                    </div>
-                  
+                    </div>                  
                     <div className='grid mt-4'>
-                      <CustomTextField
-                        multiline
-                        rows={10}
-                      />
+                      <div></div>
+                      <div className="box-border border-dashed rounded h-52 w-full p-4 border-2">
+                        
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

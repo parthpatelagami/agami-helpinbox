@@ -79,6 +79,10 @@
     "menuLevels": "Menu Levels",
     "menuLevel2": "Menu Level 2",
     "menuLevel3": "Menu Level 3",
-    "disabledMenu": "Disabled Menu"
+    "disabledMenu": "Disabled Menu",
+    "ticketalert": "Ticket Alert",
+    "replypage1": "Reply Page 1",
+    "replypage2": "Reply Page 2",
+    "tickets": "Tickets"
   }
 }

@@ -79,6 +79,10 @@
     "menuLevels": "مستويات القائمة",
     "menuLevel2": "مستوى القائمة 2",
     "menuLevel3": "مستوى القائمة 3",
-    "disabledMenu": "قائمة المعوقين"
+    "disabledMenu": "قائمة المعوقين",
+    "ticketalert": "تنبيه التذاكر",
+    "replypage1": "الرد على الصفحة 1",
+    "replypage2": "الرد على الصفحة 2",
+    "tickets": "التذاكر"
   }
 }

@@ -57,6 +57,11 @@ const horizontalMenuData = (): HorizontalMenuDataType[] => [
     label: 'Custom Form',
     icon: 'tabler-layout-2',
     href: '/custom-form'
+  },
+  {
+    label: 'Ticket Alert',
+    icon: 'custom-ticket-alert',
+    href: '/ticket-alert'
   }
 ]
 

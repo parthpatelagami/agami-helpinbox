@@ -96,11 +96,11 @@ const HorizontalMenu = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof 
             {dictionary['navigation'].crm}
           </MenuItem>
         </SubMenu>
-        <SubMenu label='Tickets' icon={<i className='tabler-ticket' />}>
+        <SubMenu label={dictionary['navigation'].tickets} icon={<i className='tabler-ticket' />}>
           <MenuItem href={`/${locale}/tickets/viewalltickets`}>View All Tickets</MenuItem>
           <MenuItem href={`/${locale}/tickets/viewalltickets2`}>View All Tickets 2</MenuItem>
-          <MenuItem href={`/${locale}/tickets/replypage1`}>Reply Page 1</MenuItem>
-          <MenuItem href={`/${locale}/tickets/replypage2`}>Reply Page 2</MenuItem>
+          <MenuItem href={`/${locale}/tickets/replypage1`}>{dictionary['navigation'].replypage1}</MenuItem>
+          <MenuItem href={`/${locale}/tickets/replypage2`}>{dictionary['navigation'].replypage2}</MenuItem>
         </SubMenu>
 
         <MenuItem href='/about' icon={<i className='tabler-info-circle' />}>
@@ -125,7 +125,7 @@ const HorizontalMenu = ({ dictionary }: { dictionary: Awaited<ReturnType<typeof 
           Settings
         </MenuItem>
         <MenuItem href={`/${locale}/ticket-alert`} icon={<i className='custom-ticket-alert' />}>
-          Ticket Alert
+          {dictionary['navigation'].ticketalert}
         </MenuItem>
       </Menu>
       {/* <Menu

@@ -84,8 +84,8 @@ const SMSAlertTabPanel:React.FC<SMSAlertTabPanelProps> = (props) => {
     
     return (
       <CardContent className='py-3 h-full'>
-          <FormControlLabel value='start' label='Enable' labelPlacement='start' className='gap-6 pb-4 px-2' control={<Switch defaultChecked={false} />} />
-          <TabPanel key={1} value={props.value} className='!p-0'>
+          <FormControlLabel value='start' label='Enable' labelPlacement='start' className='gap-6 px-2' control={<Switch defaultChecked={false} />} />
+          <TabPanel key={1} value={props.value} className='!p-0 my-3'>
             <Grid container spacing={6}>
               <Grid key={1} item xs={12} md={12} lg={2} >
                 <Card className='h-full'>  
