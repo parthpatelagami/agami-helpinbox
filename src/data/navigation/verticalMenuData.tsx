@@ -56,8 +56,13 @@ const verticalMenuData = (): VerticalMenuDataType[] => [
   },
   {
     label: 'Ticket Alert',
-    icon:'custom-ticket-alert',
+    icon: 'custom-ticket-alert',
     href: '/ticket-alert'
+  },
+  {
+    label: 'License',
+    icon: 'tabler-license',
+    href: '/license'
   }
 ]
 
