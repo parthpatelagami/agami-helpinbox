@@ -61,6 +61,27 @@ const LicensePlanData = [
       'Custom domain support',
       'Stripe integration'
     ]
+  },
+  {
+    imgWidth: 140,
+    imgHeight: 140,
+    monthlyPrice: 120,
+    popularPlan: false,
+    currentPlan: false,
+    title: 'Premium',
+    subtitle: 'Advanced features for professionals',
+    imgSrc: '/images/pages/pricing-plan-premium.png',
+    yearlyPlan: {
+      perMonth: 100,
+      totalAnnual: 1200
+    },
+    planBenefits: [
+      'Advanced analytics',
+      'Priority support',
+      'Unlimited storage',
+      'Custom branding',
+      'Advanced security'
+    ]
   }
 ]
 
