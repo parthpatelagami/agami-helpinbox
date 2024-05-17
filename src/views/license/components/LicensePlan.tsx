@@ -81,14 +81,14 @@ const LicensePlanComponents = (props: LicensePlanProps) => {
               }}
             />
           ) : null}
-          <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+          {/* <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
             <img
               width={planData?.imgWidth}
               src={planData?.imgSrc}
               height={planData?.imgHeight}
               alt={`${planData?.title.toLowerCase().replace(' ', '-')}-plan-img`}
             />
-          </Box>
+          </Box> */}
           <Box sx={{ textAlign: 'center' }}>
             <Typography sx={{ mb: 1.5, fontWeight: 500, lineHeight: 1.385, fontSize: '1.625rem' }}>
               {planData?.title}

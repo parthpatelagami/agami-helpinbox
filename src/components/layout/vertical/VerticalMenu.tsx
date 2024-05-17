@@ -115,9 +115,9 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         <MenuItem href={`/${locale}/ticket-alert`} icon={<i className='custom-ticket-alert' />}>
           {dictionary['navigation'].ticketalert}
         </MenuItem>
-        <MenuItem href={`/${locale}/license`} icon={<i className='tabler-license' />}>
+        {/* <MenuItem href={`/${locale}/license`} icon={<i className='tabler-license' />}>
           License
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </ScrollWrapper>
   )
