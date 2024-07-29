@@ -1,12 +1,12 @@
 // React Imports
-import { useEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 
 // MUI Imports
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import type { DialogProps } from '@mui/material/Dialog'
-import { Grid, IconButton, MenuItem } from '@mui/material'
+import { Grid, IconButton, MenuItem, useTheme } from '@mui/material'
 
 // Third-party Imports
 import { Responsive, WidthProvider } from 'react-grid-layout'
@@ -27,6 +27,7 @@ interface PropsType {
 const FormPreview = (props: PropsType) => {
   const { layoutState, usedFields, columns } = props
   const [date, setDate] = useState<Date | null | undefined>(new Date())
+  const theme = useTheme()
 
   // States
   const [open, setOpen] = useState<boolean>(false)
@@ -41,6 +42,13 @@ const FormPreview = (props: PropsType) => {
   }
 
   const handleClose = () => setOpen(false)
+  useEffect(() => {
+    const gridLayoutContainer = document.querySelector('.react-grid-layout')
+    const children = document.querySelectorAll('.react-grid-item')
+
+    gridLayoutContainer?.setAttribute('dir', theme.direction)
+    children.forEach(child => child.setAttribute('dir', theme.direction))
+  }, [])
 
   useEffect(() => {
     if (open) {
@@ -85,7 +93,6 @@ const FormPreview = (props: PropsType) => {
             cols={{ xxs: 1, xs: 2, sm: columns, md: columns, lg: columns, xl: columns }}
             layouts={layoutState}
             isDraggable={false}
-            isDroppable
             style={{ minHeight: '100%' }}
             isResizable={false}
             rowHeight={65}

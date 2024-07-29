@@ -1,13 +1,17 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { Button, Card, CardHeader, Divider, Grid, IconButton, Tooltip, useTheme } from '@mui/material'
+import { Button, Card, CardHeader, Divider, Grid, IconButton, Link, Tooltip, useTheme } from '@mui/material'
 import { Layout, Responsive, WidthProvider } from 'react-grid-layout'
 
 // Types Import
 import { LayoutBreakpoints, FieldType } from '@/types/formViewTypes'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useSettings } from '@/@core/hooks/useSettings'
+import { Locale } from '@/configs/i18n'
+import { getLocalizedUrl } from '@/utils/i18n'
+import { useParams } from 'next/navigation'
+import { column } from 'stylis'
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
 interface PropsType {
@@ -20,16 +24,20 @@ interface PropsType {
   setLayoutState: (val: any) => void
 }
 
-var currentX = 0
-var currentY = 0
-
 const FormAreaNew = (props: PropsType) => {
+  // vars
   const { columns, unusedFields, setUnusedFields, usedFields, setUsedFields, layoutState, setLayoutState } = props
+
+  // hooks
+  const theme = useTheme()
+  const { lang: locale } = useParams()
+  const { settings } = useSettings()
+
+  // states
   const [itemsCount, setItemsCount] = useState<number>(0)
   const [breakpoint, setBreakpoint] = useState<string>('lg')
-
-  const theme = useTheme()
-  const { settings } = useSettings()
+  const [currentX, setCurrentX] = useState<number>(theme.direction == 'rtl' ? columns - 1 : 0)
+  const [currentY, setCurrentY] = useState<number>(0)
   const navbarHeight = settings.layout === 'horizontal' ? '210px' : '180px'
 
   const onDragStop = (newLayout: Layout[]) => {
@@ -64,10 +72,10 @@ const FormAreaNew = (props: PropsType) => {
       })
     })
     if (maxX < currentX) {
-      currentX = maxX
+      setCurrentX(maxX)
     }
     if (maxY < currentY) {
-      currentY = maxY
+      setCurrentY(maxY)
     }
     setItemsCount(itemsCount - 1)
     setLayoutState(updatedLayout)
@@ -79,7 +87,7 @@ const FormAreaNew = (props: PropsType) => {
     const fieldType = e.dataTransfer?.getData('type') || ''
     const fieldLabel = e.dataTransfer?.getData('label') || ''
     const fieldCategory = e.dataTransfer?.getData('category') || ''
-    const fieldWidth = fieldType == 'editor' ? 4 : 1
+    const fieldWidth = fieldType == 'editor' ? 3 : 1
     Object.keys(layoutState).forEach((breakpoint: string) => {
       updatedLayout[breakpoint] = layoutState[breakpoint].concat({
         i: fieldLabel,
@@ -97,8 +105,17 @@ const FormAreaNew = (props: PropsType) => {
         })
       )
     })
-    currentY = currentX + fieldWidth >= columns ? (currentY += 1) : currentY
-    currentX = currentX + fieldWidth >= columns ? 0 : currentX + fieldWidth
+    if (theme.direction == 'rtl') {
+      setCurrentY(currentX - fieldWidth < 0 ? currentY + 1 : currentY)
+    } else {
+      setCurrentY(currentX + fieldWidth >= columns ? currentY + 1 : currentY)
+    }
+
+    if (theme.direction == 'rtl') {
+      setCurrentX(currentX - fieldWidth < 0 ? columns : currentX - fieldWidth)
+    } else {
+      setCurrentX(currentX + fieldWidth >= columns ? 0 : currentX + fieldWidth)
+    }
     console.log(updatedLayout)
 
     setItemsCount(itemsCount + 1)
@@ -188,9 +205,11 @@ const FormAreaNew = (props: PropsType) => {
         </ResponsiveGridLayout>
       </PerfectScrollbar>
       <div className='flex justify-end p-2 border-solid border-t'>
-        <Button size='small' variant='text'>
-          Close
-        </Button>
+        <Link href={getLocalizedUrl('/custom-form', locale as Locale)}>
+          <Button size='small' variant='text'>
+            Close
+          </Button>
+        </Link>
         <Button size='small' variant='contained'>
           Save
         </Button>
